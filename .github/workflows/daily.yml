@@ -1,0 +1,52 @@
+name: daily-update
+
+on:
+  schedule:
+    - cron: "10 1 * * *"     # 01:10 UTC = 09:10 Beijing, just after arXiv's daily announcement
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths: ["radar/**", "run.py", "data/zh_summaries.json", "data/rejected_ids.json"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y && sudo apt-get install -y poppler-utils
+          pip install requests
+      - name: Fetch new papers and rebuild site
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then python run.py --rebuild --no-digest; else python run.py --no-digest; fi
+      - name: Commit updated data and site
+        run: |
+          git config user.name "paper-radar-bot"
+          git config user.email "paper-radar-bot@users.noreply.github.com"
+          git add data/papers.json data/state.json site
+          git diff --cached --quiet || git commit -m "data: daily update $(date -u +%F)"
+          git pull --rebase --autostash origin main || true
+          git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4

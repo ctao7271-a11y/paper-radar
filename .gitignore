@@ -1,0 +1,7 @@
+cache/
+out-digest/
+data/digested_ids.json
+data/run.log
+data/*.tmp
+__pycache__/
+*.pyc
