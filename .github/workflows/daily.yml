@@ -42,8 +42,9 @@ jobs:
           git config user.email "paper-radar-bot@users.noreply.github.com"
           git add data/papers.json data/state.json site
           git diff --cached --quiet || git commit -m "data: daily update $(date -u +%F)"
-          git pull --rebase --autostash origin main || true
-          git push
+          # generated files: if another run (or a re-run) already pushed, keep this run's fresh output
+          git pull --rebase -X theirs --autostash origin main || { git rebase --abort || true; git reset --hard origin/main; echo "rebase failed: keeping the already-published data"; }
+          git push origin HEAD:main
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
