@@ -7,7 +7,7 @@ SCH = {k: v["zh"] for k, v in C.SCHOOLS.items()}
 SCH_COLOR = {"tsinghua": ("#6b21a8", "#f3e8ff"), "pku": ("#9f1239", "#ffe4e6"), "buaa": ("#1d4ed8", "#dbeafe")}
 TOPIC = {"cockpit": "智能座舱", "embodied": "具身智能"}
 CN = dt.timezone(dt.timedelta(hours=8))
-MAX_OTHER = {"cockpit": 6, "embodied": 8}
+MAX_OTHER = {"cockpit": 10, "embodied": 12}   # non-flagged papers in the mail; the rest are on the site
 NEW_WINDOW_DAYS = 4  # never e-mail papers first seen more than this many days ago
 
 def site_url():
@@ -101,21 +101,27 @@ def build(store, digested, out):
                   f'<td style="width:6px"></td>'
                   for n, lab in [(cnt["cockpit"], "智能座舱"), (cnt["embodied"], "具身智能"), (len(flagged), "清华/北大/北航")])
         + "</tr></table>",
+        (f'<p style="font-size:13px;color:#334155;margin:8px 0 0">网站（全部论文、筛选）：{link}</p>' if url else ""),
     ]
     if not new:
         body.append('<p style="font-size:14px;color:#334155">今天没有新的相关论文（arXiv 周末不发布新论文）。</p>')
     body.append(section(f"清华 / 北大 / 北航作者论文（{len(flagged)}）", flagged, True,
                         "机构信息自动解析自论文 PDF 首页与 OpenAlex，加粗为对应学校的作者。"))
-    body.append(section("其他值得关注 · 智能座舱", others["cockpit"]))
-    body.append(section("其他值得关注 · 具身智能", others["embodied"],
-                        note=f"今日具身方向共 {cnt['embodied']} 篇，以下按相关度挑选 {len(others['embodied'])} 篇，完整列表见网站。" if cnt["embodied"] > len(others["embodied"]) else ""))
+    def more_note(t):
+        n_rest = sum(t in p["topics"] and not p.get("flag") for p in new)
+        if n_rest <= len(others[t]):
+            return ""
+        return (f"本批{TOPIC[t]}方向非清北航论文共 {n_rest} 篇，以下按相关度挑选 {len(others[t])} 篇；"
+                f"其余 {n_rest - len(others[t])} 篇见网站{('：' + link) if url else ''}。")
+    body.append(section("其他值得关注 · 智能座舱", others["cockpit"], note=more_note("cockpit")))
+    body.append(section("其他值得关注 · 具身智能", others["embodied"], note=more_note("embodied")))
     body.append(f'<p style="font-size:13px;color:#334155;margin-top:22px">完整列表与筛选（座舱/具身、仅看清北航）：{link}</p>')
     body.append('<p style="font-size:11.5px;color:#94a3b8">本邮件由论文追踪脚本自动生成，数据来自 arXiv。“[标签] + 英文句子”为摘要原文中的关键句。</p>')
     body.append("</div></body></html>")
     h = "\n".join(x for x in body if x)
 
     # ---------- plain text
-    T = [subject, "", f"智能座舱 {cnt['cockpit']} 篇｜具身智能 {cnt['embodied']} 篇｜清华/北大/北航 {len(flagged)} 篇", ""]
+    T = [subject, "", f"智能座舱 {cnt['cockpit']} 篇｜具身智能 {cnt['embodied']} 篇｜清华/北大/北航 {len(flagged)} 篇", f"网站：{url}" if url else "", ""]
     def titem(p, show):
         line = [f"- {p['title']}"]
         if show:
@@ -129,7 +135,9 @@ def build(store, digested, out):
         T += [f"【清华/北大/北航作者论文】({len(flagged)})"] + [titem(p, True) for p in flagged] + [""]
     for t in ("cockpit", "embodied"):
         if others[t]:
-            T += [f"【其他值得关注 · {TOPIC[t]}】"] + [titem(p, False) for p in others[t]] + [""]
+            n_rest = sum(t in p["topics"] and not p.get("flag") for p in new)
+            hdr = f"【其他值得关注 · {TOPIC[t]}】" + (f"（共 {n_rest} 篇，列出 {len(others[t])} 篇，其余见网站）" if n_rest > len(others[t]) else "")
+            T += [hdr] + [titem(p, False) for p in others[t]] + [""]
     T.append(f"完整列表：{url or '（网站地址待配置）'}")
     txt = "\n".join(T)
 
