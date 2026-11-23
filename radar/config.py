@@ -43,6 +43,8 @@ QUERIES = {
     "embodied_kw": _cat + " AND " + _any(["ti", "abs"], EMBODIED_PHRASES),
     "cockpit_hci": "(cat:cs.HC OR cat:cs.CL OR cat:cs.SD OR cat:eess.AS OR cat:cs.MM) AND " + _any(["ti", "abs"], ["vehicle", "driver", "driving", "car", "automotive", "cockpit", "cabin"]),
     "cockpit_kw": _any(["ti", "abs"], COCKPIT_PHRASES),
+    "edge_kw": "(cat:cs.LG OR cat:cs.CL OR cat:cs.AI OR cat:cs.CV OR cat:cs.RO OR cat:cs.AR OR cat:cs.DC OR cat:cs.MA OR cat:cs.HC) AND "
+               + _any(["ti", "abs"], ["on-device", "edge deployment", "edge devices", "Jetson", "NPU", "agent memory", "long-term memory", "cross-device"]),
 }
 
 # ---------------------------------------------------------------- local classifier
@@ -135,6 +137,11 @@ TAGS = [
     (r"emotion|affective", "情感识别", "cockpit"),
     (r"take-?over", "接管请求", "cockpit"),
     (r"(?<![a-z])hmi(?![a-z])|human-machine interface|user interface|(?<![a-z])ux(?![a-z])|user experience", "人机界面/体验", "cockpit"),
+    (r"on-?device|edge (?:ai|inference|deployment|devices?)|embedded|jetson|orin|(?<![a-z])npus?(?![a-z])|smartphones?|mobile (?:phones?|devices?)", "端侧部署", "edge"),
+    (r"quantiz|low-?bit|pruning|model compression|distill|small (?:language )?models?|(?<![a-z])slms?(?![a-z])", "模型压缩", "edge"),
+    (r"kv[- ]cache|speculative decoding|efficient inference|inference (?:acceleration|latency|speed)|latency", "推理加速", "edge"),
+    (r"long-?term memory|agent memory|episodic memory|memory (?:mechanism|module|system|bank|management)|personali[sz]", "智能体记忆", "edge"),
+    (r"cross-?device|multi-?device|device-?cloud|edge-?cloud|cloud-?edge", "跨设备协同", "edge"),
     (r"autonomous driving|self-driving|end-to-end driving", "自动驾驶", None),
     (r"safety|safe ", "安全", None),
 ]
@@ -170,3 +177,29 @@ OPENALEX_IDS = {  # OpenAlex institution ids (lineage) -> school key
 }
 
 VENUES = re.compile(r"(?<![A-Za-z])(CVPR|ICCV|ECCV|NeurIPS|ICLR|ICML|CoRL|RSS|ICRA|IROS|AAAI|IJCAI|ACL|EMNLP|NAACL|CHI|UIST|ITSC|T-RO|RA-L|TPAMI|IJRR|Science Robotics|AutomotiveUI)(?![A-Za-z])")
+
+# ---------------------------------------------------------------- topic 3: on-device deployment & agents ("edge")
+EDGE_TARGET = _rx([r"on-?device", r"edge (?:ai|inference|deployment|devices?|hardware|gpus?|platforms?|computing devices?)", r"edge-side",
+                   r"embedded (?:gpus?|platforms?|devices?|hardware|systems?|boards?)", r"jetson", r"orin", r"npus?", r"snapdragon",
+                   r"mobile (?:phones?|devices?|npus?|socs?|gpus?|platforms?)", r"smartphones?", r"microcontrollers?", r"mcus?",
+                   r"resource-constrained (?:devices?|hardware|platforms?|robots?)", r"onboard (?:compute|inference|deployment|hardware)",
+                   r"on-?board (?:compute|inference|deployment|hardware)", r"in-vehicle (?:chips?|compute|hardware|deployment|platforms?)",
+                   r"automotive (?:chips?|socs?|hardware|platforms?)", r"vehicle (?:chips?|socs?)", r"local deployment", r"offline deployment",
+                   r"consumer (?:gpus?|devices?|hardware)", r"wearables?", r"ai pcs?", r"laptops?"])
+EDGE_EFF = _rx([r"quantiz\w*", r"low-?bit", r"int[48]", r"w4a\d+", r"w8a8", r"pruning", r"sparsit\w*", r"model compression", r"compress\w* (?:the )?models?",
+                r"distill\w*", r"small (?:language |vision-language |multimodal )?models?", r"slms?", r"lightweight", r"tiny\w*",
+                r"kv[- ]cache", r"speculative decoding", r"efficient inference", r"inference (?:acceleration|latency|speed|efficiency|cost)",
+                r"latency", r"real-?time", r"throughput", r"memory footprint", r"energy[- ]efficien\w*", r"power consumption", r"tokens? per second",
+                r"(?:\d+(?:\.\d+)?\s?(?:ms|hz|fps))", r"parameter-efficient", r"[0-9.]+\s?[mb] parameters?", r"deploy\w*"])
+EDGE_NET_EXCLUDE = _rx([r"mobile edge computing", r"\bmec\b", r"offloading", r"wireless", r"spectrum", r"base stations?", r"6g", r"5g",
+                        r"federated", r"blockchain", r"iot networks?", r"satellites?", r"channel estimation", r"beamforming"])
+AGENT = _rx([r"agents?", r"agentic", r"assistants?", r"copilots?"])
+AGENT_MEM = _rx([r"long-?term memory", r"memory (?:mechanisms?|modules?|systems?|banks?|management|architectures?|retrieval|consolidation|store|layer)",
+                 r"persistent memory", r"episodic memory", r"agent memory", r"memory-augmented", r"cross-?session", r"lifelong (?:memory|personali[sz]ation)",
+                 r"user memory", r"personal memory", r"memories", r"remember\w*", r"personali[sz]\w*"])
+CROSS_DEVICE = _rx([r"cross-?device", r"multi-?device", r"device-?cloud", r"edge-?cloud", r"cloud-?edge", r"device collaboration",
+                    r"phone[- ](?:car|vehicle)", r"smartphones? and (?:the )?(?:car|vehicle)s?", r"(?:car|vehicle)s? and smartphones?", r"handoff", r"hand-off"])
+# on-device papers must be about the kind of model worth deploying in a car / robot / phone (not generic tiny CV apps)
+EDGE_MODEL = _rx([r"llms?", r"slms?", r"vlms?", r"vlas?", r"mllms?", r"language models?", r"vision-language\w*", r"multimodal", r"transformers?",
+                  r"foundation models?", r"moe", r"mixture-of-experts", r"agents?", r"agentic", r"assistants?", r"speech", r"asr", r"voice",
+                  r"polic(?:y|ies)", r"diffusion", r"world models?", r"kv[- ]cache", r"decoding", r"vlns?", r"action (?:chunks?|flows?|experts?|models?)"])

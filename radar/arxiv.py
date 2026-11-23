@@ -77,7 +77,7 @@ def search(query, start_dt, end_dt, page=200, cap=3000, log=print):
 
 # ---------------------------------------------------------------- classification
 def classify(p):
-    """Return (topics:list, score:dict). topics ⊆ {'cockpit','embodied'}"""
+    """Return (topics:list, score:dict). topics ⊆ {'cockpit','embodied','edge'}"""
     text = f"{p['title']}. {p['abstract']}"
     title = p["title"]
     topics, score = [], {}
@@ -140,6 +140,29 @@ def classify(p):
     score["embodied"] = (1.5 if C.EMB_WM.search(text) else 0) + len(es) * 2 + (2 if es_title else 0) + min(robot, 5) * 0.3 + min(learn, 3) * 0.5
     if e_ok:
         topics.append("embodied")
+
+    # --- edge: on-device deployment / compression on device chips, agent memory, cross-device agents
+    tgt = set(m.group(0).lower() for m in C.EDGE_TARGET.finditer(text))
+    tgt_title = bool(C.EDGE_TARGET.search(title))
+    eff = len(set(m.group(0).lower() for m in C.EDGE_EFF.finditer(text)))
+    net = len(C.EDGE_NET_EXCLUDE.findall(text))
+    agent = len(C.AGENT.findall(text))
+    mem_sents = sum(1 for s in re.split(r"(?<=[.!?])\s+", text) if C.AGENT_MEM.search(s) and C.AGENT.search(s))
+    mem_title = bool(C.AGENT_MEM.search(title)) and agent >= 1
+    xdev = len(C.CROSS_DEVICE.findall(text))
+    d_ok = False
+    model = len(set(m.group(0).lower() for m in C.EDGE_MODEL.finditer(text)))
+    if tgt and net <= 1 and model >= 1:
+        d_ok = (tgt_title and eff >= 1) or (len(tgt) >= 2 and eff >= 2) or (len(tgt) >= 1 and eff >= 3 and bool(C.EDGE_EFF.search(title)))
+    if not d_ok and (mem_title or mem_sents >= 2) and agent >= 2:
+        d_ok = True
+    if not d_ok and xdev >= 1 and agent >= 1 and net <= 1 and (tgt or C.CROSS_DEVICE.search(title)):
+        d_ok = True
+    if not any(c.startswith(("cs.", "eess.")) for c in p["categories"]) or p["primary"] in ("cs.LO", "cs.CR", "cs.DB", "cs.NI", "cs.IT", "eess.SP"):
+        d_ok = False
+    score["edge"] = len(tgt) * 2 + (2 if tgt_title else 0) + min(eff, 5) * 0.5 + min(mem_sents, 3) * 1.5 + (2 if mem_title else 0) + min(xdev, 2) * 2
+    if d_ok:
+        topics.append("edge")
     return topics, score
 
 def tags_zh(p, topics):
@@ -157,7 +180,7 @@ def venue(p):
     return m.group(1) if m else ""
 
 # ---------------------------------------------------------------- RSS (daily announcements; light on rate limits)
-RSS_CATS = ["cs.RO", "cs.AI", "cs.CV", "cs.CL", "cs.HC", "cs.LG", "cs.MA", "eess.SY", "cs.SD", "eess.AS", "cs.MM", "eess.IV"]
+RSS_CATS = ["cs.RO", "cs.AI", "cs.CV", "cs.CL", "cs.HC", "cs.LG", "cs.MA", "eess.SY", "cs.SD", "eess.AS", "cs.MM", "eess.IV", "cs.AR", "cs.DC", "cs.PF"]
 
 def rss(cats=RSS_CATS, log=print):
     from email.utils import parsedate_to_datetime

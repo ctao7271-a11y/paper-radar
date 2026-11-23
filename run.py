@@ -10,7 +10,7 @@
 import os, sys, json, argparse, datetime as dt, time, traceback
 ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
-from radar import config as C, arxiv, affil, summarize, site, digest
+from radar import config as C, arxiv, affil, summarize, site, digest, interest
 
 DATA = os.path.join(ROOT, "data")
 STORE = os.path.join(DATA, "papers.json")
@@ -20,6 +20,8 @@ REJECT = os.path.join(DATA, "rejected_ids.json")
 DIGESTED = os.path.join(DATA, "digested_ids.json")   # local only (gitignored)
 LOG = os.path.join(DATA, "run.log")
 UTC = dt.timezone.utc
+
+CN = dt.timezone(dt.timedelta(hours=8))
 
 def load(path, default):
     try:
@@ -92,7 +94,8 @@ def fetch(store, state, reject, candidates_file=""):
         p["first_seen"] = now_utc().isoformat(timespec="seconds")
         out.append(p)
     log(f"Fetched {len(seen)} candidates, {len(out)} new on-topic "
-        f"(cockpit {sum('cockpit' in p['topics'] for p in out)}, embodied {sum('embodied' in p['topics'] for p in out)})")
+        f"(cockpit {sum('cockpit' in p['topics'] for p in out)}, embodied {sum('embodied' in p['topics'] for p in out)}, "
+        f"edge/agents {sum('edge' in p['topics'] for p in out)})")
     return out
 
 def resolve_affils(papers, allow_pdf=True, label="new"):
@@ -138,10 +141,20 @@ def sync(store, url):
             store[aid] = p; added += 1
         else:  # keep the better-resolved / summarized copy
             loc = store[aid]
+            if p.get("pick") and not loc.get("pick"):
+                loc["pick"] = p["pick"]
             if p.get("zh_summary") and not loc.get("zh_summary"):
                 loc["zh_summary"] = p["zh_summary"]
             if len(p.get("affil", {}).get("sources", [])) > len(loc.get("affil", {}).get("sources", [])):
                 loc["affil"], loc["flag"] = p["affil"], p.get("flag", [])
+    # the published site is authoritative for picks of any day it already has picks for
+    rdays = {p["pick"]["date"] for p in remote.values() if p.get("pick")}
+    for aid, p in store.items():
+        rp = remote.get(aid, {}).get("pick")
+        if p.get("pick", {}).get("date") in rdays and not rp:
+            p.pop("pick", None)
+        elif rp:
+            p["pick"] = rp
     log(f"Synced {added} papers from {url}")
 
 def main():
@@ -152,6 +165,7 @@ def main():
     ap.add_argument("--mark-sent", action="store_true")
     ap.add_argument("--no-pdf", action="store_true")
     ap.add_argument("--no-digest", action="store_true")
+    ap.add_argument("--reseed-picks", action="store_true", help="recompute the whole picks archive (per submission day)")
     ap.add_argument("--candidates", default="", help="(debug) extra candidate JSON {id: paper} to merge")
     a = ap.parse_args()
     os.makedirs(DATA, exist_ok=True)
@@ -172,11 +186,13 @@ def main():
     if a.sync:
         sync(store, a.sync)
 
+    new_ids = []
     if not a.rebuild:
         new = fetch(store, state, reject, a.candidates)
         resolve_affils(new, allow_pdf=not a.no_pdf)
         for p in new:
             store[p["id"]] = p
+        new_ids = [p["id"] for p in new]
         recheck(store, allow_pdf=not a.no_pdf)
         state["last_run"] = now_utc().isoformat(timespec="seconds")
         state.setdefault("runs", []).append({"at": state["last_run"], "new": len(new),
@@ -199,6 +215,24 @@ def main():
             del store[aid]
         elif aid in zh:
             store[aid]["zh_summary"] = zh[aid]
+    # research-interest relevance score + practicality signals (rule-based)
+    for p in store.values():
+        p["interest"] = interest.analyze(p)
+    if not any(p.get("pick") for p in store.values()) or a.reseed_picks:
+        # one-off: seed the picks archive for the backlog, one pick set per arXiv submission day
+        byday = {}
+        for p in store.values():
+            p.pop("pick", None)
+            d = dt.datetime.fromisoformat(p["published"].replace("Z", "+00:00")).astimezone(CN).date().isoformat()
+            byday.setdefault(d, []).append(p["id"])
+        for d in sorted(byday):
+            if len(byday[d]) >= 5:
+                interest.assign(store, d, byday[d], log=log)
+    elif new_ids:
+        interest.assign(store, now_utc().astimezone(CN).date().isoformat(), new_ids, log=log)
+    for p in store.values():  # refresh reason text (e.g. after a Chinese summary was added)
+        if p.get("pick"):
+            p["pick"].update(interest.reasons(p, p["interest"]))
     save(STORE, store)
     save(STATE, state)
 

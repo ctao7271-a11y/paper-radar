@@ -225,6 +225,20 @@ def from_pdf(p, txt, ltxt=""):
                 who.append(n)
             elif _sentence_mentions(region, n, key):
                 who.append(n)
+        # ACM style: "Chunyang Luo, lcy007@stu.pku.edu.cn, Peking University, Beijing, China"
+        for n in names:
+            if n in who:
+                continue
+            for m in re.finditer(re.escape(_norm(n)) + r",([^\n]{0,160})", _norm(region), re.I):
+                seg = m.group(1)
+                sm = s["strong"].search(seg)
+                if not sm:
+                    continue
+                between = seg[:sm.start()]
+                if INST.search(between) or any(o != n and _norm(o).lower() in between.lower() for o in names):
+                    continue
+                who.append(n)
+                break
         # every affiliation line in the header belongs to this school -> all authors
         if not who:
             aff_lines = [l for l in head.splitlines() if INST.search(l)]

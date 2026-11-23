@@ -22,6 +22,11 @@ def slim(p):
         "tg": p.get("tags", []),
         "v": p.get("venue", ""),
         "c": p.get("primary", ""),
+        "r": p.get("interest", {}).get("rec", 0),
+        "it": p.get("interest", {}).get("it", []),
+        "sig": p.get("interest", {}).get("sig", []),
+        "th": int(p.get("interest", {}).get("theory", False)),
+        "pk": p.get("pick") or None,
         "s": round(max(p.get("score", {}).get(t, 0) for t in p.get("topics", ["x"])) if p.get("topics") else 0, 1),
     }
 
@@ -42,16 +47,22 @@ def build(store, state, out):
                 "total": len(store),
                 "counts": {"cockpit": sum("cockpit" in p.get("topics", []) for p in store.values()),
                            "embodied": sum("embodied" in p.get("topics", []) for p in store.values()),
+                           "edge": sum("edge" in p.get("topics", []) for p in store.values()),
+                           "picks": sum(bool(p.get("pick")) for p in store.values()),
                            "flagged": sum(bool(p.get("flag")) for p in store.values())},
                 "last_run": state.get("last_run", "")}
     keep = set()
     for m in sorted(months, reverse=True):
-        items = sorted(months[m], key=lambda x: (x["d"], x["s"]), reverse=True)
+        items = sorted(months[m], key=lambda x: (x["d"], x["r"]), reverse=True)
         fn = f"{m}.json"
         keep.add(fn)
         json.dump(items, open(os.path.join(out, "data", fn), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
         manifest["months"].append({"m": m, "file": fn, "n": len(items)})
     for f in os.listdir(os.path.join(out, "data")):
-        if f.endswith(".json") and f not in keep and f != "manifest.json":
+        if f.endswith(".json") and f not in keep and f not in ("manifest.json", "picks.json"):
             os.remove(os.path.join(out, "data", f))
+    # cumulative top-picks archive (all days, newest first) – loaded independently of the monthly files
+    picks = sorted((slim(p) for p in store.values() if p.get("pick")), key=lambda x: (x["pk"]["date"], -x["pk"]["rank"]), reverse=True)
+    json.dump(picks, open(os.path.join(out, "data", "picks.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    manifest["pick_days"] = sorted({x["pk"]["date"] for x in picks}, reverse=True)
     json.dump(manifest, open(os.path.join(out, "data", "manifest.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
