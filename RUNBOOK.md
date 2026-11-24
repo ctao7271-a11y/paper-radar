@@ -109,5 +109,5 @@ git add -A && git commit -m "update pipeline" && git push
   - 建议在 Supabase 控制台 Authentication → URL Configuration 把 Site URL 与 Redirect URLs 设为 `https://ctao7271-a11y.github.io/paper-radar/`（否则邮件链接可能指向默认地址，需要粘贴回对话框）。
 - **打开次数（全站总计）**：卡片上只显示一个数字“打开 N 次”= 所有访客点击标题、arXiv 或 PDF 链接的总次数（事件委托，不拦截跳转，中键也算）。表 `public.global_clicks(arxiv_id, count, updated_at)`；匿名访客只能 SELECT 和调用 SECURITY DEFINER 函数 `increment_global_click(p_arxiv_id)`（校验 ID 格式与长度），不能直接写表。同一浏览器同一篇 30 秒内只计一次（客户端限流）。连接不上 Supabase 时不显示数字。
   - 修正误计数：`update public.global_clicks set count = greatest(count - <n>, 0) where arxiv_id = '<id>';`
-- 视觉：浅色四色（白底 #FFFFFF、墨色文字 #0F172A 及其透明度、主色蓝 #2563EB、重点推荐青 #06B6D4 少量使用），等宽数字、1px 细线，样式在 `radar/assets/style.css`；supabase-js 本地化为 `radar/assets/supabase-2.119.2.js`（构建时复制到 `site/`）。
+- 视觉（Aurora 浅色主题，2026-11-24 晚）：画布 #F7F6FC、卡片 #FFFFFF、墨色 #1E1B3A、次要文字 #5B5878/#8A87A3、细线 #E7E4F3/#D6D1EA；紫 #7C5CFC（文字用 #6D28D9）、粉 #EC4899（文字用 #DB2777）、蓝 #3B82F6（文字用 #2563EB）、靛 #6366F1；渐变 粉→紫（总数卡、重点推荐、已勾选）、紫→蓝（推荐度、已读、占比条）。弱投影、圆角卡片、胶囊按钮，顶部有 arXiv→三方向的流向图。样式在 `radar/assets/style.css`（构建时复制到 `site/`）；supabase-js 本地化为 `radar/assets/supabase-2.119.2.js`。
 - 自测：`/workspace/pwenv/bin/python tests/test_reading_list.py <url> <tag> [测试邮箱 测试密码]`。注意脚本的点击会真实计入全站次数，结束时打印 `GLOBAL_CLICK_DELTAS`，按上面的 SQL 扣回。

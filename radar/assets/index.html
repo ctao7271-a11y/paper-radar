@@ -6,8 +6,8 @@
 <title>Paper Radar · 座舱、具身与端侧智能论文追踪</title>
 <meta name="description" content="每日追踪 arXiv 上智能座舱、具身智能与端侧部署/智能体方向的新论文，挑选可落地的重点推荐，并标注清华、北大、北航作者。">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#F7F6FC">
+<meta name="color-scheme" content="light">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -29,16 +29,39 @@
 
 <section class="hero">
   <div class="wrap">
-    <p class="kicker">ARXIV DAILY · 智能座舱 × 具身智能 × 端侧部署与智能体</p>
-    <div class="stats" id="stats" aria-live="polite">
-      <div class="stat"><b id="s-total">–</b><span>累计论文</span></div>
-      <div class="stat"><b id="s-cockpit">–</b><span>智能座舱</span></div>
-      <div class="stat"><b id="s-embodied">–</b><span>具身智能</span></div>
-      <div class="stat"><b id="s-edge">–</b><span>端侧·智能体</span></div>
-      <div class="stat acc"><b id="s-picks">–</b><span>重点推荐</span></div>
-      <div class="stat"><b id="s-flag">–</b><span>清华/北大/北航</span></div>
+    <div class="hero-head">
+      <div class="hero-txt">
+        <p class="kicker">arXiv daily · 智能座舱 × 具身智能 × 端侧部署与智能体</p>
+        <h1 class="headline">论文雷达 <span>Paper Radar</span></h1>
+        <p class="updated" id="updated"></p>
+      </div>
+      <svg class="flow" viewBox="0 0 360 120" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="fa" x1="0" x2="1"><stop offset="0" stop-color="#7C5CFC" stop-opacity=".32"/><stop offset="1" stop-color="#3B82F6" stop-opacity=".38"/></linearGradient>
+          <linearGradient id="fb" x1="0" x2="1"><stop offset="0" stop-color="#7C5CFC" stop-opacity=".32"/><stop offset="1" stop-color="#7C5CFC" stop-opacity=".42"/></linearGradient>
+          <linearGradient id="fc" x1="0" x2="1"><stop offset="0" stop-color="#7C5CFC" stop-opacity=".32"/><stop offset="1" stop-color="#EC4899" stop-opacity=".38"/></linearGradient>
+          <linearGradient id="na" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4F46E5"/><stop offset="1" stop-color="#2563EB"/></linearGradient>
+          <linearGradient id="nb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6D28D9"/><stop offset="1" stop-color="#4F46E5"/></linearGradient>
+          <linearGradient id="nc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#DB2777"/><stop offset="1" stop-color="#7C5CFC"/></linearGradient>
+        </defs>
+        <path d="M62 36 C170 36 190 12 286 12 L286 30 C190 30 170 46 62 46Z" fill="url(#fa)"/>
+        <path d="M62 46 C170 46 190 44 286 44 L286 76 C190 76 170 74 62 74Z" fill="url(#fb)"/>
+        <path d="M62 74 C170 74 190 90 286 90 L286 108 C190 108 170 84 62 84Z" fill="url(#fc)"/>
+        <rect x="4" y="30" width="58" height="60" rx="12" fill="url(#nb)"/>
+        <text x="33" y="64" fill="#fff" font-size="12" font-weight="700" text-anchor="middle" font-family="Inter,PingFang SC,sans-serif">arXiv</text>
+        <rect x="286" y="9" width="70" height="24" rx="9" fill="url(#na)"/><text x="321" y="25" fill="#fff" font-size="11.5" font-weight="700" text-anchor="middle" font-family="Inter,PingFang SC,sans-serif">座舱</text>
+        <rect x="286" y="46" width="70" height="28" rx="9" fill="url(#nb)"/><text x="321" y="64" fill="#fff" font-size="11.5" font-weight="700" text-anchor="middle" font-family="Inter,PingFang SC,sans-serif">具身</text>
+        <rect x="286" y="87" width="70" height="24" rx="9" fill="url(#nc)"/><text x="321" y="103" fill="#fff" font-size="11.5" font-weight="700" text-anchor="middle" font-family="Inter,PingFang SC,sans-serif">端侧·智能体</text>
+      </svg>
     </div>
-    <p class="updated" id="updated"></p>
+    <div class="stats" id="stats" aria-live="polite">
+      <div class="stat main"><span>累计论文</span><b id="s-total">–</b><i class="meter" aria-hidden="true"></i></div>
+      <div class="stat t-cockpit"><span>智能座舱</span><b id="s-cockpit">–</b><i class="meter" aria-hidden="true"></i></div>
+      <div class="stat t-embodied"><span>具身智能</span><b id="s-embodied">–</b><i class="meter" aria-hidden="true"></i></div>
+      <div class="stat t-edge"><span>端侧·智能体</span><b id="s-edge">–</b><i class="meter" aria-hidden="true"></i></div>
+      <div class="stat acc"><span>重点推荐</span><b id="s-picks">–</b><i class="meter" aria-hidden="true"></i></div>
+      <div class="stat"><span>清华/北大/北航</span><b id="s-flag">–</b><i class="meter" aria-hidden="true"></i></div>
+    </div>
   </div>
 </section>
 

@@ -284,7 +284,7 @@
     const en = p.en ? `<p class="en"><span class="k">要点</span>${esc(p.en)}</p>` : "";
     return `<article class="card${flag ? " flag" : ""}${pk ? " pick" : ""}${myList[p.id] ? " saved" : ""}" data-id="${esc(p.id)}">
       ${head(p.id)}
-      <div class="cardhead">${p.pk ? `<span class="pill pick">★ 推荐${pk ? "" : " " + esc(p.pk.date.slice(5))}</span>` : ""}${p.tp.map((t) => `<span class="pill">${TOPIC[t]}</span>`).join("")}${badges(p)}${p.v ? `<span class="pill venue">${esc(p.v)}</span>` : ""}</div>
+      <div class="cardhead">${p.pk ? `<span class="pill pick">★ 推荐${pk ? "" : " " + esc(p.pk.date.slice(5))}</span>` : ""}${p.tp.map((t) => `<span class="pill t-${t}">${TOPIC[t]}</span>`).join("")}${badges(p)}${p.v ? `<span class="pill venue">${esc(p.v)}</span>` : ""}</div>
       <h3><a href="https://arxiv.org/abs/${esc(p.id)}" target="_blank" rel="noopener" data-open="${esc(p.id)}">${esc(p.t)}</a></h3>
       <p class="au">${authors(p)}</p>
       ${pk ? why(p) : ""}
@@ -316,7 +316,7 @@
     const s = p || { id, ...(v.p || {}) };
     return `<article class="card mine-item saved${v.read ? " is-read" : ""}" data-id="${esc(id)}">
       ${head(id, `<label class="read-box"><input type="checkbox" data-read="${esc(id)}"${v.read ? " checked" : ""}><span>已读</span></label>`)}
-      <div class="cardhead">${(s.tp || []).map((t) => `<span class="pill">${TOPIC[t] || esc(t)}</span>`).join("")}${p ? badges(p) : ""}</div>
+      <div class="cardhead">${(s.tp || []).map((t) => `<span class="pill t-${esc(t)}">${TOPIC[t] || esc(t)}</span>`).join("")}${p ? badges(p) : ""}</div>
       <h3><a href="https://arxiv.org/abs/${esc(id)}" target="_blank" rel="noopener" data-open="${esc(id)}">${esc(s.t || id)}</a></h3>
       <p class="au">${esc((s.au || []).slice(0, 8).join("，"))}${(s.au || []).length > 8 ? " 等" : ""}</p>
       ${p && p.zh ? `<p class="sum"><span class="k">简介</span>${esc(p.zh)}</p>` : ""}
@@ -464,7 +464,12 @@
     $("#s-edge").textContent = manifest.counts.edge ?? 0;
     $("#s-picks").textContent = manifest.counts.picks ?? 0;
     $("#s-flag").textContent = manifest.counts.flagged;
-    $("#updated").textContent = "LAST UPDATE " + fmtTime(manifest.updated) + " (UTC+8)";
+    $("#updated").textContent = "更新于 " + fmtTime(manifest.updated) + "（北京时间）";
+    // share bars under each stat: proportion of the archive
+    document.querySelectorAll(".stat").forEach((el) => {
+      const n = parseInt((el.querySelector("b") || {}).textContent, 10) || 0;
+      el.style.setProperty("--w", Math.max(4, Math.round(100 * n / Math.max(1, manifest.total))) + "%");
+    });
     const [, pk] = await Promise.all([loadMore(Math.min(6, manifest.months.length)), getJSON("picks.json").catch(() => []),
       Promise.race([gc, new Promise((r) => setTimeout(r, 2500))])]);    // don't wait forever for counts
     picks = pk;
