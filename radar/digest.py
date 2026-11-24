@@ -47,7 +47,8 @@ def build(store, digested, out):
     os.makedirs(out, exist_ok=True)
     now = dt.datetime.now(dt.timezone.utc)
     cutoff = now - dt.timedelta(days=NEW_WINDOW_DAYS)
-    new = [p for aid, p in store.items() if aid not in digested and dt.datetime.fromisoformat(p["first_seen"]) >= cutoff]
+    new = [p for aid, p in store.items() if aid not in digested and not p.get("backfill")
+           and dt.datetime.fromisoformat(p["first_seen"]) >= cutoff]   # backfilled older papers: site only, never mailed
     pool = [p for p in new if p.get("pick") and "interest" in p]
     if len(pool) > MAX_PICKS:   # several pick days unsent (e.g. after a weekend): keep the best, with topic variety
         from . import interest

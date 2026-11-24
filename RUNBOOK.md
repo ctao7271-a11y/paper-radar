@@ -84,6 +84,12 @@ git add -A && git commit -m "update pipeline" && git push
 | `gh workflow run daily-update -R ctao7271-a11y/paper-radar` | 手动触发网站更新 |
 | `gh run list -R ctao7271-a11y/paper-radar` | 查看网站更新运行记录 |
 
+## 智能座舱召回（2026-11-24 调整）
+- 座舱是小众方向：按 2026-08-26～11-24 的 90 天回溯，arXiv 上真正与舱内/驾驶员/车载交互相关的新论文约 40 篇（每周 3～4 篇），远少于具身（每天全量抓取 cs.RO）。
+- 抓取：RSS 增加 eess.SP；API 查询 `cockpit_kw`（扩充的短语）、`cockpit_hci`、`cockpit_title`（标题含 driver/vehicle/car/cabin/cockpit/passenger/occupant，限定 cs.HC/CV/CL/RO/AI/LG、eess.SP/AS/IV、cs.SD/MM）。
+- 分类（`radar/arxiv.py` + `radar/config.py`）：强短语（舱内、车载助手/智能体、信息娱乐、AR-HUD、驾驶员状态/视线/情绪/负荷、接管、乘客 EEG/生理信号等）+ 句级共现；纯自动驾驶感知/规划、交通行为建模、车联网、保险遥测、楼宇“occupant”等排除。一篇论文可同时属于座舱与端侧/具身（多标签）。
+- 一次性回溯：`python3 run.py --backfill-cockpit 90 --no-digest`。回溯论文 `first_seen` = arXiv 日期、带 `backfill: true`，并写入本地 `digested_ids.json`——只在网站显示，不进邮件、不参与当天重点推荐。
+
 ## 机构解析说明
 - 顺序：arXiv 元数据 → PDF 首页（普通文本 + `-layout` 文本，按作者上标与单位编号/列位置对应；“X is with … University” 脚注；所有单位同校则全员；邮箱前缀）→ OpenAlex（仅在 PDF 无法定位具体作者时补充；新论文常延迟，且有时把所有机构赋给所有作者，故优先级最低）。
 - 匹配：清华（Tsinghua University / 清华大学 / tsinghua.edu.cn / Tsinghua SIGS / IIIS / AIR），北大（Peking University / PKU / 北京大学 / pku.edu.cn），北航（Beihang / BUAA / Beijing University of Aeronautics and Astronautics / 北京航空航天大学 / buaa.edu.cn）。裸缩写只在摘要前的作者区有效；排除 “Tsinghua-Tencent 100K”、“Peking Union Medical College” 等。

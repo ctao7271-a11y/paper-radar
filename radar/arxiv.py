@@ -97,7 +97,7 @@ def classify(p):
     co_title = bool(C.COCKPIT_OCC.search(title) and C.COCKPIT_HUMAN.search(title))
     c_ok = False
     if cs >= 1 and not (excl and cs < 2 and not cs_title):
-        c_ok = cs_title or cs >= 2 or stack <= 1 or co >= 2
+        c_ok = cs_title or cs >= 2 or stack == 0 or (co >= 2 and stack <= 1)   # one weak cockpit phrase inside a driving-stack paper is not enough
     elif not excl and (co_title or co >= 2) and stack <= 2:
         c_ok = True
     score["cockpit"] = cs * 3 + (2 if cs_title else 0) + min(co, 4) + (2 if co_title else 0) + min(ai, 4) * 0.5
@@ -180,7 +180,7 @@ def venue(p):
     return m.group(1) if m else ""
 
 # ---------------------------------------------------------------- RSS (daily announcements; light on rate limits)
-RSS_CATS = ["cs.RO", "cs.AI", "cs.CV", "cs.CL", "cs.HC", "cs.LG", "cs.MA", "eess.SY", "cs.SD", "eess.AS", "cs.MM", "eess.IV", "cs.AR", "cs.DC", "cs.PF"]
+RSS_CATS = ["cs.RO", "cs.AI", "cs.CV", "cs.CL", "cs.HC", "cs.LG", "cs.MA", "eess.SY", "cs.SD", "eess.AS", "cs.MM", "eess.IV", "cs.AR", "cs.DC", "cs.PF", "eess.SP"]
 
 def rss(cats=RSS_CATS, log=print):
     from email.utils import parsedate_to_datetime

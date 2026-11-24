@@ -465,7 +465,7 @@
     $("#s-picks").textContent = manifest.counts.picks ?? 0;
     $("#s-flag").textContent = manifest.counts.flagged;
     $("#updated").textContent = "LAST UPDATE " + fmtTime(manifest.updated) + " (UTC+8)";
-    const [, pk] = await Promise.all([loadMore(Math.min(2, manifest.months.length)), getJSON("picks.json").catch(() => []),
+    const [, pk] = await Promise.all([loadMore(Math.min(6, manifest.months.length)), getJSON("picks.json").catch(() => []),
       Promise.race([gc, new Promise((r) => setTimeout(r, 2500))])]);    // don't wait forever for counts
     picks = pk;
     render();

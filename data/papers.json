@@ -1,4 +1,2434 @@
 {
+ "2608.27108": {
+  "abstract": "Federated Learning (FL) enables privacy-aware distributed training, yet gradient updates remain exploitable: Man-in-the-Middle (MitM) interception exposes updates in transit, while model poisoning corrupts global convergence. We first introduce GASHE (Gradient-Aware Selective Homomorphic Encryption), a novel selective encryption strategy that dynamically identifies and encrypts only the gradient components exceeding a DP-calibrated sensitivity threshold, rather than encrypting all parameters uniformly as in static layer-based or full-parameter CKKS schemes. Building on GASHE, we introduce SecureDrive-FL, a federated driver monitoring framework that couples DP-SGD with GASHE to create the first closed-loop DP+HE privacy pipeline: DP-SGD calibration parameters directly derive the GASHE encryption mask, unifying training-time privacy and communication-time confidentiality. Evaluated on a ten-class distracted driver classification task under non-IID federated splits, SecureDrive-FL matches DP-SGD alone's poisoning resistance (73.6% vs. 74.0% accuracy, 3.9% Attack Success Rate for both) while additionally withstanding MitM interception, where DP-SGD alone collapses to near-random accuracy (78.2% vs. 10.4%), all under only approx. 8--10% additional runtime overhead relative to DP-SGD alone---under DP-SGD noise injection with per-round privacy parameter epsilon_0=4.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Baran Can Gül"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Hanuma Siddhartha Tunuguntla"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Anjana Arvind Naik"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Abhishek Vijay Potekar"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Nasser Jazdi"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Michael Weyrich"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.CR",
+   "cs.LG"
+  ],
+  "comment": "",
+  "first_seen": "2026-08-27T13:24:33+00:00",
+  "flag": [],
+  "id": "2608.27108",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 4.2,
+   "sig": [],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "Building on GASHE, we introduce SecureDrive-FL, a federated driver monitoring framework that couples DP-SGD with GASHE to create the first closed-loop DP+HE privacy pipeline: DP-SGD calibration parameters directly derive the GASHE encryption mask, unifying training-time privacy and …",
+  "primary": "cs.CR",
+  "published": "2026-08-27T13:24:33Z",
+  "score": {
+   "cockpit": 9.0,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "驾驶员状态监测"
+  ],
+  "title": "SecureDrive-FL: Joint Differential Privacy and Gradient-Aware Selective Homomorphic Encryption for Federated Driver Monitoring",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-08-27T13:24:33Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "提出 SecureDrive-FL：联邦学习训练驾驶员监测模型时，用差分隐私校准的阈值只对敏感梯度分量做同态加密（GASHE），在保护隐私与通信安全的同时减少加密开销。"
+ },
+ "2608.30013": {
+  "abstract": "More than 430 million people worldwide live with disabling hearing loss. Although people with hearing loss are legally permitted to drive and may benefit from conditionally automated vehicles, SAE Level 3 systems still require drivers to respond to takeover requests when automation reaches its limits. Existing takeover requests often rely on auditory information, yet little evidence addresses visual and tactile designs for drivers who cannot rely on sound. This driving-simulator study with 40 participants examined the effects of information type (instructional, informative, and baseline), signal type (visual, tactile, and visual-tactile), and hearing condition (normal hearing and simulated hearing impairment) on takeover performance. Information type significantly affected reaction time, with baseline displays producing the shortest times. Signal type significantly affected reaction and takeover time, with visual-tactile displays producing the shortest times. The interaction between signal type and information type was significant for all three measures. Visual-tactile displays produced the shortest reaction times within every information type. With visual-tactile signaling, simple baseline alerts prompted the fastest reactions and the most abrupt maneuvers, whereas informative content produced the lowest mean maximum resulting acceleration. Hearing condition showed no significant main effect on any measure. These findings suggest that AI-enabled vehicles can support urgent takeover communication through visual-tactile displays and can adapt message content to the time available and the maneuver quality required, with implications for drivers across hearing abilities.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Aries Chu"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Wei-Hsiang Lo"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Gaojian Huang"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.HC"
+  ],
+  "comment": "10 pages, 5 figures. Preprint",
+  "first_seen": "2026-08-30T20:12:51+00:00",
+  "flag": [],
+  "id": "2608.30013",
+  "interest": {
+   "it": [
+    "cockpit",
+    "dex"
+   ],
+   "rec": 8.45,
+   "sig": [
+    "real"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "More than 430 million people worldwide live with disabling hearing loss.",
+  "primary": "cs.HC",
+  "published": "2026-08-30T20:12:51Z",
+  "score": {
+   "cockpit": 18.0,
+   "edge": 0.0,
+   "embodied": 2.0
+  },
+  "tags": [
+   "接管请求"
+  ],
+  "title": "Multimodal Takeover Requests for Drivers with Hearing Loss: Implications for AI-Enabled Communication in Automated Vehicles",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-08-30T20:12:51Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "驾驶模拟器研究（40 人）：为听障驾驶员设计视觉、触觉及视觉+触觉的 L3 接管请求，比较信息类型与提示方式对接管反应时间和表现的影响，为车内多模态提示设计提供依据。"
+ },
+ "2608.30526": {
+  "abstract": "Autonomous vehicles (AVs) promise safer, cleaner, and more inclusive mobility, yet large-scale adoption is hindered by user acceptance rather than by technical challenges. Prior studies on acceptance and user experience largely rely on surveys, simulators or Wizard-of-Oz setups, often over-representing technologically enthusiastic participants and focusing on drivers instead of passengers. We address this gap with real-world field studies with AVs in real traffic, totaling 144 participants. Using multi-modal sensing, we evaluated EGG, heartbeat, breathing, camera and voice signals for affect inference in combination with vehicle data. Our results show that breathing, camera and voice measurements are reliable and pratical in naturalistic passenger contexts. We further contribute a validated study protocol, a self-assessment app for real-time assessment during human-machine interaction, and a tailored questionnaire to capture participant attitudes towards AVs. By grounding UX evaluation in real-world contexts, this work lays a foundation for user-centered design of autonomous mobility systems and robotics in general. Our work bridges the gap between affective computing and technical implementation of autonomous vehicles.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Helen Schneider"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Svetlana Pavlitska"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "J. Marius Zöllner"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.HC"
+  ],
+  "comment": "Accepted for publication at ABAW Workshop at ECCV2026",
+  "first_seen": "2026-08-31T09:56:46+00:00",
+  "flag": [],
+  "id": "2608.30526",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 6.0,
+   "sig": [
+    "real",
+    "deploy"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "Autonomous vehicles (AVs) promise safer, cleaner, and more inclusive mobility, yet large-scale adoption is hindered by user acceptance rather than by technical challenges.",
+  "primary": "cs.HC",
+  "published": "2026-08-31T09:56:46Z",
+  "score": {
+   "cockpit": 4.0,
+   "edge": 0.5,
+   "embodied": 0.0
+  },
+  "tags": [
+   "语音/对话交互",
+   "情感识别",
+   "人机界面/体验"
+  ],
+  "title": "User Experience in Human-Machine Interaction: Insights from Field Studies in Autonomous Mobility",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-08-31T09:56:46Z",
+  "venue": "ECCV",
+  "version": "v1",
+  "zh_summary": "在真实道路自动驾驶车辆上做了 144 人的乘客实地研究，用呼吸、心跳、摄像头、语音等多模态信号推断乘客情绪；发现呼吸、摄像头和语音信号在真实乘坐场景中可靠实用，并提供研究流程与实时自评 App。"
+ },
+ "2609.00682": {
+  "abstract": "Intelligent vehicles increasingly support adaptive applications beyond driving themselves, ranging from context-aware ADAS and automated driving to in-cabin monitoring and fleet management, all under tight requirements on accuracy, latency, cost, and reliability. Meeting these requirements is challenging because vehicles operate in complex, uncertain, and rapidly changing environments while running on resource-constrained computing platforms. This paper argues that context-situational factors that give meaning to sensor signals and constrain decisions-should be treated as a first-class principle for next-generation vehicle systems, and operationalized as a unified, shared state for learning, risk assessment, and closed-loop control across the software stack. We systematically review state-of-the- art (SOTA) context-aware methods spanning (i) environment understanding, (ii) planning and control, (iii) safety and security, and (iv) connected vehicles. Based on a trend analysis of context-aware design, we identify four key technical challenges in building a general contextual engine for future intelligent vehicles: multi-modal context fusion, temporal context modeling, handling rare events, and collaborative context sharing. We hope this survey will motivate the development of robust and efficient context-aware vehicle applications.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Liangkai Liu"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Shuyao Shi"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Mingke Wang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Noah T. Curran"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Chuan Li"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Fan Bai"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Kang G. Shin"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.RO",
+   "cs.ET",
+   "eess.SY"
+  ],
+  "comment": "15 pages, 3 figures",
+  "first_seen": "2026-09-01T03:58:58+00:00",
+  "flag": [],
+  "id": "2609.00682",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 2.0,
+   "sig": [],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "Intelligent vehicles increasingly support adaptive applications beyond driving themselves, ranging from context-aware ADAS and automated driving to in-cabin monitoring and fleet management, all under tight requirements on accuracy, latency, cost, and reliability.",
+  "primary": "cs.RO",
+  "published": "2026-09-01T03:58:58Z",
+  "score": {
+   "cockpit": 4.5,
+   "edge": 0.5,
+   "embodied": 0.0
+  },
+  "tags": [
+   "舱内感知",
+   "安全"
+  ],
+  "title": "Context-Aware Intelligent Vehicles",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-01T03:58:58Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "综述：主张把“情境”作为下一代智能汽车软件的一等公民，统一服务于环境理解、规划控制、安全与车联网（也涵盖舱内监测），并梳理构建通用情境引擎的四大技术挑战。"
+ },
+ "2609.04913": {
+  "abstract": "Automotive infotainment validation still relies on manual testing, slow, costly, and incompatible with agile releases and OTA updates. Scripted automation only partly helps: it couples test logic to implementation, yielding brittle, high-maintenance suites. Existing LLM-driven frameworks mostly target web/mobile apps, using single- or dual-agent setups that overload one or two models with perception, planning, action selection, and validation at once, prone to hallucinations and unproductive exploration loops given infotainment complexity. We present ARIA (Autonomous Real-time Infotainment Assessment), a multi-agent LLM framework that autonomously runs end-to-end tests on Android infotainment systems via visual interaction, using a closed-loop pipeline of four specialized agents per step plus a report stage. From single-sentence scenarios (path, action, expected outcome), ARIA runs the interactions and produces reports, reproducible scripts, and visual evidence per step. Evaluated on a manufacturer's physical Android infotainment system across 30 scenarios, ARIA completed 28 (93.3%) with a verdict (2 errored), 20 of which (71.4%) matched ground truth. It caught all 5 known defects, no fault passed as working; its 8 false positives stem from navigation/image limits and unsupported gestures, showing multi-agent LLMs can run infotainment tests industrially while exposing the cost of a low false-positive tolerance. A single-agent baseline confirms the multi-agent design's value: on the first pass, before stronger-model revisitation narrows the gap, it shows a far higher false-positive rate (72.0% vs. 52.6%), conflating navigational difficulty with system failure. We report first-pass/post-revisitation results, token/call/cost per scenario, and show via repeated runs that stability tracks complexity, with fault detection perfectly consistent, pointing to CI integration of visual testing.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "António Azevedo"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Bruno Lima"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "João Pascoal Faria"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.SE",
+   "cs.AI"
+  ],
+  "comment": "",
+  "first_seen": "2026-09-04T09:18:01+00:00",
+  "flag": [],
+  "id": "2609.04913",
+  "interest": {
+   "it": [
+    "agent",
+    "cockpit"
+   ],
+   "rec": 9.72,
+   "sig": [
+    "deploy"
+   ],
+   "theory": false
+  },
+  "journal_ref": "The International Symposium on Empirical Software Engineering and Measurement (ESEM 2026)",
+  "key_en": "We present ARIA (Autonomous Real-time Infotainment Assessment), a multi-agent LLM framework that autonomously runs end-to-end tests on Android infotainment systems via visual interaction, using a closed-loop pipeline of four specialized agents per step plus a report stage.",
+  "primary": "cs.SE",
+  "published": "2026-09-04T09:18:01Z",
+  "score": {
+   "cockpit": 13.0,
+   "edge": 0.5,
+   "embodied": 1.5
+  },
+  "tags": [
+   "大语言模型",
+   "智能体",
+   "手势/视线交互",
+   "车载信息娱乐"
+  ],
+  "title": "ARIA - An Agentic Framework for Autonomous Testing of Infotainment Systems",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-04T09:18:01Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "提出 ARIA：多智能体大模型框架，通过视觉界面交互对安卓车载信息娱乐系统自动执行端到端测试并生成报告和可复现脚本；在实车信息娱乐系统的 30 个场景中完成 28 个（93.3%）。"
+ },
+ "2609.07128": {
+  "abstract": "Reliable risk assessment remains a central challenge for Autonomous Vehicles (AVs). Despite advances in automation, passenger cognition provides a non-intrusive auxiliary signal that improves both objective and perceived safety without requiring active human intervention. We introduce an Electroencephalogram (EEG)-based Brain-Computer Interface (BCI) that decodes passenger neural responses for both Risk Prediction (RP) and Danger Identification (DI), explicitly modeling humans as passengers to match real-world AV use. To achieve this, we propose the Passenger Cognitive Model (PCM), Risk-aware Sequential Labeling (RSL), and the Passenger EEG Decoding Strategy (PEDS), which integrates a 3D Convolutional Recurrent Neural Network (3D-CRNN) model for joint EEG decoding. Experimental results show that 3D-CRNN achieves a Balanced Accuracy (BA) of $95.3\\% \\pm 2.7\\%$ in RP and improves single-subject DI from $80.9\\% \\pm 3.9\\%$ to $85.0\\% \\pm 3.2\\%$ with RSL. Event-wise analyses further show that 3D-CRNN consistently outperforms other models across different event types in RP and DI. In generalization experiments, 3D-CRNN achieves $77.0\\% \\pm 5.3\\%$ BA in cross-session DI and $77.4\\% \\pm 1.1\\%$ BA on seen subjects in cross-subject evaluation, while maintaining a $64.9\\% \\pm 8.5\\%$ BA on unseen subjects, demonstrating promising generalizability and transferability across both intra-subject and inter-subject variability. These findings establish an Electroencephalogram (EEG) decoding framework for AV passenger hazard perception and suggest that passenger cognitive signals can provide auxiliary supervision for future AV decision-making and Safety of the Intended Functionality (SOTIF) support.",
+  "affil": {
+   "evidence": [
+    "清华大学: 1 School of Vehicle and Mobility, Tsinghua University, Beijing 100084, China | 3 School of Medicine, Tsinghua University, Beijing 100084, China"
+   ],
+   "schools": {
+    "tsinghua": [
+     "Yingkai Yang",
+     "Ashton Yu Xuan Tan",
+     "Bowen Li",
+     "Xiaorong Gao",
+     "Sifa Zheng",
+     "Jianqiang Wang",
+     "Xinyu Gu",
+     "Jun Li",
+     "Hong Wang"
+    ]
+   },
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Yingkai Yang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Ashton Yu Xuan Tan"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Bowen Li"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Xiaorong Gao"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Sifa Zheng"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Jianqiang Wang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Xinyu Gu"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Yang Zhao"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Yuxin Zhang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Sharon X. Huang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Tania Stathaki"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Jun Li"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Hong Wang"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.AI",
+   "cs.LG",
+   "eess.SP"
+  ],
+  "comment": "31 pages, 8 figures, 13 tables, including appendices. Accepted for publication in Automotive Innovation. Yingkai Yang and Ashton Yu Xuan Tan contributed equally. Corresponding author: Hong Wang. Data: https://doi.org/10.21227/jw72-m261 ; Code: https://github.com/SOTIF-AVLab/EEG2023",
+  "first_seen": "2026-09-07T07:22:04+00:00",
+  "flag": [
+   "tsinghua"
+  ],
+  "id": "2609.07128",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 8.2,
+   "sig": [
+    "code"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "We introduce an Electroencephalogram (EEG)-based Brain-Computer Interface (BCI) that decodes passenger neural responses for both Risk Prediction (RP) and Danger Identification (DI), explicitly modeling humans as passengers to match real-world AV use.",
+  "primary": "cs.AI",
+  "published": "2026-09-07T07:22:04Z",
+  "score": {
+   "cockpit": 17.0,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "生理信号",
+   "安全"
+  ],
+  "title": "EEG-Driven Decoding Framework for Passenger Hazard Perception in Highly Automated Vehicles",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-07T07:22:04Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "用脑电（EEG）脑机接口解码自动驾驶车内乘客对危险的神经反应，用于风险预测与危险识别；3D-CRNN 在风险预测上平衡准确率达 95.3%。"
+ },
+ "2609.08117": {
+  "abstract": "Driver motion can provide cues to ongoing behavior, attention, and near-term driving intent. However, most existing driver-centric datasets focus on recognizing predefined driver behaviors from short video clips, while human motion forecasting benchmarks largely target motion outside the vehicle. We introduce DriveMotion, a multi-source benchmark for continuous driver motion forecasting. DriveMotion contains 393 hours of 133-keypoint motion sequences at 10 Hz from 360 drivers, integrating naturalistic driving data, curated public in-cabin videos, and the AIDE dataset into a unified representation with per-joint validity masks and synchronized driving context. Naturalistic driving contains long periods of limited body movement, making uniformly sampled evaluation dominated by persistence and less sensitive to brief but behaviorally meaningful motion. To address this, we use dynamics-anchored evaluation, placing forecasting windows around vehicle maneuvers identified offline from CAN signals without providing CAN to the model at inference. Arm motion in pre-maneuver windows is 3.4x greater than in route-matched stable-driving controls. On these anchored windows, learned models reduce forecasting error over persistence by up to 15%, while maneuver-enriched training improves forecast-derived Part-State F1 by 44% over the zero-motion reference. Training on the full multi-source corpus further reduces forecasting error on held-out web drivers by 38% compared with BATON-only training. DriveMotion provides identity-disjoint splits, fixed evaluation subsets, and reference implementations for reproducible evaluation of continuous driver motion forecasting. The dataset and benchmark are available at https://huggingface.co/datasets/HenryYHW/DriveMotion",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Yuhang Wang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Chuheng Wei"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Jingxin Yang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Xishun Liao"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Hao Zhou"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.CV",
+   "cs.HC"
+  ],
+  "comment": "21 pages, 7 figures, 18 tables. Dataset and benchmark: https://huggingface.co/datasets/HenryYHW/DriveMotion; project page: https://wangyuhang-cmd.github.io/drivemotion/",
+  "first_seen": "2026-09-08T01:49:18+00:00",
+  "flag": [],
+  "id": "2609.08117",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 5.5,
+   "sig": [
+    "code",
+    "numbers"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "We introduce DriveMotion, a multi-source benchmark for continuous driver motion forecasting.",
+  "primary": "cs.CV",
+  "published": "2026-09-08T01:49:18Z",
+  "score": {
+   "cockpit": 4.0,
+   "edge": 0.5,
+   "embodied": 0.0
+  },
+  "tags": [
+   "基准评测",
+   "数据集",
+   "舱内感知",
+   "情感识别"
+  ],
+  "title": "DriveMotion: A Large-Scale Multi-Source Benchmark for Driver Motion Sequence Modeling and Forecasting",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-08T01:49:18Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "发布 DriveMotion 基准：来自 360 名驾驶员、共 393 小时的 133 关键点驾驶员动作序列（含舱内视频），用于预测驾驶员接下来的动作与驾驶意图。"
+ },
+ "2609.09476": {
+  "abstract": "In-vehicle assistants must translate natural-language requests into accurate vehicle function calls under strict memory and latency constraints, making small language models (SLMs) attractive for on-device deployment. For such models, a key design choice is how the available function surface is presented. Two approaches are to represent each function with a dedicated Functional Token (FT) or provide function schemas directly in the prompt. FTs enable compact inference but are restricted to functions learned during training, whereas Schema-in-Prompt (SIP) can generalize to unseen functions at the cost of longer prompts and higher inference overhead. We introduce a benchmark of 9,822 single-turn examples spanning 79 vehicle functions derived from Android Automotive, including held-out functions and requests requiring refusal. We compare both approaches under matched fine-tuning across four SLMs from 270M to 1.7B parameters. On functions seen during training, scaling provides limited benefit: the 270M model can match the 1.7B model, and the highest Seen accuracy in our main grid occurs at 0.6B. On held-out functions, FT achieves zero accuracy by construction, whereas SIP generalizes and improves substantially with scale. On out-of-scope requests, FT can invoke an unavailable function it was trained to emit, while SIP more reliably refuses based on the functions offered. This flexibility comes with a higher inference cost, chiefly the latency of processing the schema prompt. Our theoretical analysis formalizes why only SIP can predict functions withheld as training targets and why longer schema contexts increase inference cost. Overall, function-surface representation, rather than model scale alone, determines the capabilities and failure modes of SLM-based vehicle function calling.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Hamed Jafarzadeh Asl"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Yuanhao Yu"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Vahid Partovi Nia"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.LG",
+   "cs.AI",
+   "cs.CL"
+  ],
+  "comment": "Camera-ready version. Accepted at the SLM-Agents Workshop at NeurIPS 2026 (non-archival)",
+  "first_seen": "2026-09-08T21:46:35+00:00",
+  "flag": [],
+  "id": "2609.09476",
+  "interest": {
+   "it": [
+    "compress",
+    "agent",
+    "cockpit"
+   ],
+   "rec": 8.52,
+   "sig": [
+    "deploy"
+   ],
+   "theory": true
+  },
+  "journal_ref": "",
+  "key_en": "We introduce a benchmark of 9,822 single-turn examples spanning 79 vehicle functions derived from Android Automotive, including held-out functions and requests requiring refusal.",
+  "primary": "cs.LG",
+  "published": "2026-09-08T21:46:35Z",
+  "score": {
+   "cockpit": 5.0,
+   "edge": 4.5,
+   "embodied": 0.0
+  },
+  "tags": [
+   "基准评测",
+   "智能体",
+   "端侧部署",
+   "模型压缩",
+   "推理加速"
+  ],
+  "title": "From Fixed Keys to Readable Schemas: Small Language Models for Vehicle Agent Function Calls",
+  "topics": [
+   "cockpit",
+   "edge"
+  ],
+  "updated": "2026-10-04T04:03:46Z",
+  "venue": "NeurIPS",
+  "version": "v2",
+  "zh_summary": "研究车载助手如何用小模型（270M–1.7B）把语音请求转成车辆功能调用：构建覆盖 79 个车机功能的 9822 条基准，比较“功能 token”与“把函数说明放进提示词”两种方案，适合端侧部署参考。"
+ },
+ "2609.10139": {
+  "abstract": "Driver gaze provides information regarding driver visual attention and situational awareness to the surrounding traffic. Existing driver gaze estimation studies represent gaze in terms of gaze zone or gaze vector/point-of-gaze (PoG). However, object-level gaze information provides a more semantically meaningful representation of visual attention by identifying attended objects, such as vehicles, pedestrians, or traffic signals. In this study, we propose an end-to-end driver gaze object prediction framework, TransGaze-Object, Transformer-based Gaze Object prediction model. The proposed framework first extracts facial features, including face and iris-weighted eye features, along with trafficobject spatial features. A transformer based cross-attention mechanism is then used to compute similarity scores and attention weights for predicting the drivers gaze object. To train this model, we propose a benchmark driver gaze dataset, Urban Driving-Face Scene Gaze (UD-FSG), comprising synchronized driver-face and traffic-scene images, scene objects bounding boxes, and gaze labels in terms of 2D gaze coordinate and gaze object. The TransGaze-Object model achieves an overall accuracy of 60% for gaze-object prediction, compared to 51% accuracy obtained from associating the estimated Point-of-Gaze to traffic objects. The error analysis reveals that TransGaze-Object reduces confusion between traffic objects (predicted) and the background (ground-truth), achieving an error rate of 11.68%, a 49.7% relative reduction compared with 23.21% error obtained from PoG-based gaze-object association. Overall, the results demonstrate the effectiveness of directly predicting gaze objects from driver-face and traffic-scene information, rather than estimating an intermediate Point-of-Gaze and subsequently associating it with traffic objects.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Pavan Kumar Sharma"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Ayush Pande"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Pranamesh Chakraborty"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.CV"
+  ],
+  "comment": "32 pages, 17 figures",
+  "first_seen": "2026-09-09T13:19:16+00:00",
+  "flag": [],
+  "id": "2609.10139",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 4.7,
+   "sig": [],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "In this study, we propose an end-to-end driver gaze object prediction framework, TransGaze-Object, Transformer-based Gaze Object prediction model.",
+  "primary": "cs.CV",
+  "published": "2026-09-09T13:19:16Z",
+  "score": {
+   "cockpit": 11.5,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "基准评测",
+   "数据集",
+   "手势/视线交互"
+  ],
+  "title": "TransGaze-Object: Transformer Based Driver Gaze Object Prediction Framework in Real Driving",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-09T13:19:16Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "提出 TransGaze-Object：结合驾驶员面部/眼部特征与前方交通目标，用 Transformer 直接预测驾驶员正在看哪个物体，并发布同步的驾驶员面部–道路场景视线数据集。"
+ },
+ "2609.12374": {
+  "abstract": "Dashboard-mounted gaze trackers often lose sight of the driver's eyes during large head rotations, including shoulder checks, mirror glances, and intersection scanning. These maneuvers occur when information about the driver's visual attention is most useful. Offline gap-filling methods may reconstruct a missing interval using observations from both sides, but an online driver-monitoring system cannot rely on measurements that have not yet occurred. We therefore formulate causal gaze recovery: forecasting unavailable gaze at time t without target-tracker gaze at t or later. We introduce the Causal Context-Gated Forecaster (CCGF), which encodes a 60-frame pre-dropout history of gaze and head pose and combines it with DINOv3 scene features. A learned reliability gate controls the contribution of the history and scene representations as the dropout progresses. We evaluate two scene conditions: Live, in which the scene representation continues to update during tracker loss, and Frozen, in which the final pre-dropout representation is used throughout the missing interval. We evaluate CCGF on 2,047 eligible, naturally occurring GazeSense head\\_lost events drawn from 10.5 h of naturalistic driving by ten drivers. Across all recordings, head\\_lost accounts for 8.5 percent of GazeSense recording time. Synchronized gaze coordinates from a head-mounted Neon tracker provide supervision and evaluation targets but are never used as model inputs. Under leave-one-driver-out evaluation, CCGF achieves a mean per-driver median error of 175.7 px (10.5 deg) with Live scene updates, a 33 percent reduction relative to history-only causal forecasting. With Frozen scene input, the error increases to 210.8 px (12.9 deg), indicating that scene observations acquired during the dropout provide useful predictive information. We will release the dataset, evaluation protocol, and causal baselines.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Shabnam Shabani"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Ghazal Farhani"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.CV",
+   "cs.HC"
+  ],
+  "comment": "8 pages, 5 figures",
+  "first_seen": "2026-09-11T02:44:27+00:00",
+  "flag": [],
+  "id": "2609.12374",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 3.7,
+   "sig": [],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "We introduce the Causal Context-Gated Forecaster (CCGF), which encodes a 60-frame pre-dropout history of gaze and head pose and combines it with DINOv3 scene features.",
+  "primary": "cs.CV",
+  "published": "2026-09-11T02:44:27Z",
+  "score": {
+   "cockpit": 13.0,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "数据集",
+   "舱内感知",
+   "手势/视线交互"
+  ],
+  "title": "Context-Aware Causal Gaze Forecasting for Human-Vehicle Interaction During In-Cabin Tracking Dropouts",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-11T02:44:27Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "舱内视线追踪在驾驶员大幅转头时会丢失；该文提出因果视线预测模型 CCGF，结合丢失前的视线/头姿历史和场景特征，实时补全丢失期间的驾驶员视线。"
+ },
+ "2609.12503": {
+  "abstract": "Proactive in-cabin agents can help passengers understand automated-vehicle (AV) behavior, but communicating every ride event may introduce unnecessary interruptions. We investigated how communication should adapt to event priority and passenger activity. In a mixed-methods within-subject study, 41 participants rode as passenger in a VR simulated fully-automated vehicle. We compared an event-triggered (ET) policy that communicated immediately at every event with a context-sensitive (CS) policy that selected \\textit{Immediate}, \\textit{Delayed}, or \\textit{Silent} communications. CS increased communication appropriateness and substantially reduced perceived interruption. Perceived trust did not differ between policies, although baselines dispositional trust differentiated communication preferences. Findings highlight event consequence, passenger activity, continuing information value, and confirmation need as key considerations for selective in-cabin communication.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Kaiser Hamid"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Peihang Li"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Nade Liang"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.HC",
+   "cs.CV"
+  ],
+  "comment": "",
+  "first_seen": "2026-09-11T07:08:04+00:00",
+  "flag": [],
+  "id": "2609.12503",
+  "interest": {
+   "it": [
+    "agent",
+    "cockpit"
+   ],
+   "rec": 8.97,
+   "sig": [
+    "real"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "Proactive in-cabin agents can help passengers understand automated-vehicle (AV) behavior, but communicating every ride event may introduce unnecessary interruptions.",
+  "primary": "cs.HC",
+  "published": "2026-09-11T07:08:04Z",
+  "score": {
+   "cockpit": 12.0,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "智能体",
+   "舱内感知"
+  ],
+  "title": "When2Talk: When Should a Proactive In-Car Agent Talk?",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-11T07:08:04Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "研究车内主动式智能体“什么时候该说话”：41 人 VR 自动驾驶乘坐实验表明，按事件重要性和乘客当前活动选择立即/延后/不播报，比每个事件都播报更合适、打扰更少。"
+ },
+ "2609.13756": {
+  "abstract": "One in every five vehicle accidents on the road today is caused simply due to driver fatigue. Fatigue or otherwise drowsiness, significantly reduces the concentration and vigilance of the driver thereby increasing the risk of inherent human error leading to injuries and fatalities. Hence, our primary motive being - to reduce road accidents using a non-intrusive image processing based alert system. In this regard, we have built a system that detects driver drowsiness by real time tracking and monitoring the pattern of the driver's eyes. The stand alone system consists of 3 interconnected components - a processor, a camera and an alarm. After initial facial detection, the eyes are located, extracted and continuously monitored to check whether they are open or closed on the basis of a pixel-by-pixel method. When the eyes are seen to be closed for a certain amount of time, drowsiness is said to be detected and an alarm is issued accordingly to alert the driver and hence, prevent a casualty.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Fuzail Khan"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Sandeep Sharma"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "M. R. Arulalan"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.CV"
+  ],
+  "comment": "",
+  "first_seen": "2026-09-12T07:03:17+00:00",
+  "flag": [],
+  "id": "2609.13756",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 5.7,
+   "sig": [
+    "deploy"
+   ],
+   "theory": false
+  },
+  "journal_ref": "Intelligent Systems Design and Applications. ISDA 2018 2018. Advances in Intelligent Systems and Computing, vol 940. Springer, Cham",
+  "key_en": "One in every five vehicle accidents on the road today is caused simply due to driver fatigue.",
+  "primary": "cs.CV",
+  "published": "2026-09-12T07:03:17Z",
+  "score": {
+   "cockpit": 14.0,
+   "edge": 0.5,
+   "embodied": 0.0
+  },
+  "tags": [
+   "驾驶员状态监测"
+  ],
+  "title": "Development of Low-Cost Real-Time Driver Drowsiness Detection System using Eye Centre Tracking and Dynamic Thresholding",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-12T07:03:17Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "低成本实时疲劳驾驶检测系统：摄像头跟踪驾驶员眼睛开合，闭眼超过阈值时间即报警提醒。"
+ },
+ "2609.14687": {
+  "abstract": "Data-to-text driver coaching is often presented as a generic pipeline from telematics events to advice. This paper argues that its content requires localisation because usefulness and credibility depend on drivers' knowledge, prevalent risks, regulation, infrastructure, and available data. Two independently developed systems in the United Kingdom and Nigeria are compared by tracing requirements through content selection, generation, and field evaluation. The UK system prioritises post-trip reflection, explanations tied to road and place context, and tone-sensitive wording. The Nigerian system combines legally grounded, once-daily Tips based on detected events with weekly persuasive Reports; it foregrounds safety education and alcohol-related risk in response to reported gaps in formal training and traffic-rule knowledge, as well as local road-safety priorities. Reliable speed-limit metadata supported speeding feedback in the UK, whereas its scarcity led the Nigerian evaluation to exclude speeding from its outcome metric. Both interventions were associated with reduced distance-normalised unsafe-event rates in their own field studies, although their designs and metrics preclude an effect-size comparison. The analysis yields a requirements-to-content design process for localising safety-critical NLG without treating a high-income deployment as the default.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Iniakpokeikiye Peter Thompson"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Jawwad Baig"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Ehud Reiter"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Dewei Yi"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.CL",
+   "cs.HC"
+  ],
+  "comment": "Accepted to INLG 2026",
+  "first_seen": "2026-09-13T17:44:01+00:00",
+  "flag": [],
+  "id": "2609.14687",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 5.2,
+   "sig": [
+    "deploy"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "Data-to-text driver coaching is often presented as a generic pipeline from telematics events to advice.",
+  "primary": "cs.CL",
+  "published": "2026-09-13T17:44:01Z",
+  "score": {
+   "cockpit": 5.0,
+   "edge": 0.5,
+   "embodied": 0.0
+  },
+  "tags": [
+   "安全"
+  ],
+  "title": "One Feedback System Does Not Fit All: Localising Data-to-Text Driver Coaching for the United Kingdom and Nigeria",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-13T17:44:01Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "比较英国和尼日利亚两套基于车辆数据自动生成文字的驾驶员驾驶反馈系统，说明反馈内容需按当地驾驶员知识、风险与法规本地化；两套系统都与危险驾驶事件减少相关。"
+ },
+ "2609.14691": {
+  "abstract": "As autonomous vehicles and Extended Reality (XR) headsets enable novel in-car interactions, seamlessly querying physical landmarks, known as Outside-the-Vehicle Referencing (OVR), remains challenging due to ego-motion and referential ambiguity. We present a robust, multimodal OVR framework fusing user gaze and natural language to identify Points of Interest (POIs). To address the scarcity of dynamic vehicular data, we developed a VR-based pipeline synchronizing 360-degree transit videos with vehicle GNSS telemetry. Through a user study (N=46) mapping passenger head orientation into a 3D geospatial Digital Twin, we captured authentic gaze-speech behaviors. We subsequently trained a lightweight Transformer network, leveraging LLMs to dynamically align continuous spatial gaze vectors with discrete verbal context. Experimental results demonstrate high accuracy and low computational overhead, achieving an 83.33% Top-1 accuracy (87.72% Top-2) and an average inference time of 24.3 milliseconds. This real-time paradigm effectively resolves referential ambiguity, enabling context-aware spatial retrieval for passengers within the vehicle.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [
+     "Mercedes-Benz Tech Innovation GmbH",
+     "Saarland University"
+    ],
+    "name": "Alireza Parchami"
+   },
+   {
+    "affil_arxiv": [
+     "Saarland University"
+    ],
+    "name": "Artin Saberpour"
+   },
+   {
+    "affil_arxiv": [
+     "Mercedes-Benz Tech Innovation GmbH",
+     "RheinMain University of Applied Sciences"
+    ],
+    "name": "Robin Connor Schramm"
+   },
+   {
+    "affil_arxiv": [
+     "Saarland University"
+    ],
+    "name": "Jürgen Steimle"
+   },
+   {
+    "affil_arxiv": [
+     "RheinMain University of Applied Sciences"
+    ],
+    "name": "Ulrich Schwanecke"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.HC",
+   "cs.CL",
+   "cs.IR",
+   "cs.LG",
+   "cs.MM"
+  ],
+  "comment": "11 pages, 7 figures, 1 table; Accepted to the 18th International ACM Conference on Automotive User Interfaces and Interactive Vehicular Applications (AutoUI '26)",
+  "first_seen": "2026-09-13T17:48:22+00:00",
+  "flag": [],
+  "id": "2609.14691",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 7.5,
+   "sig": [
+    "real",
+    "numbers",
+    "deploy"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "We present a robust, multimodal OVR framework fusing user gaze and natural language to identify Points of Interest (POIs).",
+  "primary": "cs.HC",
+  "published": "2026-09-13T17:48:22Z",
+  "score": {
+   "cockpit": 6.0,
+   "edge": 1.0,
+   "embodied": 0.5
+  },
+  "tags": [
+   "大语言模型",
+   "语音/对话交互",
+   "手势/视线交互"
+  ],
+  "title": "Speak to the City: Multimodal Resolution for Outside-the-Vehicle References",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-13T17:48:22Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "车内乘客用“视线+语音”询问窗外地标：融合乘客视线方向与自然语言识别所指的兴趣点，Top-1 准确率 83.3%，推理仅 24 毫秒，可用于座舱多模态交互。"
+ },
+ "2609.19630": {
+  "abstract": "Large language models (LLMs) are increasingly integrated into vehicle voice assistants. But linking natural-language requests to vehicle functions creates a safety-critical authorization problem. Before executing a command, the system must choose whether to execute, refuse, clarify, require confirmation, defer to manual control, trigger an emergency response, or make no tool call. To our knowledge, prior evaluations do not isolate this pre-action decision across speaker role, authentication status, vehicle state, and tool availability. We introduce a 202-scenario benchmark with Reference Decisions under a seven-class taxonomy. We evaluate two local open-weight models and three API-based LLMs using Decision Alignment and safety-specific error metrics. Alignment ranges from 40.1% for Llama 3.2 3B to 89.1% for Gemini 3.1 Pro Preview. The API-based models score between 83.2% and 89.1%, with no statistically significant differences among them. Even these models produce two to three False Executes among 161 non-execution scenarios, and persistent errors remain in confirmation and manual-control decisions. A controlled Llama 3.2 3B ablation increases alignment to 40.1% under the structured authorization policy, versus 28.2-29.2% under schema-only and generic-safety baselines, but it does not eliminate False Executes. Structured LLM decisions are therefore insufficient as a standalone safety mechanism, and deployment requires an independent enforcement layer that verifies tool permissions and vehicle-state constraints before invoking any vehicle function.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Diba Afroze"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Xingli Zhang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Yazhou Tu"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Xiali Hei"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.AI",
+   "cs.CL",
+   "cs.RO"
+  ],
+  "comment": "",
+  "first_seen": "2026-09-17T03:20:22+00:00",
+  "flag": [],
+  "id": "2609.19630",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 5.7,
+   "sig": [
+    "deploy",
+    "open_model"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "We introduce a 202-scenario benchmark with Reference Decisions under a seven-class taxonomy.",
+  "primary": "cs.AI",
+  "published": "2026-09-17T03:20:22Z",
+  "score": {
+   "cockpit": 10.0,
+   "edge": 0.5,
+   "embodied": 1.5
+  },
+  "tags": [
+   "基准评测",
+   "大语言模型",
+   "语音/对话交互",
+   "安全"
+  ],
+  "title": "From Intent to Action: Benchmarking LLM Safety in Vehicle Voice Command Authorization",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-17T03:20:22Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "构建 202 个场景的基准，测试大模型车载语音助手在执行车控指令前的授权决策（执行、拒绝、澄清、确认、交回人工等）；最好的模型一致率约 89%，但仍会误执行。"
+ },
+ "2609.20123": {
+  "abstract": "Modern smart vehicles leverage multimodal sensors, ranging from high-bandwidth vision systems to low-rate physiological monitors, to provide personalized in-cabin services. However, integrating high-fidelity multimodal fusion with collaborative training is often hindered by the heterogeneous and time-varying Quality of Service (QoS) constraints of vehicular networks. Standard Federated Learning (FL) approaches enforce rigid synchronous rounds that fail to account for these resource asymmetries, leading to safety-critical timing violations and energy exhaustion. In this paper, we propose FedQoS, a novel asynchronous, event-triggered FL framework that decouples local computation from global communication via a two-phase gating mechanism. First, we introduce a resource-aware training gate that initializes local learning only when sensing buffers and energy reserves meet safety thresholds, preventing ML tasks from compromising core vehicle mobility. Second, a QoS-aware transmission policy gates uplink updates based on an efficiency score that balances model novelty against instantaneous latency and energy costs. Locally, clients optimize an objective featuring a staleness-aware proximal term that dynamically adjusts the global anchor strength based on update age. Extensive experiments on multimodal vehicular datasets demonstrate that FedQoS achieves competitive personalized accuracy with only marginal performance loss compared to FedAvg, while substantially reducing QoS violations, cutting communication overhead by 76.7\\%, and lowering latency cost by 26.0\\%, demonstrating a highly favorable accuracy and efficiency balance for real-world vehicular deployments.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Baran Can Gül"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Mert Nakıp"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Nasser Jazdi"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Michael Weyrich"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.LG"
+  ],
+  "comment": "",
+  "first_seen": "2026-09-17T12:20:07+00:00",
+  "flag": [],
+  "id": "2609.20123",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 5.2,
+   "sig": [
+    "deploy"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "In this paper, we propose FedQoS, a novel asynchronous, event-triggered FL framework that decouples local computation from global communication via a two-phase gating mechanism.",
+  "primary": "cs.LG",
+  "published": "2026-09-17T12:20:07Z",
+  "score": {
+   "cockpit": 10.0,
+   "edge": 1.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "数据集",
+   "舱内感知",
+   "生理信号",
+   "安全"
+  ],
+  "title": "QoS-Aware Federated Learning for Multimodal In-Cabin Interaction in Smart Vehicles",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-17T12:20:07Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "提出 FedQoS：面向舱内多模态交互模型的异步联邦学习，按车辆算力、电量和网络质量决定何时训练、何时上传，避免影响车辆核心功能。"
+ },
+ "2609.25195": {
+  "abstract": "We present Qwen-Audio-Agent, a harness that combines full-duplex voice interaction with asynchronous task execution through a foreground-background architecture. A Frontend Agent manages dialogue and selects between direct tool use and delegation, while a Backend Agent carries out delegated tasks in a separate context. An Orchestration Runtime maintains task state, coordinates requests for user input and authorization, and schedules the return of results to the conversation. The runtime separates speech interruption from task cancellation and execution completion from result delivery, allowing conversation to continue while delegated work proceeds. Environmental events and persistent memory provide context within and across sessions. Independent adapters support integration with different frontend models, backend agents, and clients. We instantiate the architecture in desktop assistance, intelligent cockpits, and voice customer service. On an in-house cockpit benchmark of 134 cases, mixed execution achieves a task success rate of 91.04%, compared with 72.39% and 80.60% for the direct and all delegated configurations, respectively. In a separate latency evaluation on matched successful turns, mixed execution reduces mean task execution latency by 26.73% and 30.91% relative to these baselines, respectively. These results support the complementary use of direct tool calls for immediate operations and backend delegation for multi-step tasks.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Chong Deng"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Yunjie Ji"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Yuxiang Kong"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Xiangang Li"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Xu Li"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Binbin Zhang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Haina Zhu"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Jianheng Zhuo"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "eess.AS",
+   "cs.MA"
+  ],
+  "comment": "",
+  "first_seen": "2026-09-21T17:40:55+00:00",
+  "flag": [],
+  "id": "2609.25195",
+  "interest": {
+   "it": [
+    "agent",
+    "cockpit"
+   ],
+   "rec": 7.53,
+   "sig": [
+    "numbers",
+    "open_model"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "We present Qwen-Audio-Agent, a harness that combines full-duplex voice interaction with asynchronous task execution through a foreground-background architecture.",
+  "primary": "eess.AS",
+  "published": "2026-09-21T17:40:55Z",
+  "score": {
+   "cockpit": 6.0,
+   "edge": 0.5,
+   "embodied": 0.0
+  },
+  "tags": [
+   "基准评测",
+   "智能体",
+   "语音/对话交互"
+  ],
+  "title": "Qwen-Audio-Agent Technical Report",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-21T17:40:55Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "Qwen-Audio-Agent 技术报告：全双工语音对话 + 后台异步执行任务的智能体架构，在智能座舱等场景落地；内部座舱基准 134 个用例任务成功率 91.0%。"
+ },
+ "2609.30076": {
+  "abstract": "Autonomous vehicles (AVs) are poised to fundamentally alter personal transportation, offering occupants the freedom to engage in various non-driving-related activities (NDRAs). However, our current understanding of how people might actually use this time in fully autonomous vehicles (FAVs) is limited. Traditional research methods often struggle to capture the influence of diverse travel circumstances and purposes when exploring future scenarios. This paper introduces experience-centered design (ECD) as an approach to investigate potential NDRAs within FAVs by examining the intricate connections between individuals' daily routines, specific travel contexts, and the activities they might undertake in transit. Through a multi-phase study employing participatory techniques that facilitated narrative construction and exploration, including diary studies, scenario scripting, and mixed reality (MR) enactments, we enabled participants to ground speculative future scenarios in their own lived experiences. This process yielded nuanced insights into preferences and behaviors concerning potential NDRAs, alongside the underlying subjective meanings and sociotechnical considerations. Our findings lead us to conceptualize NDRAs not as isolated instances of \"travel time use,\" but as dynamic sequences of interrelated activities deeply shaped by pre- and post-journey contexts. The effectiveness of our ECD approach in bridging current lived experiences with future scenarios was crucial for uncovering these insights. Ultimately, this study reconceptualizes AVs as complex sociotechnical systems that actively mediate human activity and interaction, suggesting a fundamental shift in their role within the urban fabric.",
+  "affil": {
+   "evidence": [
+    "清华大学: The Future Laboratory, Tsinghua University, Beijing, China"
+   ],
+   "schools": {
+    "tsinghua": [
+     "Xiao Xue"
+    ]
+   },
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Keqi Chen"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Xiao Xue"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Xinyi Liu"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Runjia Tan"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Chris Speed"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Lee Kwan Min"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Chen Lv"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.HC"
+  ],
+  "comment": "",
+  "first_seen": "2026-09-24T16:28:49+00:00",
+  "flag": [
+   "tsinghua"
+  ],
+  "id": "2609.30076",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 5.5,
+   "sig": [
+    "real"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "This paper introduces experience-centered design (ECD) as an approach to investigate potential NDRAs within FAVs by examining the intricate connections between individuals' daily routines, specific travel contexts, and the activities they might undertake in transit.",
+  "primary": "cs.HC",
+  "published": "2026-09-24T16:28:49Z",
+  "score": {
+   "cockpit": 3.5,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "舱内感知"
+  ],
+  "title": "Beyond Driving: Envisioning Activities in Future Autonomous Vehicles through Experience-Centered Design",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-24T16:28:49Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "用体验中心设计方法（日记、情景脚本、混合现实演绎）研究人们在全自动驾驶车里会做哪些非驾驶活动，为未来座舱空间与功能设计提供洞见。"
+ },
+ "2609.33000": {
+  "abstract": "Predicting how drivers, vehicles, and road scenes interact and evolve together is central to driver monitoring. Prior work models in-cabin activity or traffic-conditioned driver motion in isolation, motivating joint driver, vehicle, and road modeling with real-time on-vehicle evaluation. We introduce TriDrive, to our knowledge the first unified framework that jointly forecasts driver kinematics, vehicle dynamics, and road demands through an automation-conditioned transition model. Modality-specific encoders (an anchored kinematic representation of the driver, causal CAN-bus dynamics, and frozen V-JEPA 2 road latents with structured road margins) are connected by directed residual connections through which driver and road context refine vehicle forecasts. We evaluate TriDrive on three downstream tasks. On the public AIDE benchmark, its kinematic encoder recipe sets a new full-set state of the art (SOTA) among published baselines (48.05 versus 71.47 All-MPJPE). On 197.2 hours of naturalistic BATON subset, directed connections and road margins raise assistance-engaged PR-AUC by 0.084 for steering onset and 0.286 for time-to-collision drops. For real-time use, we distill the road encoders and run TriDrive on a comma four with an external 8 GB GPU, where a lightweight current-state warning probe updates at 5 Hz with 177 ms p95 latency while the joint model forecasts concurrently. The probe is above an openpilot-based baseline on human-labeled manual-driving warnings (AUROC 0.725 versus 0.563), and in a paired on-road study 14 drivers rate its warnings as more appropriate (+1.79) and timely (+2.67) than those of openpilot's driver-monitoring system.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Yuhang Wang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Jingxin Yang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Chuheng Wei"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Yuechen Guo"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Jinghan Xu"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Zhao Han"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Hao Zhou"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.RO",
+   "cs.CV"
+  ],
+  "comment": "32 pages (10-page main text plus appendices), 4 figures, 25 tables. Under review. Code, checkpoints, and demo video: https://huggingface.co/HenryYHW/TriDrive",
+  "first_seen": "2026-09-26T22:47:08+00:00",
+  "flag": [],
+  "id": "2609.33000",
+  "interest": {
+   "it": [
+    "compress",
+    "cockpit"
+   ],
+   "rec": 14.32,
+   "sig": [
+    "code",
+    "real",
+    "numbers",
+    "deploy"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "We introduce TriDrive, to our knowledge the first unified framework that jointly forecasts driver kinematics, vehicle dynamics, and road demands through an automation-conditioned transition model.",
+  "primary": "cs.RO",
+  "published": "2026-09-26T22:47:08Z",
+  "score": {
+   "cockpit": 9.0,
+   "edge": 2.5,
+   "embodied": 0.0
+  },
+  "tags": [
+   "基准评测",
+   "驾驶员状态监测",
+   "舱内感知"
+  ],
+  "title": "TriDrive: Joint Driver, Vehicle, and Road Modeling for Forecasting and Driver Monitoring",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-26T22:47:08Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "提出 TriDrive：联合建模驾驶员动作、车辆动态和道路需求，用于驾驶员监测与预测，在 AIDE 基准上取得新的最好结果，并在实车上评估。"
+ },
+ "2609.33811": {
+  "abstract": "Motorized two-wheelers (MTW) dominate Indian roads but remain underrepresented in driver behavior research. This study presents the first large-scale analysis of MTW driver gaze behavior in naturalistic, heterogeneous urban traffic, using the \\textit{myEye2Wheeler} dataset. A semantic segmentation pipeline (YOLOv11 + SAM2) was used to extract object-level gaze metrics under two attention modes: direct gaze (foveal overlap) and central vision (parafoveal monitoring). Results reveal a functional division: central vision supports broad monitoring, while direct gaze enables brief, selective sampling. Novice riders exhibit road-anchored scanning, returning to the road between object fixations, while experienced riders form longer chains of attention across multiple objects. The findings suggest that experience primarily refines temporal rhythm rather than altering allocation strategy and reduces object-class effects in gaze patterns. These findings offer new insight into MTW attention structures and inform future work on behavior modeling and safety systems.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Prerak Srivastava"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Bhaiya Vaibhaw Kumar"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Kavita Vemuri"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.CV"
+  ],
+  "comment": "",
+  "first_seen": "2026-09-27T18:03:16+00:00",
+  "flag": [],
+  "id": "2609.33811",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 2.0,
+   "sig": [],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "This study presents the first large-scale analysis of MTW driver gaze behavior in naturalistic, heterogeneous urban traffic, using the \\textit{myEye2Wheeler} dataset.",
+  "primary": "cs.CV",
+  "published": "2026-09-27T18:03:16Z",
+  "score": {
+   "cockpit": 4.5,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "数据集",
+   "手势/视线交互",
+   "安全"
+  ],
+  "title": "Eyes on the Road: A Naturalistic Comparison of MTW Rider Gaze in Urban Indian Traffic",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-27T18:03:16Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "首次大规模分析印度城市交通中两轮摩托车骑手的视线行为：新手更频繁回看路面，老手形成更长的注意链，可为驾驶员注意力建模与安全系统提供参考。"
+ },
+ "2609.35812": {
+  "abstract": "In-car conversational assistants (ICAs) are increasingly integrated into vehicles to support route planning, vehicle control, and information access. Ensuring their reliability is challenging due to multi-turn interactions, the absence of explicit ground truth, and strict safety constraints. Existing evaluation techniques fall short, as they target single-turn settings and fail to capture constraint handling, context retention, and safety-critical behavior across turns. We propose an automated framework for testing the multi-turn conversational capabilities of ICAs. The system is treated as a black box and evaluated via closed-loop simulation with a strategy-guided user simulator, an adversarial strategy manager, and a two-tier LLM judge assessing turn-level failures and conversation-level quality. We evaluate the approach on an industrial ICA with six LLM backends and twelve human annotators. The automated judge shows substantial agreement with humans, and strategy guidance uncovers 2.96 times more unique failure types per conversation and more than doubles the number of unique failing conversations compared to unguided simulation.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Vaishnav Negi"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Lev Sorokin"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Soroosh Tayebi Arasteh"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Andrea Stocco"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.CL",
+   "cs.SE"
+  ],
+  "comment": "Accepted at the 29th IEEE International Conference on Intelligent Transportation Systems (IEEE ITSC 2026)",
+  "first_seen": "2026-09-20T08:13:36+00:00",
+  "flag": [],
+  "id": "2609.35812",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 4.7,
+   "sig": [],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "We propose an automated framework for testing the multi-turn conversational capabilities of ICAs.",
+  "primary": "cs.CL",
+  "published": "2026-09-20T08:13:36Z",
+  "score": {
+   "cockpit": 11.0,
+   "edge": 0.0,
+   "embodied": 1.0
+  },
+  "tags": [
+   "大语言模型",
+   "语音/对话交互",
+   "安全"
+  ],
+  "title": "Automated Evaluation of Multi-Turn Dialogues in In-Car Conversational Assistants",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-20T08:13:36Z",
+  "venue": "ITSC",
+  "version": "v1",
+  "zh_summary": "提出车载对话助手的多轮对话自动化测试框架：用策略引导的用户模拟器、对抗策略和两级大模型评审，在工业级车载助手上发现的独特失败类型多 2.96 倍。"
+ },
+ "2609.36607": {
+  "abstract": "Remote photoplethysmography (rPPG) offers a promising non-contact solution for heart rate monitoring, yet its real-world robustness is fundamentally limited by an inherent hardware limitation: existing camera exposure control paradigms, whether fixed or auto-exposure, impose a uniform exposure time across all pixels within a frame. In high-dynamic-range scenes such as automotive cabins with strong directional sunlight, this spatially invariant exposure constraint inevitably leads to localized facial overexposure or underexposure, irreversibly corrupting the subtle pulsatile signals essential for rPPG at the point of capture, a physical degradation that no downstream algorithm can recover. To overcome this bottleneck, we propose PixExpo (Pixel-wise Exposure), a \"temporal-for-spatial\" framework that sequentially captures frames under a predefined cyclic exposure schedule and performs non-iterative pixel-wise fusion. At each pixel location, PixExpo selects the observation closest to an rPPG-motivated target intensity. This criterion seeks to reduce local saturation and severe underexposure rather than optimize perceptual appearance. PixExpo requires no sensor modification but assumes programmable frame-level exposure control. We validate the proposed PixExpo framework using our newly introduced MEX-Drive dataset, comprising 48 participants under real-world driving conditions. Experimental results demonstrate that PixExpo outperforms manufacture-default auto-exposure methods, reducing the mean absolute error (MAE) by 7.21 bpm (from 13.94 to 6.73 bpm) and increasing the success rate by 37.29 percentage points (from 25.95% to 63.24%) across challenging driving scenarios.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Jieying Wang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Xinqi Cai"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Caifeng Shan"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Wenjin Wang"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.CV"
+  ],
+  "comment": "",
+  "first_seen": "2026-09-29T03:23:30+00:00",
+  "flag": [],
+  "id": "2609.36607",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 5.2,
+   "sig": [
+    "real"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "To overcome this bottleneck, we propose PixExpo (Pixel-wise Exposure), a \"temporal-for-spatial\" framework that sequentially captures frames under a predefined cyclic exposure schedule and performs non-iterative pixel-wise fusion.",
+  "primary": "cs.CV",
+  "published": "2026-09-29T03:23:30Z",
+  "score": {
+   "cockpit": 8.0,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "数据集",
+   "生理信号"
+  ],
+  "title": "Pixel-wise Exposure for Highly Robust In-Vehicle Remote-PPG",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-29T03:23:30Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "车内阳光强烈时人脸局部过曝/欠曝会破坏非接触心率（rPPG）信号；PixExpo 循环切换曝光并逐像素融合，显著提升车内 rPPG 心率监测的鲁棒性。"
+ },
+ "2610.00922": {
+  "abstract": "Gaze estimation under natural head-eye motion underpins applications from driver monitoring to human-computer interaction. Single-frame methods predict each frame independently, so consecutive outputs fluctuate as jitter. Multi-frame methods reduce this, but they learn motion implicitly inside appearance features, so the gaze trajectory is never an explicit variable. We propose EyeTAG (Eye Trajectory-Aware Gaze Estimation), a causal multi-frame framework built around an explicit first-order gaze prior: at each step it differentiates its own recent predictions and feeds the resulting trajectory back as a compact kinematic token. Because differencing is translation-invariant in gaze space, this token carries subject-invariant motion rather than personal gaze offsets. Face and eye streams supply visual evidence, fused by cross-attention and a causal Transformer decoder. EyeTAG reduces the mean angular error by about 1.0$^\\circ$ on Gaze360 and performs on par with the strongest baseline on EVE (2.56$^\\circ$ vs. 2.58$^\\circ$). Within-model ablations, which keep the encoder and the rest of the architecture fixed and vary only the gaze history, show that the differential formulation, rather than temporal context alone, removes the systematic saccade bias that persists even with an absolute gaze-history prior. Our code is available at https://github.com/peter8366/EyeTAG.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Jungmin Lee"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Niamat Ullah"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Yoseob Han"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.CV",
+   "cs.LG"
+  ],
+  "comment": "Accepted to BMVC 2026",
+  "first_seen": "2026-10-01T01:57:31+00:00",
+  "flag": [],
+  "id": "2610.00922",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 4.0,
+   "sig": [
+    "code"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "We propose EyeTAG (Eye Trajectory-Aware Gaze Estimation), a causal multi-frame framework built around an explicit first-order gaze prior: at each step it differentiates its own recent predictions and feeds the resulting trajectory back as a compact kinematic token.",
+  "primary": "cs.CV",
+  "published": "2026-10-01T01:57:31Z",
+  "score": {
+   "cockpit": 5.0,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "驾驶员状态监测",
+   "手势/视线交互"
+  ],
+  "title": "EyeTAG: Eye Trajectory-Aware Gaze Estimation",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-10-01T01:57:31Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "提出 EyeTAG：显式建模视线运动轨迹的多帧视线估计方法，减少逐帧抖动，可用于驾驶员监测；在 Gaze360 上平均角度误差降低约 1 度。"
+ },
+ "2610.07083": {
+  "abstract": "Driver fatigue poses a significant challenge to railway safety, with traditional systems like the dead-man switch offering limited and basic alertness checks. This study presents a vision-based monitoring system that relies solely on a single front-facing RGB camera and a graph neural network to classify simulated train-driver states into alert, not-alert, and an emergency class comprising acted emergency-like behaviours. To optimize input representations for the model, an ablation study was performed, comparing three feature configurations: skeletal-only, facial-only, and a combination of both. Experimental results show that combining facial and skeletal features yields the highest accuracy (81%) for the three-class model under the light condition, outperforming models that use only facial or skeletal features. Furthermore, the combination of facial and skeletal features achieves 99% accuracy in the alert/not alert classification in light condition. Additionally, we introduced a controlled RGB video dataset containing alert, not alert, and acted emergency-like behaviours recorded under three illumination conditions. These contributions represent a step toward passive and non-contact train-driver state recognition based on facial and upper-body dynamics.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Olivia Nocentini"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Marta Lagomarsino"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Gokhan Solak"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Younggeol Cho"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Qiyi Tong"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Sara Zeynalpour"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Marta Lorenzini"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Alessandro Ledda"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Arash Ajoudani"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.CV",
+   "cs.AI"
+  ],
+  "comment": "",
+  "first_seen": "2026-10-05T11:25:16+00:00",
+  "flag": [],
+  "id": "2610.07083",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 2.5,
+   "sig": [],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "This study presents a vision-based monitoring system that relies solely on a single front-facing RGB camera and a graph neural network to classify simulated train-driver states into alert, not-alert, and an emergency class comprising acted emergency-like behaviours.",
+  "primary": "cs.CV",
+  "published": "2026-10-05T11:25:16Z",
+  "score": {
+   "cockpit": 7.0,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "数据集",
+   "驾驶员状态监测",
+   "安全"
+  ],
+  "title": "Graph-Based Recognition of Simulated Train-Driver States From Facial and Upper-Body Keypoints",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-10-28T19:05:05Z",
+  "venue": "",
+  "version": "v2",
+  "zh_summary": "用单个 RGB 摄像头提取面部和上半身关键点，图神经网络识别（模拟的）列车司机清醒/不清醒/紧急状态，清醒与否二分类准确率达 99%。"
+ },
+ "2610.33636": {
+  "abstract": "As general-purpose LLM agent harnesses mature, organizations must decide whether to continue developing in-house systems or adopt existing alternatives. We study this decision at Volvo Group for GUI testing of Android-based in-vehicle infotainment (IVI) systems. We compare a production, custom-built harness with two general-purpose harnesses, Claude Code and OpenCode, keeping the tools, accessed through the Model Context Protocol (MCP), and the models the same. We evaluate the harnesses with up to four models on Volvo's IVI test cases and on open-ended tasks in public apps (Google Maps, Booking.com), and interview ten practitioners: developers, the product owner, and testers. On Volvo's stepwise IVI tests, general-purpose harnesses match the custom-built harness in success but vary more across runs. Their inference cost per task is 2.6-10.7 times higher, yet the engineering effort they save outweighs this: for a nightly IVI regression suite, total monthly cost, including engineering effort and inference, is 3-66% lower. On open-ended public-app tasks, they succeed more often, mainly because they recover better from incorrect actions. Interviews suggest that external advances can turn an in-house harness into technical debt even without deterioration. Adopting a general-purpose harness shifts maintenance from the agent loop to tools and instructions, but gives teams less control over what the model receives. Regardless of the harness, testers want to inspect the agent's actions and ensure that it follows the prescribed test scenario.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Arsham Gholamzadeh Khoee"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Ruyu Fu"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Jiaqi Wei"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Ruikun Deng"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Robert Feldt"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Dhasarathy Parthasarathy"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Yinan Yu"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.SE",
+   "cs.AI"
+  ],
+  "comment": "",
+  "first_seen": "2026-10-24T12:32:16+00:00",
+  "flag": [],
+  "id": "2610.33636",
+  "interest": {
+   "it": [
+    "agent",
+    "cockpit"
+   ],
+   "rec": 7.22,
+   "sig": [],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "We study this decision at Volvo Group for GUI testing of Android-based in-vehicle infotainment (IVI) systems.",
+  "primary": "cs.SE",
+  "published": "2026-10-24T12:32:16Z",
+  "score": {
+   "cockpit": 10.0,
+   "edge": 0.5,
+   "embodied": 1.0
+  },
+  "tags": [
+   "大语言模型",
+   "智能体",
+   "车载信息娱乐"
+  ],
+  "title": "Build or Adopt? Custom-Built vs. General-Purpose LLM Agent Harnesses for Automotive GUI Testing",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-10-24T12:32:16Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "工业案例：比较自研与通用大模型智能体框架做车载信息娱乐系统 GUI 测试，通用框架成功率相当但推理成本高 2.6–10.7 倍；计入工程投入后总成本反而低 3–66%。"
+ },
+ "2610.33713": {
+  "abstract": "Driver emotion provides an important indication of how drivers perceive and evaluate ongoing traffic situations, making reliable emotion recognition an important capability for effective human-vehicle interaction. Yet, most existing driver emotion recognition approaches rely primarily on in-cabin images and overlook how surrounding traffic interactions shape driver emotional responses. To address this limitation, we propose a traffic-context-aware driver emotion recognition (TADER) framework that integrates in-cabin signals with out-of-cabin traffic scenarios, modeling driver emotions as arising from expectation deviation represented by the discrepancy between predicted and observed vehicle trajectories. The proposed framework comprises two key components: (1) a vision-based base recognizer that extracts spatiotemporal representations from in-cabin facial images to infer driver emotions, and (2) a traffic-context-aware fusion module that quantifies expectation deviation from external traffic scenarios and integrates it into the base recognizer via attention-based embedding fusion. To overcome the scarcity of paired in-cabin and out-of-cabin data, we introduce a transfer learning strategy that transfers a trajectory prediction model trained on large-scale naturalistic datasets to smaller paired datasets. Extensive experiments demonstrate that TADER consistently outperforms state-of-the-art methods across both naturalistic and simulated driving environments by incorporating traffic context information into emotion recognition, resulting in improvements of 5% in accuracy on the AIDE and manD datasets.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Longhao Yan"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Jinhao Liang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Kaidi Yang"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.CV"
+  ],
+  "comment": "",
+  "first_seen": "2026-10-24T14:59:21+00:00",
+  "flag": [],
+  "id": "2610.33713",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 4.7,
+   "sig": [],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "To address this limitation, we propose a traffic-context-aware driver emotion recognition (TADER) framework that integrates in-cabin signals with out-of-cabin traffic scenarios, modeling driver emotions as arising from expectation deviation represented by the discrepancy between predicted and …",
+  "primary": "cs.CV",
+  "published": "2026-10-24T14:59:21Z",
+  "score": {
+   "cockpit": 18.5,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "数据集",
+   "舱内感知",
+   "情感识别"
+  ],
+  "title": "Traffic-Context-Aware Driver Emotion Recognition with Expectation-Deviation-Driven Inference",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-10-24T14:59:21Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "提出 TADER：把舱内人脸图像与车外交通情境结合识别驾驶员情绪，用“预期与实际车辆轨迹的偏差”解释情绪来源，提升情绪识别效果。"
+ },
+ "2610.33915": {
+  "abstract": "Agentic driving brings goal-directed reasoning, memory, tools, and adaptive interaction into automated vehicles. A vehicle can clarify a request, explain a maneuver, or prepare a driver to take control, then adapt its next action to the response. These capabilities make the vehicle an active participant in shaping the human behavior it observes. We examine how agentic interaction affects driver-state inference, trust and reliance, and human intervention in conditional automation. Established findings on attention, takeover prediction, trust-aware planning, and adaptive warnings provide useful foundations, but their applicability depends on how observations are elicited and how assistance changes the driving task. We distinguish what remains applicable, what changes under flexible interaction, and what remains unresolved across these three areas. The analysis identifies three research priorities: establishing the effects of interventions, jointly designing interaction and driving policies, and maintaining useful adaptation across repeated use and system changes. Progress should be measured through driver comprehension, appropriate reliance, and the ability to perform the required driving action in time.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Lu Feng"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.HC"
+  ],
+  "comment": "",
+  "first_seen": "2026-10-24T21:03:32+00:00",
+  "flag": [],
+  "id": "2610.33915",
+  "interest": {
+   "it": [
+    "agent",
+    "cockpit"
+   ],
+   "rec": 6.35,
+   "sig": [],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "Agentic driving brings goal-directed reasoning, memory, tools, and adaptive interaction into automated vehicles.",
+  "primary": "cs.HC",
+  "published": "2026-10-24T21:03:32Z",
+  "score": {
+   "cockpit": 9.5,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "智能体",
+   "驾驶员状态监测",
+   "接管请求"
+  ],
+  "title": "Human-Aware Agentic Driving: Rethinking Driver State, Trust, and Intervention",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-10-24T21:03:32Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "观点文章：当自动驾驶车辆具备对话、解释和记忆等智能体能力时，驾驶员状态推断、信任和接管干预都会改变；文章梳理哪些既有结论仍适用并提出三个研究方向。"
+ },
+ "2610.37892": {
+  "abstract": "Artificial intelligence (AI) technology has gradually been integrated into automated vehicles. However, how this technology could systematically support takeover transitions in SAE Level 3 automated vehicles remains unknown, even though this level may remain a major form of driving automation in the near future. To address this, we implemented the three AI roles proposed by the triadic Human-AI collaboration framework (Advisor, Co-pilot, and Guardian) as potential authority-ability configurations for AI agents within an automated system. We then examined their interactions with explanation type (why and action) and directional semantics (ipsilateral and contralateral) in an automated driving simulator study with 24 participants. Results showed that, across the three AI roles, Advisor had the shortest decision-making time, followed by Guardian and Co-pilot. Advisor and Guardian were associated with higher decision-making accuracy and higher satisfaction ratings than Co-pilot. Guardian was associated with the lowest workload, followed by Advisor and Co-pilot. The effect of explanation type on decision-making time depended on AI role. Action explanations were faster under Advisor, whereas why explanations were faster under Co-pilot. For directional semantics, ipsilateral semantics were associated with shorter decision-making time than contralateral semantics. Overall, these findings provide preliminary guidance for designing AI-role authority-ability configurations and their associated speech-based takeover messages.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Wei-Hsiang Lo"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Jingyi Xie"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Gaojian Huang"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.HC"
+  ],
+  "comment": "19 pages, 9 figures, 5 tables",
+  "first_seen": "2026-10-27T19:32:26+00:00",
+  "flag": [],
+  "id": "2610.37892",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 5.2,
+   "sig": [
+    "real"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "Artificial intelligence (AI) technology has gradually been integrated into automated vehicles.",
+  "primary": "cs.HC",
+  "published": "2026-10-27T19:32:26Z",
+  "score": {
+   "cockpit": 6.0,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "智能体",
+   "语音/对话交互",
+   "接管请求"
+  ],
+  "title": "Advisor, Co-pilot, or Guardian? AI Role Framing and Human Decision Behavior in Automated Vehicle Takeovers",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-10-27T19:32:26Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "驾驶模拟器研究（24 人）：比较 AI 在 L3 接管中扮演顾问、副驾、守护者三种角色及不同解释方式的效果；顾问角色决策最快，守护者角色负荷最低。"
+ },
+ "2611.02790": {
+  "abstract": "Robust driver-state modelling requires synchronized physiological, behavioural, and contextual signals, yet existing open resources typically target a single cognitive state, omit continuous vehicle context, or do not define evaluation protocols that expose inter-subject heterogeneity. We present Multimental-IAS, a multimodal driver mental-state dataset collected in a cockpit-in-the-loop simulation built on CARLA. It contains vehicle telemetry with scenario-context channels, four-channel EEG and three-channel PPG from a Muse 2 headband, and cabin-facing video from 23 participants, recorded in 148 trials (11.6 hours) under six induced states: Normal, Distracted, Alerted, Stressed, Relaxed, and Drowsy. We document the acquisition pipeline in detail and provide a benchmark with one protocol for all models: chronological within-subject splits, participant-disjoint cross-subject folds, validation-based model selection, and ablations over modalities, scenario-context channels, and signal normalization. Multimodal fusion reaches a macro-F1 of 0.94 for drivers seen during training. For unseen drivers, fusing driving dynamics with per-window normalized EEG/PPG raises macro-F1 from 0.408 (telemetry alone) to 0.485, consistently across all five folds, while the gap between the two protocols quantifies the inter-driver heterogeneity that personalized models must address. Multimental-IAS thus provides a concrete testbed for non-IID generalization, personalization, and federated learning in driver monitoring.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Baran Can Gül"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Nagendra Pal Singh"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Anjana Arvind Naik"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.HC",
+   "cs.AI"
+  ],
+  "comment": "",
+  "first_seen": "2026-11-02T09:03:14+00:00",
+  "flag": [],
+  "id": "2611.02790",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 5.7,
+   "sig": [
+    "real"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "We present Multimental-IAS, a multimodal driver mental-state dataset collected in a cockpit-in-the-loop simulation built on CARLA.",
+  "primary": "cs.HC",
+  "published": "2026-11-02T09:03:14Z",
+  "score": {
+   "cockpit": 14.5,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "基准评测",
+   "数据集",
+   "驾驶员状态监测",
+   "生理信号"
+  ],
+  "title": "MultiMental-IAS: A Multimodal Driver Mental State Analysis Dataset for Context-Aware Non-IID Evaluation",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-11-02T09:03:14Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "发布 MultiMental-IAS 数据集：模拟座舱中 23 人的车辆数据、脑电、PPG 和舱内视频，覆盖分心、疲劳、紧张等 6 种状态，并给出统一的跨被试评测协议。"
+ },
+ "2611.02827": {
+  "abstract": "Passenger electroencephalography (EEG) can reveal road risk through anticipatory responses before hazardous events and neural reactions around their onset. However, existing EEG decoding methods often map physiologically meaningful arrangement of electrodes onto artificial 2D grids and thus flatten the higher-order time-feature representations into matrices, obscuring meaningful structure in the data. To preserve and exploit the spatial and time-feature structure of EEG recordings, we propose the Graph-Tensor EEG Decoding Model (GraTED) for passenger risk prediction (RP) and danger identification (DI) in autonomous-vehicle scenarios. GraTED models the electrode arrangement as an undirected graph based on their scalp locations, using graph convolution to capture spatial dependencies and low-rank tensor classification to preserve the multidimensional time-feature structure, while controlling model complexity. Evaluated on the PassengerEEG dataset, comprising 11 participants and 45 hours of recordings, GraTED achieves the highest balanced accuracy, compared to the state-of-the-art, across all three evaluation settings, while requiring the fewest learnable parameters among seven baseline methods.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Yuxuan Gu"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Yingkai Yang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Qiyu Rao"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Tania Stathaki"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Danilo Mandic"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.LG",
+   "cs.HC"
+  ],
+  "comment": "Yuxuan Gu and Yingkai Yang contribute equally to this work",
+  "first_seen": "2026-11-02T09:25:03+00:00",
+  "flag": [],
+  "id": "2611.02827",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 5.2,
+   "sig": [
+    "real"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "To preserve and exploit the spatial and time-feature structure of EEG recordings, we propose the Graph-Tensor EEG Decoding Model (GraTED) for passenger risk prediction (RP) and danger identification (DI) in autonomous-vehicle scenarios.",
+  "primary": "cs.LG",
+  "published": "2026-11-02T09:25:03Z",
+  "score": {
+   "cockpit": 10.0,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "数据集",
+   "生理信号"
+  ],
+  "title": "GraTED: Graph--Tensor EEG Decoding for Passenger Hazard Perception in Autonomous Vehicles",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-11-02T09:25:03Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "提出 GraTED：把脑电电极建成图、用低秩张量保留时间-特征结构，解码自动驾驶车乘客的危险感知，在乘客 EEG 数据集上平衡准确率最高。"
+ },
+ "2611.07828": {
+  "abstract": "Head pose estimation is important for human computer interaction and driver monitoring, but many image based methods remain too costly for resource constrained deployment. We propose STAG-Net, a structure-aware attention over landmark groups for lightweight head Pose estimation that estimates head pose from facial landmarks using movement aware selection, spatial clustering, compact DeepSet encoders, self attention, and a global geometry descriptor. We develop variants using FaceMesh and Face Alignment Network landmarks and evaluate them under cross dataset and subject independent protocols on 300W-LP, AFLW2000, and BIWI. STAG-Net achieves the lowest mean absolute error among all compared landmark based methods in every evaluated setting. On BIWI frames with valid detections, the FAN variant also records the lowest overall error among all compared methods, reaching $3.51^\\circ$ under cross dataset evaluation and $2.39^\\circ$ under subject independent evaluation. The regressors use only 0.012 to 0.043 million parameters and 24.1 to 83.6 thousand FLOPs, about three orders of magnitude fewer FLOPs than FSA-Net. Despite including landmark extraction and regression, the FaceMesh pipeline reaches 322.9 frames per second on a Tesla T4 GPU, nearly twice the 164.5 frames per second of the fastest measured image based baseline, and 111.0 frames per second on CPU. After normalization by dataset size, STAG-Net processes training samples seven to eight times faster than FSA-Net and more than one hundred times faster than HopeNet and TokenHPE, while complete training finishes within 28 minutes. These results show that STAG-Net combines leading landmark based accuracy with substantially lower training and inference cost.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Asiri Gawesha Lindamulage"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Sanka Mohottala"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Dharshana Kasthurirathna"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Nuwan Kodagoda"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.CV",
+   "cs.AI",
+   "cs.HC"
+  ],
+  "comment": "",
+  "first_seen": "2026-11-05T11:09:34+00:00",
+  "flag": [],
+  "id": "2611.07828",
+  "interest": {
+   "it": [
+    "compress",
+    "cockpit"
+   ],
+   "rec": 9.62,
+   "sig": [
+    "numbers",
+    "deploy"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "We propose STAG-Net, a structure-aware attention over landmark groups for lightweight head Pose estimation that estimates head pose from facial landmarks using movement aware selection, spatial clustering, compact DeepSet encoders, self attention, and a global geometry descriptor.",
+  "primary": "cs.CV",
+  "published": "2026-11-05T11:09:34Z",
+  "score": {
+   "cockpit": 3.5,
+   "edge": 1.5,
+   "embodied": 0.0
+  },
+  "tags": [
+   "数据集",
+   "驾驶员状态监测"
+  ],
+  "title": "STAG-Net: Structure-Aware Attention over Landmark Groups for Lightweight Head Pose Estimation",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-11-05T11:09:34Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "提出 STAG-Net：基于人脸关键点的超轻量头部姿态估计（仅 1.2–4.3 万参数），误差在同类方法中最低，适合在驾驶员监测等端侧场景部署。"
+ },
+ "2611.08798": {
+  "abstract": "As Level 2 advanced driver-assistance systems (ADAS) become more widely used, understanding driver-system interaction is increasingly important for traffic safety. However, limited real-world data make these interactions difficult to study. We present ADAS-TO, a naturalistic dataset of 16,446 takeover clips from 364 drivers across 2,585 different drives. It combines road video, vehicle kinematics, driver inputs, and ADAS status. To analyze takeover behavior, we retained 6,206 manually reviewed takeover events during continued lane keeping or car following. We excluded events in which the driver intentionally changed lanes, turned, or made a stop beyond the ADAS's capabilities (e.g., at a red light or stop sign) shortly after takeover. Drivers began intervening before ADAS disengaged in 65.6% of takeovers involving braking or steering. When the ego vehicle was still closing on a lead vehicle at disengagement, longitudinal safety margins often narrowed further after the transfer to manual control. Among 2,031 such events, 78.5% had a lower minimum time-to-collision (TTC) in the five seconds after disengagement than in the five seconds before it. For events involving braking, the mean TTC trajectory reached its minimum about 1.2 s after disengagement. We model the subsequent braking response using a Gazis-Herman-Rothery (GHR) car-following law. Its median five-second spacing root-mean-square error is 1.34 m with observed lead motion and 1.84 m with predicted lead motion. The fitted model expresses braking as a response to looming, with stronger responses at higher speeds and shorter gaps. Applied before takeover, it shows that greater looming than predicted by the human-response reference is associated with disengagement. These findings support continued assessment of longitudinal safety after ADAS disengagement, while the driver's braking response develops.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Yuhang Wang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Hao Zhou"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.HC"
+  ],
+  "comment": "28 pages, 14 figures. See arXiv:2603.06986 for the companion dataset paper. The longitudinal subset is available at https://huggingface.co/datasets/HenryYHW/ADAS-TO_longitudinal",
+  "first_seen": "2026-11-05T23:48:44+00:00",
+  "flag": [],
+  "id": "2611.08798",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 7.7,
+   "sig": [
+    "code",
+    "real"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "We present ADAS-TO, a naturalistic dataset of 16,446 takeover clips from 364 drivers across 2,585 different drives.",
+  "primary": "cs.HC",
+  "published": "2026-11-05T23:48:44Z",
+  "score": {
+   "cockpit": 10.5,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "数据集",
+   "接管请求",
+   "安全"
+  ],
+  "title": "Driver Takeovers and Longitudinal Responses Analysis from Naturalistic Driving",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-11-05T23:48:44Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "发布 ADAS-TO 自然驾驶接管数据集（364 名驾驶员、1.6 万段接管片段），分析 L2 辅助驾驶退出时驾驶员如何接管及安全裕度变化。"
+ },
+ "2611.11653": {
+  "abstract": "Modern vehicles are equipped with advanced sensors and capabilities, yet engaging human drivers effectively in hazard perception remains a challenging research area. This paper investigates the potential of mixed reality (MR) to enhance driver warning systems. The study examines the impact of attention-shifting methods, including visual cues, audio cues, and a combination of both, on drivers' hazard perception. A preliminary study involving six participants was conducted, and the NASA-TLX analysis did not yield significant differences. However, through the use of functional near-infrared spectroscopy (fNIRS), we unveil distinct brain activation patterns associated with visual and sound cues. Further research with larger sample sizes and diverse driving scenarios is required to validate and expand upon these preliminary results.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Shih-Yu Ma"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Nolan Robert Brady"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Xu Han"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Neng-Hao Yu"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Tom Yeh"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.HC"
+  ],
+  "comment": "8 pages, 3 figures",
+  "first_seen": "2026-11-08T22:21:24+00:00",
+  "flag": [],
+  "id": "2611.11653",
+  "interest": {
+   "it": [
+    "cockpit"
+   ],
+   "rec": 6.7,
+   "sig": [
+    "real"
+   ],
+   "theory": false
+  },
+  "journal_ref": "Adjunct Proceedings of the 15th International Conference on Automotive User Interfaces and Interactive Vehicular Applications (AutomotiveUI '23 Adjunct), pp. 87-92, 2023",
+  "key_en": "This paper investigates the potential of mixed reality (MR) to enhance driver warning systems.",
+  "primary": "cs.HC",
+  "published": "2026-11-08T22:21:24Z",
+  "score": {
+   "cockpit": 10.0,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [],
+  "title": "Exploring Mixed-Reality for Enhancing Driver Warning Systems: A Preliminary Study on Attention-Shifting Methods and Hazard Perception",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-11-08T22:21:24Z",
+  "venue": "AutomotiveUI",
+  "version": "v1",
+  "zh_summary": "初步研究（6 人）：用混合现实的视觉/声音提示引导驾驶员注意危险，借助近红外脑成像观察不同提示引起的脑活动差异。"
+ },
  "2611.19463": {
   "abstract": "A surveillance drone on a bandwidth-starved link cannot send the video its operator would need, yet the operator's questions are often not about pixels: did three people converge, when, and where? We study what should cross a link of 1 Mbps down to 1 kbps instead, and in what order. BPS, a behavior-primitive stream, sends semantics first and pixels later: it runs a detector and a tracker onboard and sends short records (25 bytes on average) of multi-frame events selected by a mission card of 16-125 bytes, ahead of positions and pictures. We measure it by what a ground-side language model answers from it, under a preregistered protocol with a held-out set, against H.265 read by the vision fine-tune of the same model, H.265 on which the ground runs our own perception, a stream of quantized tracks, and onboard captions. On the development set (84% of questions about convergence, mostly one location) the event stream answers 74.3% of questions at 0.13 kbps. A reader that receives nothing answers 57.4%, and the video reader 59.6% at 100 kbps and 64.7% on the source frames. When the ground instead runs our perception on the video, video matches the stream at 100 kbps, about 800 times the stream's rate, and falls behind at 64 kbps and below. A track stream matches it at 96 times the bytes and loses 0.03 at 17 times. On held-out data the result is weaker: with events taken from annotated tracks, an oracle, the stream beats H.265 at 100 kbps (+0.13), but with onboard perception it does not (+0.01 [-0.04, +0.06]) and is no better than receiving nothing. Sent alone through emulated links the event records answer 0.739 at 1 Mbps and still 0.724 at 0.3 kbps; an every-frame track stream holds down to 1 kbps and video with ground-side perception down to about 100 kbps. On a Jetson Orin Nano the unchanged pipeline runs at 4.5 fps and misses most events.",
   "affil": {
@@ -56,6 +2486,79 @@
   "updated": "2026-11-14T15:35:15Z",
   "venue": "",
   "version": "v1"
+ },
+ "2611.19474": {
+  "abstract": "Proactive, autonomous interactions receive high interest in the field of intelligent assistants, including the automotive domain. A central challenge, however, is identifying appropriate levels of autonomy for different functions while maintaining user acceptance and trust. This work examines how function characteristics relate to suitable autonomy levels and whether these relationships generalize across functions. We conducted an expert workshop to define autonomy levels and identify relevant function characteristics. We then collected data from 126 participants, who rated 14 in-vehicle functions regarding autonomy preferences and function characteristics, from which we trained machine learning models to predict appropriate autonomy levels. Building on our findings, we developed our prototypical Autonomy Design Assistant that supports designers in making autonomy-related decisions, which we evaluated qualitatively with nine experts. Our results suggest that function characteristics can rank functions by their suitable level of autonomy and thereby guide more informed autonomy design decisions, whereas predictions for individual users remain uncertain.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Sebastian Zepf"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Annika Stampf"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Markus Schuster"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Enrico Rukzio"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Mark Colley"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.HC"
+  ],
+  "comment": "",
+  "first_seen": "2026-11-14T15:52:11+00:00",
+  "flag": [],
+  "id": "2611.19474",
+  "interest": {
+   "it": [
+    "agent",
+    "cockpit"
+   ],
+   "rec": 7.6,
+   "sig": [
+    "real"
+   ],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "Proactive, autonomous interactions receive high interest in the field of intelligent assistants, including the automotive domain.",
+  "primary": "cs.HC",
+  "published": "2026-11-14T15:52:11Z",
+  "score": {
+   "cockpit": 7.5,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "智能体"
+  ],
+  "title": "Towards Informed Autonomy Design: Understanding the Interplay of Function Characteristics and Autonomy Preferences in Automotive Agents",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-11-14T15:52:11Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "研究车载智能助手各功能适合多高的自主程度：126 人对 14 项车内功能打分并训练模型预测合适的自主等级，进而做出辅助设计师决策的原型工具。"
  },
  "2611.19752": {
   "abstract": "An agent that stores facts over time eventually stores several versions of the same fact. Asked a value-agnostic question - \"which team does X play for now?\" - a similarity retriever cannot prefer the current version, because every version matches the entity the query names. StaleBench isolates this stale-retrieval failure on 892 real updating facts, with currency labels from the source (Wikidata validity years via TempLAMA), never from a retrieval score. Our central result is that retrieval metrics can rank memory policies backwards: a retention policy and its retain-everything control return the identical statement at rank 1 for every test query, yet differ by 29.5 and 65.6 points in reader accuracy on two readers when no date is shown. Contamination@5, the metric we add, ranks them correctly where current@1 and current@5 do not. Withdrawing the lexical anchor that statements carry costs deployed keying mechanisms tens of points of freshness; entity resolution on both the write path and the query recovers most of the loss. Three deployed systems (Mem0, Graphiti, LangMem) and a reimplemented ERASE each handle supersession differently, and no single scoring convention describes all four. We release the data, a frozen evaluator, and reference baselines.",
@@ -887,9 +3390,10 @@
     "edge",
     "compress",
     "memory",
-    "agent"
+    "agent",
+    "cockpit"
    ],
-   "rec": 19.9,
+   "rec": 21.9,
    "sig": [
     "real",
     "deploy"
@@ -909,7 +3413,7 @@
   "primary": "cs.AI",
   "published": "2026-11-16T07:51:11Z",
   "score": {
-   "cockpit": 2.0,
+   "cockpit": 5.0,
    "edge": 7.0,
    "embodied": 0.0
   },
@@ -922,12 +3426,113 @@
   ],
   "title": "UbiHearo: Bringing Scenario-Aware Sound Guidance to DHH Users with Mobile Agents",
   "topics": [
+   "cockpit",
    "edge"
   ],
   "updated": "2026-11-16T07:51:11Z",
   "venue": "",
   "version": "v1",
   "zh_summary": "面向听障用户的手机端声音助手智能体：在设备本地用音频-语言模型理解周围声音“意味着什么、有多紧急、该怎么做”，只在有意义的声音出现时才启动处理以省电，并能根据用户反馈在本地做个性化调整；已在智能手机和车载系统上测试，兼顾准确率、延迟与能耗。"
+ },
+ "2611.20753": {
+  "abstract": "Mobile task automation aims to streamline multi-step, cross-app interactions on smartphones and in-vehicle systems. Recent LLM-based GUI agents have advanced rapidly, yet reliability remains limited because modern mobile workflows are increasingly service-composed (app switching, forms, pop-ups/permissions, copy-paste), requiring fine-grained operations on dense, dynamic, and heterogeneous UIs, often in distraction-sensitive contexts (e.g., hands-busy or attention-limited use). Through an in-the-wild failure analysis of deployable GUI agents, we identify two dominant bottlenecks: agents often miss or misread actionable UI elements, and they execute actions without verifying target correctness or outcomes. We present UIAnchor, a modular multi-agent system that improves mobile GUI automation by anchoring both perception and execution. UIAnchor combines a two-stage UI parser for high-recall element capture and context-aware semantics with a meta-controller that performs pre-action verification, post-action outcome perception, per-step state tracking, and targeted recovery. We further introduce an L1-L5 task taxonomy based on step length, cross-app scope, and UI granularity, showing that L5 remains beyond today's practical frontier. On the hardest practical tier, L4 tasks (20-30 steps, multi-app, targets < 100 x 100 px, ~5 mm on typical phones), UIAnchor improves success by 31.5% over GPT-4o and 16.6% over Mobile-Agent-v3. With edge/cloud assistance, UIAnchor runs at ~2 s per step, comparable to human operation, while reducing per-step latency by up to 75.5% and energy by 52.4%. It also generalizes to unseen apps and cross-platform GUIs.",
+  "affil": {
+   "evidence": [
+    "北京大学: Daqing Zhang, Telecom SudParis, Institut Polytechnique de Paris, Paris, France and Peking University, Beijing, China, daqing.zhang@telecomsudparis.eu; Zhiwen Yu"
+   ],
+   "schools": {
+    "pku": [
+     "Daqing Zhang"
+    ]
+   },
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Wentao Zhou"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Sicong Liu"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Zimu Zhou"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Yimeng Duan"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Yongyan Cai"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Weiye Wu"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Teng Li"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Daqing Zhang"
+   },
+   {
+    "affil_arxiv": [],
+    "name": "Zhiwen Yu"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.HC"
+  ],
+  "comment": "",
+  "first_seen": "2026-11-16T09:01:47+00:00",
+  "flag": [
+   "pku"
+  ],
+  "id": "2611.20753",
+  "interest": {
+   "it": [
+    "agent",
+    "cockpit"
+   ],
+   "rec": 12.03,
+   "sig": [
+    "real",
+    "numbers",
+    "deploy"
+   ],
+   "theory": false
+  },
+  "journal_ref": "Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, Volume 10, Issue 3, Article 197 (2026), Pages 1-30",
+  "key_en": "We present UIAnchor, a modular multi-agent system that improves mobile GUI automation by anchoring both perception and execution.",
+  "primary": "cs.HC",
+  "published": "2026-11-16T09:01:47Z",
+  "score": {
+   "cockpit": 4.5,
+   "edge": 3.0,
+   "embodied": 0.5
+  },
+  "tags": [
+   "大语言模型",
+   "智能体"
+  ],
+  "title": "UIAnchor: Anchoring UI Perception and Action Execution for Reliable Service-Composed Mobile Task Automation with GUI Agents",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-11-16T09:01:47Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "提出 UIAnchor：面向手机和车机的 GUI 智能体，先高召回解析界面元素、再在执行前后校验动作与结果，提升跨应用多步任务自动化的可靠性。"
  },
  "2611.20759": {
   "abstract": "Agentic memory systems give LLMs persistent memory by extracting experience into text and retrieving it at query time, but the model itself does not evolve: however many interactions it has had, it starts each query the same. Extraction errors compound, implicit cross-session patterns that no single fragment states cannot be surfaced, and the construction cost grows with every conversation. Fine-tuning on past interactions does change the weights, but requires backpropagation at serving time and degrades on long histories. We introduce CLAM (Carried Latent Adapter Memory), which combines the strengths of both: a recurrent hypernetwork performs parametric consolidation, compiling a stream of session activations into a low-rank adapter in a single forward pass with no gradient steps and no language-model generation calls, while a complementary episodic buffer supplies verbatim detail at inference. A gated latent state carries knowledge across sessions in fixed size, so the parametric memory accumulates without growing. On LoCoMo and LongMemEval-S across three open models (2-7B parameters), CLAM leads all agentic baselines by 1-45 points and all gradient-based parametric methods by 10-45 points, while requiring zero generative LLM calls, zero gradient steps, and 3-151x less wall-clock time than extraction systems to build its memory. The two channels are complementary: the consolidated adapter adds 12-15 accuracy points when the episodic buffer misses the gold evidence, and still adds 4-5 points even with an oracle buffer.",
@@ -14734,7 +17339,7 @@
    "it": [
     "cockpit"
    ],
-   "rec": 5.2,
+   "rec": 6.2,
    "sig": [
     "real"
    ],
@@ -14745,11 +17350,12 @@
   "primary": "cs.CR",
   "published": "2026-11-18T21:15:25Z",
   "score": {
-   "cockpit": 9.5,
+   "cockpit": 15.5,
    "edge": 0.0,
    "embodied": 0.0
   },
   "tags": [
+   "车载信息娱乐",
    "人机界面/体验"
   ],
   "title": "User Perceptions of Deceptive In-Vehicle Infotainment User Interfaces",
@@ -17522,7 +20128,7 @@
    "it": [
     "cockpit"
    ],
-   "rec": 2.5,
+   "rec": 4.2,
    "sig": [],
    "theory": false
   },
@@ -17531,7 +20137,7 @@
   "primary": "cs.CV",
   "published": "2026-11-19T09:09:04Z",
   "score": {
-   "cockpit": 12.5,
+   "cockpit": 17.5,
    "edge": 0.0,
    "embodied": 0.0
   },
@@ -19682,7 +22288,8 @@
   },
   "tags": [
    "数据集",
-   "驾驶员状态监测"
+   "驾驶员状态监测",
+   "生理信号"
   ],
   "title": "Contactless Estimation of Respiratory Frequency Using 3D-CNN on Thermal Images",
   "topics": [
@@ -26849,5 +29456,62 @@
   "updated": "2026-11-20T18:48:12Z",
   "venue": "",
   "version": "v1"
+ },
+ "2611.28007": {
+  "abstract": "This position paper considers how the gap between an anthropomorphic agent in an autonomous vehicle and the automated driving system of the vehicle can create psychological risks if the agent inaccurately presents itself as integrated into the driving system. This gap is under-explored both because of the evolving nature of these agents and because of study limitations in Human-Computer Interaction (HCI) research. Nevertheless, this gap may cause the agent to misrepresent itself as more knowledgeable about the car than it is, creating a risk of dependence and, in the worst case, betrayal if the occupant feels that the agent has misled them. This paper proposes a research agenda for future work to understand the psychological risk that exists in the gap between agents and driving systems and to narrow this gap in a manner aligned with safety assurance. As these agents evolve to hold greater capabilities and increased anthropomorphism, future research must investigate risks which may emerge from richer interaction with them. The impact of how an agent presents itself and its knowledge becomes greater.",
+  "affil": {
+   "evidence": [],
+   "schools": {},
+   "sources": [
+    "pdf"
+   ],
+   "status": "pdf",
+   "tries": 1
+  },
+  "authors": [
+   {
+    "affil_arxiv": [],
+    "name": "Benjamin Hardin"
+   }
+  ],
+  "backfill": true,
+  "categories": [
+   "cs.HC"
+  ],
+  "comment": "",
+  "first_seen": "2026-09-07T10:38:53+00:00",
+  "flag": [],
+  "id": "2611.28007",
+  "interest": {
+   "it": [
+    "agent",
+    "cockpit"
+   ],
+   "rec": 6.72,
+   "sig": [],
+   "theory": false
+  },
+  "journal_ref": "",
+  "key_en": "This paper proposes a research agenda for future work to understand the psychological risk that exists in the gap between agents and driving systems and to narrow this gap in a manner aligned with safety assurance.",
+  "primary": "cs.HC",
+  "published": "2026-09-07T10:38:53Z",
+  "score": {
+   "cockpit": 9.5,
+   "edge": 0.0,
+   "embodied": 0.0
+  },
+  "tags": [
+   "智能体",
+   "舱内感知",
+   "安全"
+  ],
+  "title": "The Agent Is Not Your Driver: Clarifying the Implied Capabilities of In-Vehicle Anthropomorphic Agents",
+  "topics": [
+   "cockpit"
+  ],
+  "updated": "2026-09-07T10:38:53Z",
+  "venue": "",
+  "version": "v1",
+  "zh_summary": "观点文章：车内拟人化智能体若让乘员误以为它与自动驾驶系统一体，可能造成过度依赖和心理风险；提出相关的研究议程。"
  }
 }

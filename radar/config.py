@@ -29,6 +29,10 @@ COCKPIT_PHRASES = [
     "driver drowsiness", "driver fatigue", "driver state", "occupant", "automotive assistant",
     "vehicle assistant", "car assistant", "automotive voice", "automotive HMI", "takeover request",
     "automotive user interface", "in-vehicle assistant", "driver emotion", "passenger",
+    # broadened 2026-11-24
+    "infotainment", "head-up display", "AR-HUD", "driver attention", "driver alertness", "distracted driving", "drowsy driving",
+    "automotive UX", "car interior", "vehicle interior", "in-vehicle agent", "voice assistant vehicle", "non-driving related",
+    "driver gaze", "driver workload", "driver trust", "automated vehicle takeover", "cockpit agent", "automotive large model",
 ]
 EMBODIED_PHRASES = [
     "embodied", "vision-language-action", "humanoid", "dexterous", "robot manipulation",
@@ -43,6 +47,8 @@ QUERIES = {
     "embodied_kw": _cat + " AND " + _any(["ti", "abs"], EMBODIED_PHRASES),
     "cockpit_hci": "(cat:cs.HC OR cat:cs.CL OR cat:cs.SD OR cat:eess.AS OR cat:cs.MM) AND " + _any(["ti", "abs"], ["vehicle", "driver", "driving", "car", "automotive", "cockpit", "cabin"]),
     "cockpit_kw": _any(["ti", "abs"], COCKPIT_PHRASES),
+    "cockpit_title": "(cat:cs.HC OR cat:cs.CV OR cat:cs.CL OR cat:cs.RO OR cat:eess.SP OR cat:eess.AS OR cat:cs.SD OR cat:cs.AI OR cat:cs.LG OR cat:cs.MM OR cat:eess.IV) AND "
+                     + _any(["ti"], ["driver", "drivers", "vehicle", "car", "automotive", "cabin", "cockpit", "passenger", "occupant"]),
     "edge_kw": "(cat:cs.LG OR cat:cs.CL OR cat:cs.AI OR cat:cs.CV OR cat:cs.RO OR cat:cs.AR OR cat:cs.DC OR cat:cs.MA OR cat:cs.HC) AND "
                + _any(["ti", "abs"], ["on-device", "edge deployment", "edge devices", "Jetson", "NPU", "agent memory", "long-term memory", "cross-device"]),
 }
@@ -63,6 +69,22 @@ COCKPIT_STRONG = _rx([
     r"human-vehicle interaction", r"driver-vehicle interaction", r"take-?over requests?", r"impaired driving", r"driver impairment",
     r"automotive (?:agent|assistant)s?", r"vehicle (?:hmi|human-machine interface)", r"cabin monitoring",
     r"in-?vehicle (?:hmi|human-machine)", r"passenger (?:experience|interaction|comfort|monitoring)",
+    # broadened 2026-11-24 (cockpit recall): HMI / HUD / infotainment / occupant state / in-car agents
+    r"in-?(?:vehicle|car) (?:anthropomorphic |conversational |voice |intelligent |ai |llm[- ]based |proactive )?(?:agents?|assistants?|robots?)",
+    r"infotainment(?: systems?)?", r"ar-?huds?", r"(?:automotive|vehicle|in-?vehicle|in-?car|windshield|car) (?:ar |augmented reality )?(?:head-?up displays?|huds?)",
+    r"windshield displays?", r"driver-?facing (?:cameras?|video|monitoring)", r"cabin cameras?",
+    r"(?:vehicle|car) occupants?", r"child presence detection", r"seat ?belt (?:detection|usage|use)",
+    r"driver (?:alertness|warning (?:systems?|interfaces?|hmi)|coaching|feedback|mental (?:states?|workload|health)|workload|stress|cognitive load|engagement|"
+    r"readiness|trust|gaze|head pose|hand(?:s|-on)?|phone use|secondary tasks?|vigilance|sleepiness|well-?being|health|physiolog\w*|takeovers?)",
+    r"passengers? (?:cognition|hazard perception|neural responses?|states?|emotions?|trust|well-?being|motion sickness|preferences?)",
+    r"(?:vehicle|driving|car) motion sickness", r"(?:automated|autonomous|conditionally automated) (?:vehicle|driving) takeovers?",
+    r"takeover (?:performance|time|requests?|readiness|quality|behaviou?r)s?",
+    r"(?:in-?vehicle|in-?car|driver|occupant) (?:r?ppg|remote-?ppg|heart rate|vital signs?|respiration|physiological signals?)",
+    r"(?:vehicle|car|in-?car|in-?vehicle) voice (?:commands?|control|interaction|interfaces?)",
+    r"(?:automotive|in-?vehicle|in-?car|cockpit) (?:large language|large|foundation|multimodal large language|vision-language) models?",
+    r"cockpit (?:socs?|chips?|domain controllers?|computing platforms?)", r"automotive (?:guis?|ui testing|gui testing)",
+    r"non-driving[- ]related (?:activities|tasks)", r"(?:smartphones?|mobile (?:phones?|devices?)),? (?:\w+ )?(?:and|or) in-?vehicle (?:systems?|devices?|scenarios?|screens?)",
+    r"(?:automated|autonomous) vehicle (?:hmi|interfaces?|users?|passengers?|occupants?)",
 ])
 COCKPIT_VEHICLE = _rx([r"vehicles?", r"cars?", r"automotive", r"drivers?", r"driving", r"passengers?", r"cockpits?", r"cabin", r"in-?vehicle", r"in-?car"])
 COCKPIT_AI = _rx([r"assistants?", r"agents?", r"llms?", r"large language models?", r"multimodal", r"multi-modal", r"voice", r"speech",
@@ -70,7 +92,10 @@ COCKPIT_AI = _rx([r"assistants?", r"agents?", r"llms?", r"large language models?
                   r"interaction", r"vision-language", r"vlms?", r"mllms?"])
 COCKPIT_EXCLUDE = _rx([r"in-?vehicle networks?", r"can bus", r"controller area network", r"intrusion detection", r"v2x",
                        r"vehicular networks?", r"aircraft", r"aviation", r"flight deck", r"pilots?", r"helicopter",
-                       r"electric vehicle charging", r"battery", r"vehicle routing", r"traffic signal", r"spacecraft"])
+                       r"electric vehicle charging", r"battery", r"vehicle routing", r"traffic signal", r"spacecraft",
+                       r"building (?:energy|occupants?|automation)", r"smart buildings?", r"space heating", r"indoor (?:comfort|environments?)",
+                       r"air traffic control", r"train drivers?", r"motor drivers?", r"gate drivers?", r"device drivers?",
+                       r"vanets?", r"vehicular ad hoc networks?", r"insurance"])
 # Driving-stack papers (perception/planning) are NOT cockpit unless a strong cockpit phrase appears.
 # sentence-level co-occurrence: occupant-centric term + human-state / interaction term
 COCKPIT_OCC = _rx([r"drivers?", r"passengers?", r"occupants?", r"in-?cabin", r"cabin", r"in-?car", r"in-?vehicle", r"cockpits?", r"vehicle users?", r"car users?"])
@@ -78,9 +103,14 @@ COCKPIT_HUMAN = _rx([r"gaze", r"eye[- ]tracking", r"emotions?", r"affective", r"
                      r"heart rate", r"respirat\w*", r"vital signs?", r"voice", r"speech", r"spoken", r"dialog(?:ue)?s?", r"conversation\w*",
                      r"assistants?", r"gestures?", r"comfort", r"motion sickness", r"trust", r"hmi", r"human-machine", r"interfaces?",
                      r"wheelchairs?", r"accessib\w*", r"infotainment", r"personali[sz]\w*", r"workload", r"situation(?:al)? awareness",
-                     r"take-?over", r"cognitive load", r"stress", r"intentions?", r"user experience", r"llm[- ]based agents?", r"in-?cabin"])
+                     r"take-?over", r"cognitive load", r"stress", r"intentions?", r"user experience", r"llm[- ]based agents?", r"in-?cabin",
+                     r"eeg", r"brain-computer", r"hazard perception", r"mental states?", r"r?ppg", r"anthropomorphic", r"head-?up displays?",
+                     r"user stud(?:y|ies)", r"participants"])
 DRIVING_STACK = _rx([r"autonomous driving", r"self-driving", r"trajectory prediction", r"motion planning", r"lidar", r"bev",
-                     r"3d object detection", r"end-to-end driving", r"driving policy", r"occupancy"])
+                     r"3d object detection", r"end-to-end driving", r"driving policy", r"occupancy",
+                     r"signali[sz]ed intersections?", r"traffic simulation", r"car-following", r"lane-?changing", r"personal mobility",
+                     r"crowd navigation", r"accident anticipation", r"traffic-sign", r"lane-?departure", r"mixed traffic",
+                     r"driving behaviou?r modell?ing", r"red-light", r"traffic lights?"])
 
 EMB_STRONG = _rx([
     r"embodied", r"vision-language-action", r"vlas?", r"humanoids?", r"dexterous", r"(?:robot|robotic) manipulation",
@@ -136,6 +166,9 @@ TAGS = [
     (r"gesture|gaze|eye[- ]tracking", "手势/视线交互", "cockpit"),
     (r"emotion|affective", "情感识别", "cockpit"),
     (r"take-?over", "接管请求", "cockpit"),
+    (r"head-?up display|(?<![a-z])(?:ar-?)?huds?(?![a-z])|windshield display", "抬头显示/AR-HUD", "cockpit"),
+    (r"infotainment", "车载信息娱乐", "cockpit"),
+    (r"(?<![a-z])eeg(?![a-z])|physiolog|heart rate|(?<![a-z])r?ppg(?![a-z])|vital sign|respirat", "生理信号", "cockpit"),
     (r"(?<![a-z])hmi(?![a-z])|human-machine interface|user interface|(?<![a-z])ux(?![a-z])|user experience", "人机界面/体验", "cockpit"),
     (r"on-?device|edge (?:ai|inference|deployment|devices?)|embedded|jetson|orin|(?<![a-z])npus?(?![a-z])|smartphones?|mobile (?:phones?|devices?)", "端侧部署", "edge"),
     (r"quantiz|low-?bit|pruning|model compression|distill|small (?:language )?models?|(?<![a-z])slms?(?![a-z])", "模型压缩", "edge"),

@@ -98,6 +98,37 @@ def fetch(store, state, reject, candidates_file=""):
         f"edge/agents {sum('edge' in p['topics'] for p in out)})")
     return out
 
+def backfill_cockpit(store, reject, days):
+    """One-off: search the last `days` days for cockpit papers the daily feed never saw.
+    Backfilled papers keep their arXiv date as first_seen and carry backfill=True, so they appear on the site
+    but are never mailed and never become a day's picks."""
+    end = now_utc() + dt.timedelta(hours=1)
+    start = end - dt.timedelta(days=days)
+    log(f"Cockpit backfill window (UTC): {start:%Y-%m-%d} → {end:%Y-%m-%d}")
+    seen = {}
+    for name in ("cockpit_kw", "cockpit_hci", "cockpit_title"):
+        try:
+            for p in arxiv.search(C.QUERIES[name], start, end, cap=4000, log=log):
+                seen.setdefault(p["id"], p)
+        except Exception as e:
+            log(f"  backfill query {name} failed: {e}")
+    cand = [p for aid, p in seen.items() if aid not in store and aid not in reject and "cockpit" in arxiv.classify(p)[0]]
+    arxiv.enrich(cand, log=log)
+    out = []
+    for p in cand:
+        topics, score = arxiv.classify(p)
+        if "cockpit" not in topics:
+            continue
+        p["topics"], p["score"] = topics, score
+        p["tags"] = arxiv.tags_zh(p, topics)
+        p["venue"] = arxiv.venue(p)
+        p["key_en"] = summarize.key_sentence(p["abstract"])
+        p["first_seen"] = dt.datetime.fromisoformat(p["published"].replace("Z", "+00:00")).isoformat(timespec="seconds")
+        p["backfill"] = True
+        out.append(p)
+    log(f"Backfill: {len(seen)} candidates, {len(out)} new cockpit papers")
+    return out
+
 def resolve_affils(papers, allow_pdf=True, label="new"):
     t0 = time.time()
     for i, p in enumerate(papers, 1):
@@ -167,6 +198,7 @@ def main():
     ap.add_argument("--no-digest", action="store_true")
     ap.add_argument("--reseed-picks", action="store_true", help="recompute the whole picks archive (per submission day)")
     ap.add_argument("--candidates", default="", help="(debug) extra candidate JSON {id: paper} to merge")
+    ap.add_argument("--backfill-cockpit", type=int, default=0, metavar="DAYS", help="one-off cockpit backfill (site only, never mailed)")
     a = ap.parse_args()
     os.makedirs(DATA, exist_ok=True)
     _logf = open(LOG, "a", encoding="utf-8")
@@ -185,6 +217,15 @@ def main():
 
     if a.sync:
         sync(store, a.sync)
+
+    if a.backfill_cockpit:
+        bf = backfill_cockpit(store, reject, a.backfill_cockpit)
+        resolve_affils(bf, allow_pdf=not a.no_pdf, label="backfill")
+        for p in bf:
+            store[p["id"]] = p
+        done = set(load(DIGESTED, []))   # archived: never mailed
+        save(DIGESTED, sorted(done | {p["id"] for p in bf}))
+        a.rebuild = True
 
     new_ids = []
     if not a.rebuild:
