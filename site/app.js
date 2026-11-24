@@ -434,6 +434,7 @@
     $("#auth-paste").addEventListener("submit", (e) => { e.preventDefault(); finishLogin($("#auth-code").value); });
     $("#auth-resync").addEventListener("click", syncNow);
     $("#auth-logout").addEventListener("click", async () => {
+      lsSet(LS_MERGED, ""); user = null; paintAuth(); render(); setSyncState("");
       try { const { error } = await sb.auth.signOut(); if (error) await sb.auth.signOut({ scope: "local" }); } catch (e) { try { await sb.auth.signOut({ scope: "local" }); } catch (_) {} }
       lsSet(LS_MERGED, ""); user = null; paintAuth(); render();
     });
