@@ -93,3 +93,9 @@ git add -A && git commit -m "update pipeline" && git push
 - arXiv API 429 限流：自动退避；仍失败则只用 RSS 继续，不中断。漏掉的日子在下次运行时按“上次运行前 4 天”回补。
 - `--sync` 失败（网络 / GitHub 不可达）会跳过并继续，本地抓取照常进行。
 - 网站没更新：`gh run list -R ctao7271-a11y/paper-radar` 查看 `daily-update` 是否失败；可 `gh workflow run daily-update -R ctao7271-a11y/paper-radar` 重跑。
+
+## 阅读清单与打开次数（网站前端）
+- 每张论文卡片左上角有“阅读清单”勾选框；勾选的论文出现在“我的阅读清单”视图（`#v=mine`，导航上显示数量），可按加入时间/打开次数排序、按已读/未读筛选、标记“已读”、移除。
+- 点击论文标题、arXiv 链接或 PDF 链接都会给该论文的“打开 N 次”加 1（事件委托，不拦截跳转；鼠标中键打开也计数）。
+- 数据只存在访问者自己浏览器的 localStorage（键 `paperRadar.readingList.v1`、`paperRadar.openCounts.v1`，按 arXiv ID 存，网站每天重建不受影响）；不上传、不跨设备同步。阅读清单页“导出”下载 JSON 备份，“导入”合并（清单取并集，次数取较大值）。清除浏览器数据会丢失，请定期导出。
+- 代码在 `radar/assets/app.js`（构建时复制到 `site/`）；自测脚本：`tests/test_reading_list.py <url> <tag>`（需要 playwright：`/workspace/pwenv/bin/python`）。

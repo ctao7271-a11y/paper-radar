@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0f172a">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css?v=aa885e25">
+<link rel="stylesheet" href="style.css?v=1213c30b">
 </head>
 <body>
 <header class="hero">
@@ -37,6 +37,7 @@
     <div class="views" role="tablist" aria-label="视图">
       <button role="tab" data-view="list" aria-selected="true">全部论文</button>
       <button role="tab" data-view="picks" aria-selected="false">★ 重点推荐</button>
+      <button role="tab" data-view="mine" aria-selected="false">我的阅读清单 <b class="nbadge" id="mine-n" hidden>0</b></button>
     </div>
     <div class="seg" role="tablist" aria-label="方向">
       <button role="tab" data-topic="all" aria-selected="true">全部</button>
@@ -68,10 +69,11 @@
     <li><b>来源：</b>每天检索 arXiv（cs.RO、cs.AI、cs.CV、cs.CL、cs.HC、cs.LG、cs.AR、cs.DC、eess.SY 等分类）的新论文，用关键词规则筛选三个方向：“智能座舱”（舱内感知、驾驶员状态、车载语音/多模态助手、人机交互）、“具身智能”（VLA、机器人操作与学习、人形、世界模型、仿真到真实等）、“端侧·智能体”（端侧/车载/机器人芯片上的模型部署、量化压缩与推理加速、智能体记忆、跨设备协同）。</li>
     <li><b>推荐度与重点推荐：</b>每篇论文按规则打一个推荐度分：研究兴趣权重（端侧部署、模型压缩/加速、智能体记忆、跨设备协同、座舱交互、具身智能）＋可落地信号（公开代码/项目页、真机或实车实验、给出延迟/显存等数据、面向部署、免训练即插即用）。偏理论、缺少实验的工作会降权但仍保留。每天从新论文中挑出 3–5 篇“重点推荐”，附通俗说明：解决什么、为什么可落地、可以用来做什么。说明由规则与中文简介自动生成，仅供快速筛选。</li>
     <li><b>机构标注：</b>作者单位来自论文 PDF 首页解析，并用 OpenAlex 补充核对。新论文的单位数据可能缺失或略有延迟，系统会在之后几天自动复查。标注仅供参考，以论文原文为准。</li>
+    <li><b>阅读清单与打开次数：</b>勾选卡片上的“阅读清单”即可收藏到“我的阅读清单”；点击标题、arXiv 或 PDF 链接会累计“打开次数”。这些数据只保存在你当前使用的浏览器中，不会上传，可在阅读清单页导出/导入备份。</li>
     <li><b>摘要：</b>“要点”为论文摘要原文中的关键句；部分论文附有中文简介。</li>
   </ul>
   <p class="fine">数据与链接均指向 arXiv 原文。本站为自动生成的公开研究索引。</p>
 </footer>
-<script src="app.js?v=aa885e25" defer></script>
+<script src="app.js?v=1213c30b" defer></script>
 </body>
 </html>

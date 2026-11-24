@@ -8,6 +8,70 @@
   const WD = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
   const st = { view: "list", topic: "all", onlyFlag: false, schools: new Set(["tsinghua", "pku", "buaa"]), q: "", it: "" };
   let manifest = null, loaded = 0, papers = [], picks = [];
+
+  // ---- personal data, kept only in this browser (localStorage), keyed by arXiv id
+  const LS_LIST = "paperRadar.readingList.v1", LS_OPEN = "paperRadar.openCounts.v1";
+  const lsGet = (k) => { try { return JSON.parse(localStorage.getItem(k)) || {}; } catch (e) { return {}; } };
+  const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage full / disabled */ } };
+  let myList = lsGet(LS_LIST);   // {id: {at: ISO time checked, read: bool, readAt?, p: {t, au, d, tp}}}
+  let opens = lsGet(LS_OPEN);    // {id: number}
+  const mine = { sort: "new", show: "all" };
+  const byId = (id) => papers.find((x) => x.id === id) || picks.find((x) => x.id === id);
+  function snap(p) { return { t: p.t, au: p.au.slice(0, 12), d: p.d, tp: p.tp }; }
+  function setChecked(id, on) {
+    if (on) {
+      const p = byId(id);
+      myList[id] = myList[id] || { at: new Date().toISOString(), read: false, p: p ? snap(p) : { t: id, au: [], d: "", tp: [] } };
+    } else delete myList[id];
+    lsSet(LS_LIST, myList);
+    document.querySelectorAll(`.card[data-id="${CSS.escape(id)}"] .pick-box input`).forEach((i) => { i.checked = !!on; });
+    document.querySelectorAll(`.card[data-id="${CSS.escape(id)}"]`).forEach((c) => c.classList.toggle("saved", !!on));
+    badge();
+  }
+  function bumpOpen(id) {
+    opens[id] = (opens[id] || 0) + 1;
+    lsSet(LS_OPEN, opens);
+    document.querySelectorAll(`.card[data-id="${CSS.escape(id)}"] .opens`).forEach((el) => { el.textContent = openText(id); el.classList.toggle("zero", !opens[id]); });
+  }
+  const openText = (id) => `打开 ${opens[id] || 0} 次`;
+  function badge() {
+    const n = Object.keys(myList).length;
+    const b = $("#mine-n");
+    if (b) { b.textContent = n; b.hidden = n === 0; }
+  }
+  function fmtTime(iso) {
+    if (!iso) return "";
+    return new Date(iso).toLocaleString("zh-CN", { timeZone: "Asia/Shanghai", hour12: false, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+  }
+  function exportData() {
+    const data = { app: "paper-radar", version: 1, exported: new Date().toISOString(), readingList: myList, openCounts: opens };
+    const blob = new Blob([JSON.stringify(data, null, 1)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `paper-radar-reading-list-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  }
+  function importData(file) {
+    const r = new FileReader();
+    r.onload = () => {
+      let d;
+      try { d = JSON.parse(r.result); } catch (e) { alert("导入失败：不是有效的 JSON 文件。"); return; }
+      const L = d.readingList || {}, O = d.openCounts || {};
+      let added = 0;
+      for (const [id, v] of Object.entries(L)) {
+        if (!v || typeof v !== "object") continue;
+        if (!myList[id]) added++;
+        const cur = myList[id];
+        myList[id] = cur ? { ...cur, read: cur.read || !!v.read, at: cur.at < v.at ? cur.at : v.at || cur.at } : v;   // merge: keep earliest check time
+      }
+      for (const [id, n] of Object.entries(O)) opens[id] = Math.max(opens[id] || 0, Number(n) || 0);   // merge: keep the larger count
+      lsSet(LS_LIST, myList); lsSet(LS_OPEN, opens);
+      badge(); render();
+      alert(`导入完成：新增 ${added} 篇，阅读清单共 ${Object.keys(myList).length} 篇。`);
+    };
+    r.readAsText(file);
+  }
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
@@ -15,7 +79,7 @@
   function readHash() {
     const h = new URLSearchParams(location.hash.slice(1));
     if (["all", "cockpit", "embodied", "edge"].includes(h.get("t"))) st.topic = h.get("t");
-    st.view = h.get("v") === "picks" ? "picks" : "list";
+    st.view = ["picks", "mine"].includes(h.get("v")) ? h.get("v") : "list";
     st.it = INTEREST[h.get("i")] ? h.get("i") : "";
     st.onlyFlag = h.get("f") === "1";
     if (h.get("s")) st.schools = new Set(h.get("s").split(",").filter((x) => SCHOOL[x]));
@@ -23,7 +87,7 @@
   }
   function writeHash() {
     const h = new URLSearchParams();
-    if (st.view === "picks") h.set("v", "picks");
+    if (st.view !== "list") h.set("v", st.view);
     if (st.view === "picks" && st.it) h.set("i", st.it);
     if (st.topic !== "all") h.set("t", st.topic);
     if (st.onlyFlag) h.set("f", "1");
@@ -35,8 +99,9 @@
   function syncControls() {
     document.querySelectorAll(".views button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.view === st.view)));
     $("#interests").hidden = st.view !== "picks";
+    document.body.classList.toggle("v-mine", st.view === "mine");
     document.querySelectorAll("#interests .chip").forEach((c) => c.classList.toggle("on", c.dataset.it === st.it));
-    document.querySelectorAll(".seg button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.topic === st.topic)));
+    document.querySelectorAll(".seg button[data-topic]").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.topic === st.topic)));
     $("#only-flag").checked = st.onlyFlag;
     $("#schools").hidden = !st.onlyFlag;
     document.querySelectorAll("#schools .chip").forEach((c) => c.classList.toggle("on", st.schools.has(c.dataset.school)));
@@ -115,16 +180,18 @@
       : "";
     const en = p.en ? `<p class="en"><span class="k sum">要点</span>${esc(p.en)}</p>` : "";
     const pk = showWhy && p.pk;
-    return `<article class="card${flag ? " flag" : ""}${pk ? " pick" : ""}">
+    const saved = !!myList[p.id];
+    return `<article class="card${flag ? " flag" : ""}${pk ? " pick" : ""}${saved ? " saved" : ""}" data-id="${esc(p.id)}">
+      <div class="mine-bar"><label class="pick-box" title="加入/移出我的阅读清单"><input type="checkbox" data-save="${esc(p.id)}"${saved ? " checked" : ""}><span>阅读清单</span></label><span class="opens${opens[p.id] ? "" : " zero"}" title="点击标题、arXiv 或 PDF 链接的次数（仅本浏览器）">${openText(p.id)}</span></div>
       <div class="meta">${p.pk ? `<span class="pill pick">★ 重点推荐${pk ? "" : " · " + esc(p.pk.date.slice(5))}</span>` : ""}${p.tp.map((t) => `<span class="pill ${t}">${TOPIC[t]}</span>`).join("")}${badges(p)}${p.v ? `<span class="pill venue">${esc(p.v)}</span>` : ""}</div>
-      <h3><a href="https://arxiv.org/abs/${esc(p.id)}" target="_blank" rel="noopener">${esc(p.t)}</a></h3>
+      <h3><a href="https://arxiv.org/abs/${esc(p.id)}" target="_blank" rel="noopener" data-open="${esc(p.id)}">${esc(p.t)}</a></h3>
       <p class="au">${authors(p)}</p>
       ${pk ? why(p) : ""}
       ${sigs(p)}
       ${pk ? "" : sum}${pk || p.zh ? "" : en}
       ${p.tg.length ? `<div class="tags">${p.tg.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>` : ""}
       <details><summary>${p.zh && p.en ? "英文要点与摘要" : "摘要原文"}</summary>${p.zh && p.en ? `<p class="en">${esc(p.en)}</p>` : ""}<p class="ab">${esc(p.ab)}</p></details>
-      <div class="links"><a href="https://arxiv.org/abs/${esc(p.id)}" target="_blank" rel="noopener">arXiv:${esc(p.id)}</a><a href="https://arxiv.org/pdf/${esc(p.id)}" target="_blank" rel="noopener">PDF</a><span class="src">${esc(src)}</span></div>
+      <div class="links"><a href="https://arxiv.org/abs/${esc(p.id)}" target="_blank" rel="noopener" data-open="${esc(p.id)}">arXiv:${esc(p.id)}</a><a href="https://arxiv.org/pdf/${esc(p.id)}" target="_blank" rel="noopener" data-open="${esc(p.id)}">PDF</a><span class="src">${esc(src)}</span></div>
     </article>`;
   }
   function fmtShort(d) {
@@ -147,8 +214,52 @@
     box.innerHTML = `<div class="hd"><h2>★ 最新重点推荐 · ${label}</h2><span>按研究兴趣与可落地程度自动挑选</span><a id="go-picks">查看往期推荐 ›</a></div>${items.map((p) => card(p, true)).join("")}`;
     $("#go-picks").addEventListener("click", () => { st.view = "picks"; update(); window.scrollTo(0, 0); });
   }
+  function mineCard(id, v) {
+    const p = byId(id);
+    const s = p || { id, ...v.p };
+    return `<article class="card mine-item${v.read ? " is-read" : ""}" data-id="${esc(id)}">
+      <div class="mine-bar"><label class="pick-box" title="移出阅读清单"><input type="checkbox" data-save="${esc(id)}" checked><span>阅读清单</span></label>
+        <label class="read-box"><input type="checkbox" data-read="${esc(id)}"${v.read ? " checked" : ""}><span>已读</span></label>
+        <span class="opens${opens[id] ? "" : " zero"}">${openText(id)}</span></div>
+      <div class="meta">${(s.tp || []).map((t) => `<span class="pill ${t}">${TOPIC[t] || t}</span>`).join("")}${p ? badges(p) : ""}</div>
+      <h3><a href="https://arxiv.org/abs/${esc(id)}" target="_blank" rel="noopener" data-open="${esc(id)}">${esc(s.t)}</a></h3>
+      <p class="au">${esc((s.au || []).slice(0, 8).join("，"))}${(s.au || []).length > 8 ? " 等" : ""}</p>
+      ${p && p.zh ? `<p class="sum"><span class="k">简介</span>${esc(p.zh)}</p>` : ""}
+      <div class="links"><a href="https://arxiv.org/abs/${esc(id)}" target="_blank" rel="noopener" data-open="${esc(id)}">arXiv:${esc(id)}</a><a href="https://arxiv.org/pdf/${esc(id)}" target="_blank" rel="noopener" data-open="${esc(id)}">PDF</a>
+        <span class="src">${s.d ? "论文日期 " + esc(s.d) + " · " : ""}加入于 ${esc(fmtTime(v.at))}${v.read && v.readAt ? " · 读完于 " + esc(fmtTime(v.readAt)) : ""}</span>
+        <button class="rm" data-rm="${esc(id)}">移除</button></div>
+    </article>`;
+  }
+  function renderMine() {
+    let items = Object.entries(myList);
+    const total = items.length, nRead = items.filter(([, v]) => v.read).length;
+    if (mine.show === "unread") items = items.filter(([, v]) => !v.read);
+    if (mine.show === "read") items = items.filter(([, v]) => v.read);
+    if (st.q) {
+      const ws = st.q.toLowerCase().split(/\s+/).filter(Boolean);
+      items = items.filter(([id, v]) => { const p = byId(id) || v.p; const hay = (id + " " + p.t + " " + (p.au || []).join(" ") + " " + (p.zh || "")).toLowerCase(); return ws.every((w) => hay.includes(w)); });
+    }
+    items.sort((a, b) => (mine.sort === "new" ? (a[1].at < b[1].at ? 1 : -1) : mine.sort === "old" ? (a[1].at > b[1].at ? 1 : -1) : (opens[b[0]] || 0) - (opens[a[0]] || 0)));
+    const tools = `<div class="mine-tools">
+      <label>排序 <select id="mine-sort"><option value="new"${mine.sort === "new" ? " selected" : ""}>最近加入</option><option value="old"${mine.sort === "old" ? " selected" : ""}>最早加入</option><option value="opens"${mine.sort === "opens" ? " selected" : ""}>打开次数</option></select></label>
+      <div class="seg mini">${[["all", "全部"], ["unread", "未读"], ["read", "已读"]].map(([k, l]) => `<button data-show="${k}" aria-selected="${mine.show === k}">${l}</button>`).join("")}</div>
+      <span class="grow"></span>
+      <button class="tool" id="mine-export">导出</button>
+      <label class="tool">导入<input type="file" id="mine-import" accept="application/json,.json" hidden></label>
+    </div>
+    <p class="hint">阅读清单和打开次数只保存在当前浏览器（本机 localStorage），不会上传；换设备或清除浏览器数据前，请用“导出”备份，在另一台设备上“导入”即可合并。</p>`;
+    $("#list").innerHTML = tools + (items.length ? items.map(([id, v]) => mineCard(id, v)).join("")
+      : `<p class="empty">${total ? "没有符合条件的论文。" : "阅读清单还是空的：在任意论文卡片左上角勾选“阅读清单”即可加入。"}</p>`);
+    $("#count").textContent = `阅读清单 ${total} 篇（已读 ${nRead}，未读 ${total - nRead}）· 当前显示 ${items.length} 篇`;
+    $("#more").hidden = true;
+    $("#mine-sort").addEventListener("change", (e) => { mine.sort = e.target.value; render(); });
+    document.querySelectorAll(".mine-tools [data-show]").forEach((b) => b.addEventListener("click", () => { mine.show = b.dataset.show; render(); }));
+    $("#mine-export").addEventListener("click", exportData);
+    $("#mine-import").addEventListener("change", (e) => { if (e.target.files[0]) importData(e.target.files[0]); e.target.value = ""; });
+  }
   function render() {
     renderToday();
+    if (st.view === "mine") { renderMine(); return; }
     if (st.view === "picks") {
       const items = picks.filter(match);
       const groups = new Map();
@@ -186,10 +297,7 @@
 
   // ---- events
   function bind() {
-    document.querySelectorAll(".views button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.view === st.view)));
-    $("#interests").hidden = st.view !== "picks";
-    document.querySelectorAll("#interests .chip").forEach((c) => c.classList.toggle("on", c.dataset.it === st.it));
-    document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("click", () => { st.topic = b.dataset.topic; update(); }));
+    document.querySelectorAll(".seg button[data-topic]").forEach((b) => b.addEventListener("click", () => { st.topic = b.dataset.topic; update(); }));
     document.querySelectorAll(".views button").forEach((b) => b.addEventListener("click", () => { st.view = b.dataset.view; update(); }));
     $("#interests").innerHTML = '<button class="chip it" data-it="">全部兴趣</button>' +
       Object.entries(INTEREST).map(([k, v]) => `<button class="chip it" data-it="${k}">${v}</button>`).join("");
@@ -200,6 +308,29 @@
       if (st.schools.has(k) && st.schools.size > 1) st.schools.delete(k); else st.schools.add(k);
       update();
     }));
+    // event delegation: works for every card rendered later (lists, picks, archive, search, reading list)
+    const onOpen = (e) => {
+      const a = e.target.closest("a[data-open]");
+      if (!a || (e.type === "auxclick" && e.button !== 1)) return;
+      bumpOpen(a.dataset.open);   // never preventDefault: navigation goes ahead normally
+    };
+    document.addEventListener("click", onOpen, true);
+    document.addEventListener("auxclick", onOpen, true);
+    document.addEventListener("change", (e) => {
+      const t = e.target;
+      if (t.matches("input[data-save]")) {
+        setChecked(t.dataset.save, t.checked);
+        if (st.view === "mine" && !t.checked) render();
+      } else if (t.matches("input[data-read]")) {
+        const v = myList[t.dataset.read];
+        if (v) { v.read = t.checked; v.readAt = t.checked ? new Date().toISOString() : undefined; lsSet(LS_LIST, myList); render(); }
+      }
+    });
+    document.addEventListener("click", (e) => {
+      const b = e.target.closest("button[data-rm]");
+      if (b) { setChecked(b.dataset.rm, false); render(); }
+    });
+    window.addEventListener("storage", (e) => { if (e.key === LS_LIST || e.key === LS_OPEN) { myList = lsGet(LS_LIST); opens = lsGet(LS_OPEN); badge(); render(); } });
     let t;
     $("#q").addEventListener("input", (e) => { clearTimeout(t); t = setTimeout(() => { st.q = e.target.value.trim(); update(); }, 150); });
     $("#more").addEventListener("click", async () => { $("#more").disabled = true; await loadMore(1); $("#more").disabled = false; render(); });
@@ -207,7 +338,7 @@
   function update() { syncControls(); writeHash(); render(); }
 
   async function init() {
-    readHash(); bind(); syncControls();
+    readHash(); bind(); syncControls(); badge();
     try {
       manifest = await getJSON("manifest.json");
     } catch (e) {
