@@ -94,8 +94,14 @@ git add -A && git commit -m "update pipeline" && git push
 - `--sync` 失败（网络 / GitHub 不可达）会跳过并继续，本地抓取照常进行。
 - 网站没更新：`gh run list -R ctao7271-a11y/paper-radar` 查看 `daily-update` 是否失败；可 `gh workflow run daily-update -R ctao7271-a11y/paper-radar` 重跑。
 
-## 阅读清单与打开次数（网站前端）
-- 每张论文卡片左上角有“阅读清单”勾选框；勾选的论文出现在“我的阅读清单”视图（`#v=mine`，导航上显示数量），可按加入时间/打开次数排序、按已读/未读筛选、标记“已读”、移除。
-- 点击论文标题、arXiv 链接或 PDF 链接都会给该论文的“打开 N 次”加 1（事件委托，不拦截跳转；鼠标中键打开也计数）。
-- 数据只存在访问者自己浏览器的 localStorage（键 `paperRadar.readingList.v1`、`paperRadar.openCounts.v1`，按 arXiv ID 存，网站每天重建不受影响）；不上传、不跨设备同步。阅读清单页“导出”下载 JSON 备份，“导入”合并（清单取并集，次数取较大值）。清除浏览器数据会丢失，请定期导出。
-- 代码在 `radar/assets/app.js`（构建时复制到 `site/`）；自测脚本：`tests/test_reading_list.py <url> <tag>`（需要 playwright：`/workspace/pwenv/bin/python`）。
+## 阅读清单、云同步与打开次数（网站前端）
+- 每张卡片左上角有“阅读清单”勾选框；勾选的论文进入“阅读清单”视图（`#v=mine`，导航显示数量），可按加入时间（新/旧）或打开次数排序、按已读/未读筛选、标记“已读”、移除；“导出”下载 JSON 备份，“导入”合并。
+- **云同步（Supabase）**：项目 `paper-radar`，ref `gabsjglbryeftyolopev`，区域 ap-southeast-1（新加坡），免费档。前端只内置 publishable/anon key（`radar/assets/app.js` 顶部），**绝不放 service_role key**。
+  - 点右上角“登录同步”→ 输入邮箱 → 点邮件里的登录链接（每台设备一次）。若链接跳到别的地址，把整条链接（或邮件里的验证码）粘贴回对话框即可登录。
+  - 首次在某台设备登录：本地清单与云端取并集（加入时间取最早，已读取“或”），之后勾选/已读/移除都即时写云端；离线时写本地并排队，下次联网同步。退出登录后本地清单保留。
+  - 只有白名单邮箱能注册/使用：`public.allowed_users`（RLS 拒绝所有直接访问）+ `auth.users` 上的 BEFORE INSERT 触发器 `private.enforce_signup_allowlist`；`reading_list` 的 RLS 为 `auth.uid() = user_id and private.is_allowed()`。增加可同步邮箱：在 SQL 编辑器执行 `insert into public.allowed_users(email) values ('<email>');`
+  - 建议在 Supabase 控制台 Authentication → URL Configuration 把 Site URL 与 Redirect URLs 设为 `https://ctao7271-a11y.github.io/paper-radar/`（否则邮件链接可能指向默认地址，需要粘贴回对话框）。
+- **打开次数（全站总计）**：卡片上只显示一个数字“打开 N 次”= 所有访客点击标题、arXiv 或 PDF 链接的总次数（事件委托，不拦截跳转，中键也算）。表 `public.global_clicks(arxiv_id, count, updated_at)`；匿名访客只能 SELECT 和调用 SECURITY DEFINER 函数 `increment_global_click(p_arxiv_id)`（校验 ID 格式与长度），不能直接写表。同一浏览器同一篇 30 秒内只计一次（客户端限流）。连接不上 Supabase 时不显示数字。
+  - 修正误计数：`update public.global_clicks set count = greatest(count - <n>, 0) where arxiv_id = '<id>';`
+- 视觉：三色（背景 #0B0F14、文字 #E6EDF3 及其透明度、强调 #00E5FF），深色、等宽数字，样式在 `radar/assets/style.css`；supabase-js 本地化为 `radar/assets/supabase-2.119.2.js`（构建时复制到 `site/`）。
+- 自测：`/workspace/pwenv/bin/python tests/test_reading_list.py <url> <tag> [测试邮箱 测试密码]`。注意脚本的点击会真实计入全站次数，结束时打印 `GLOBAL_CLICK_DELTAS`，按上面的 SQL 扣回。
