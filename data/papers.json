@@ -29817,7 +29817,8 @@
   ],
   "updated": "2026-11-20T06:16:26Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "基于联合嵌入预测架构构建老年人健康轨迹世界模型，用状态编码器与动作/情境条件预测器模拟未来轨迹，在美国 HRS 上训练，并在英国 ELSA、中国 CHARLS 上不重训评估。HRS 测试集上死亡、ADL/IADL 恶化在首个预测时点的 AUROC 分别为 0.89、0.93、0.93；在外部队列上死亡 AUROC 约为 0.80–0.88，并可按生活方式动作做反事实模拟。"
  },
  "2611.28231": {
   "abstract": "Memory benchmarks built on question answering tell an agent which fact to recall. Workplace requests often leave that need implicit: to post an update in the team's channel, an agent must work out which channel from earlier interactions and use it in a tool call. We evaluate Memanto, a memory agent that ranks memories with an information-theoretic relevance score, on DolphinBench, which tests memory through 600 simulated workplace tasks, each validated as requiring memory. Running in the Hermes agent harness with GPT-6-Luna and at most 6 iterations per conversation, Memanto completes 503 tasks (83.83%). The strongest configuration reported by the benchmark's authors, Mem0 with GPT-5.6-Luna and up to 60 iterations, completes 424 (70.67%). Memanto's run also has the lowest total cost ($10.86, against $61.48 for the cheapest reported run) and the shortest median task latency (15.32s). Grading uses the benchmark's own judge, but the agent model differs, so these results compare complete systems. The memory system affects both whether an agent completes such tasks and what completion costs.",
@@ -31164,7 +31165,8 @@
   ],
   "updated": "2026-11-21T04:33:57Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出面向边缘机器人的混合存储与调度方案：将部分固定权重放入分体 ROM、经专用数据通路供给计算阵列，其余权重与可变状态留在 LPDDR，并在输出切片边界做抢占；同时用一次前向为候选阶段打分，避免常规决策逐 token 生成。在 Qwen3-8B 上解码最高加速 1.56 倍，P99 任务响应时间约降低 227 倍，测试的抓取与搬运任务全部完成。"
  },
  "2611.28585": {
   "abstract": "Vision-language-action (VLA) models translate visual observations and language instructions into robot actions, enabling general-purpose robotic control. However, environmental perturbations, such as objects moving during execution, can undermine their reliability. Different policies exhibit complementary failures under mid-rollout perturbations, motivating selective switching between policies for recovery. Such switching can stall the robot during inference of the newly invoked policy or, if performed asynchronously, act on stale observations. We present AsyncMixVLA, an adaptive inference framework for proactive, asynchronous switching across heterogeneous VLA policies. A learned trigger balances recovery potential against intervention harm to selectively escalate to a higher-compute policy. AsyncMixVLA overlaps its inference with committed outgoing actions and aligns its context to the anticipated takeover state. On LIBERO-Long with mid-rollout perturbations, AsyncMixVLA improves perturbed task success from 69.5% to 77.1% over the lightweight policy. It achieves 84.9% overall success, comparable to 84.5% for synchronous switching, while reducing median exposed handoff latency from 226.5 ms to 0.1 ms. Without retraining or recalibration, it achieves 75.1% success across three unseen perturbation families, compared with 71.3% for the stronger constituent policy in aggregate.",
@@ -31595,7 +31597,8 @@
   ],
   "updated": "2026-11-21T09:44:47Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 TacitTouch，把带触觉的教师策略直接蒸馏到仅视觉的学生策略中，部署时无需触觉传感器，也不再重建触觉信号。在 4 个仿真 UniVTAC 任务和 4 个真机任务上，平均成功率比纯视觉分别高 16.0 和 22.5 个百分点，距使用实测触觉的教师仅差 2.0 和 3.75 个百分点。"
  },
  "2611.28707": {
   "abstract": "Imagine-then-execute methods offer a promising paradigm for video-based manipulation, where a video planner predicts future visual subgoals and an inverse dynamics model (IDM) grounds them into robot actions. Despite their promise, these methods remain limited by action grounding. First, the IDM is typically trained on limited task-specific demonstrations and can generalize poorly even when given oracle visual subgoals, indicating that action grounding remains a bottleneck beyond visual planning errors. Second, precise execution benefits from eye-in-hand observations, but eye-in-hand video planning is both hard to learn and hard to scale: the viewpoint moves with the robot, and such videos are scarce at internet scale. To overcome these challenges, we propose IRIS, a video-based manipulation framework that learns a highly generalizable, execution-aware IDM. First, IRIS scales action grounding by pretraining the IDM on task-agnostic random exploration data, which provides diverse visual state transitions paired with robot actions without human task annotation. Second, it extends the IDM with eye-in-hand sensing through a two-stage training scheme, without requiring eye-in-hand video planning. Extensive simulation and real-world experiments show that IRIS improves action grounding and data efficiency, enables more precise execution, and achieves competitive performance against state-of-the-art manipulation policies.",
@@ -31838,7 +31841,8 @@
   ],
   "updated": "2026-11-21T10:58:36Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 Entangle，用单段人类视频作为上下文，让世界动作模型在不微调参数的情况下完成未见操作任务；通过视频生成构造时间对齐的人-机训练对，并用任务内对比损失避免走捷径。无需任务微调，在 Astribot S1 的 6 个未见任务上平均 83.5/100，在 7 个未见 RoboTwin 任务上成功率 69.5%，比 Zero-WAM 高 22.6 个百分点。"
  },
  "2611.28752": {
   "abstract": "Vision-language-action foundation models learn general manipulation priors, but object mass and local slip are difficult to infer from vision alone. Changing loads require contact-driven grasp adjustments that demonstrations collected under fixed conditions may not adequately cover. We present VTLA-RL to study visuotactile grasping policies and their reinforcement learning (RL) post-training under varying loads. Our main approach shares a visual encoder between tactile-image histories and RGB inputs to jointly generate and execute motion and bilateral force targets in a unified action space. Mixed real and simulated demonstrations first establish motion and contact priors. Two-stage multi-task RL then uses only simulated interaction to optimize the policy through task-success returns without continued real-demonstration supervision, and the trained policy deploys directly to real robots. We compare tactile representations and RL post-training routes in simulation and separately evaluate load variation and placement perturbations on hardware. The full method achieves higher grasping success than the supervised initialization, while RL post-training gains differ across approaches, providing empirical evidence for choosing representations and training approaches for this task.",
@@ -32821,7 +32825,8 @@
   ],
   "updated": "2026-11-21T17:23:39Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 45 亿参数的世界动作模型 SANA-Robot，用线性注意力维持固定大小的全局记忆、滑动窗口注意力传递信息，并可通过不同噪声水平同时充当策略与世界模拟器，以支持端侧实时控制。在约 5B 规模模型中取得 RoboDojo 记忆维度最佳，并在 LIBERO-Plus/Pro/Max 上成功率最高；RTX 5090 上每动作块 115–135 ms，端侧可 30 Hz 闭环异步控制。"
  },
  "2611.28963": {
   "abstract": "A world model should tell us not only what will happen, but what would happen under a different action. Learned Earth models now forecast remarkably well, yet forecast skill says little about what their state means or how it responds to a changed driver. We build LandWM, a world model of land-surface water in which rain is the action, learned from seven years of SMAP and CYGNSS observations: physical observation operators tie its latent state to soil water, and a mass-conserving balance governs how that state responds to rain. Over the U.S. Southern Great Plains, the model, never shown a soil-moisture value, tracks 28 in-situ probes as well as the operational SMAP Level-4 product, even from CYGNSS alone, and a storm added to the forcing of a station's cell wets its soil as natural storms wet the probes. Replace either piece and the forecasts stay, but the meaning goes: with neural operators, only a probe fitted to the stations finds the soil water; with a generic recurrent transition, rain on a single cell barely moves it. Yet when the same rain covers the whole region the two transitions swap roles, and the conserving one responds too weakly. Grounding makes a world model readable; its response to actions must be tested under more than one kind of intervention.",
@@ -32896,7 +32901,8 @@
   ],
   "updated": "2026-11-21T17:56:27Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出陆地水文世界模型 LandWM：以降雨为动作，用物理观测算子把隐状态约束到土壤水，并用质量守恒方程描述降雨响应，基于 7 年 SMAP 与 CYGNSS 观测训练。模型从未见过土壤湿度数值，但在美国南部大平原上对 28 个原位探头的跟踪可与业务 SMAP Level-4 相当，并用于检验世界模型对干预的响应是否具有物理含义。"
  },
  "2611.29062": {
   "abstract": "Personalized LLM agents rely on an agent harness, the surrounding memory and control code, to connect user history with downstream decisions. Existing methods typically employ either a single shared memory workflow across all users, which is efficient to deploy but cannot adapt how evidence is retrieved and interpreted across diverse histories, or per-user harness optimization, which customizes behavior for each user but requires costly repeated candidate evaluation at deployment and suffers from sparse, noisy supervision in raw logs. To address this trade-off, we present HyperHarness, a framework that learns a shared history-to-harness generator to synthesize executable, user-specific retrieval and answer-guidance code directly from user histories. Given a user's permitted history, HyperHarness prompts a construction LLM to write personalized retrieval and guidance functions, while downstream task scores across training users supervise iterative refinements to the shared generator without reference harnesses or answering-model updates. At deployment, the frozen generator constructs a harness for each unseen user in a single pass from history alone, eliminating per-user task-scored search. Across three benchmarks (PersonaMemv3, Mem-PAL, and MemoryCD) and three answering models (Qwen3.5-9B, Qwen3.8-27B, and GPT-5.6-Luna), HyperHarness achieves the highest aggregate score in seven of nine settings and ranks second in the remaining two, improving over the strongest baselines by up to 5.95 points while cutting matched answer-time tokens by 90.32% over long-context prompting. Analyses show that optimization tailors context allocation to each executor, transfers to unseen user clusters, and amortizes adaptation costs.",
@@ -34484,7 +34490,8 @@
   ],
   "updated": "2026-11-22T09:15:32Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 nanoAstra：把机器人行为写成可复用、带参数的语义动作原语，并用带机器人系统提示的能力保持微调（CP-SFT）在结构化动作空间上适配视觉-语言模型。在超过 5000 小时机器人数据与通用 VQA 上训练后，9B 模型在 RoboTwin 2.0 随机基准上零样本成功率 17.8%；单卡 H20 上推理快于动作执行，可将机器人空闲时间从 35.0% 降到 6.9%。"
  },
  "2611.29339": {
   "abstract": "Latent reasoning lets Vision-Language-Action (VLA) models deliberate at a fraction of the cost of explicit chain-of-thought, increasingly through visual foresight, which we show to be indispensable for predicting actions. Yet this paradigm is inherited from Vision-Language Models, where it serves understanding rather than action: each latent is aligned with an isolated future frame, often enriched with further modalities of that frame. We find that this binds the policy to the appearance of its training scenes, so that it degrades sharply once the scene changes. We argue that visual latents for action should capture not what a future frame looks like, but how the scene evolves toward the goal. We therefore propose Motion-Oriented Latent Reasoning, which redirects visual latents from the whole frame to the interaction that the action must bring about. Semantic latents, following the stages of embodied chain-of-thought, first establish what to accomplish and how. Conditioned on them, motion-oriented latents anticipate each future step from coarse to fine: from the global scene, to the interaction region spanned by the manipulated object and its destination, to the robot state. Relative to the state-of-the-art latent VLA LaST$_0$, our method raises the mean success rate on SimplerEnv-WidowX from 37.5% to 55.2% in distribution and from 22.4% to 30.2% under out-of-distribution shifts, and on an AgileX Piper dual-arm platform from 60.8% to 90.8% in training scenes and from 6.7% to 37.5% under environmental changes.",
@@ -35239,7 +35246,7 @@
    "date": "2026-11-24",
    "line": "让机器人在行动前“预演”结果；已开源、有真实设备验证，可做抓取/操作 PoC 的起点。",
    "rank": 3,
-   "solve": "目标：让机器人在行动前“预演”结果。（原文要点：To bridge this gap, we present MAWAM, a multi-agent world action model that jointly predicts the future observations of multiple embodiments and decodes each agent's actions from them for collaborative manipulation.）",
+   "solve": "提出多智能体世界动作模型 MAWAM，在统一序列中联合预测多台机器人的未来观测并解码各自动作，以支持跨工作空间、异构本体的协同操作。在自建 MA-Bench 七项任务上平均联合成功率 82.7%，比最强基线高 30.7 个百分点，并在真实异构机器人团队上实现实时闭环协作。",
    "use": "可作为机器人抓取/操作类 PoC 的起点；可用于在仿真中先预演、再让机器人执行的方案验证。",
    "why": "已公开代码或项目页，可以直接上手复现；在真实设备、机器人或车辆上做了实验（或有用户测试），不只停留在仿真；从设计上就面向实际部署。"
   },
@@ -35263,7 +35270,8 @@
   ],
   "updated": "2026-11-22T14:16:55Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出多智能体世界动作模型 MAWAM，在统一序列中联合预测多台机器人的未来观测并解码各自动作，以支持跨工作空间、异构本体的协同操作。在自建 MA-Bench 七项任务上平均联合成功率 82.7%，比最强基线高 30.7 个百分点，并在真实异构机器人团队上实现实时闭环协作。"
  },
  "2611.29518": {
   "abstract": "Robot co-design benchmarks rank bodies after training their controllers under a fixed episode protocol, but that protocol can change the ranking itself. Consequently, two studies can select different bodies from the same corpus even when they use the same task and evaluator. We study one part of that protocol, the reset rule, which ends a training episode when the robot's torso falls below a height threshold. We train proximal policy optimization (PPO) controllers for 100 DERL-evolved UNIMAL bodies with this threshold at 20% of each body's starting torso height (Standard), at 50% (Strict), or with no threshold (Reset-free), and score every controller with the same evaluator. The threshold changes which bodies look best: the rankings after Strict and Reset-free training correlate at only 0.21, against about 0.89 if seed noise were the only difference. Removing fall resets costs some bodies far more than others. Bodies evolved on flat ground lose 45% of their per-step reward relative to Standard training, and those evolved on variable terrain only 16%. Permutation tests over bodies support this difference, and on 24 bodies, flat-ground bodies gain the most from Strict over Reset-free training under both PPO and soft actor-critic (SAC). Choosing bodies by their worst reward across the three protocols costs little: in sample, they keep at least 91% of the reward of each protocol's best bodies, and over 80% averaged across held-out seeds. Co-design benchmarks should state their reset rule, test whether their rankings depend on it, and report bodies that stay strong across protocols. Project page: https://reset-dependence.github.io.",
@@ -35609,7 +35617,8 @@
   ],
   "updated": "2026-11-22T17:04:16Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出一种时间反转课程与协同重置机制，使简单的 MLP+PPO 策略在保持闭环控制的同时覆盖多种抓取姿态分布。仅用约 400 个物体训练，即可在超过 2 万个未见物体上展现较强泛化，兼具多样抓取行为与抗扰动的闭环执行。"
  },
  "2611.29637": {
   "abstract": "Service robots that share corridors and lobbies with people must keep moving without endangering them. Reactive planners can stop indefinitely in dense crowds (the freezing robot problem), whereas the attention-based learned navigators that dominate the standard crowd benchmark assume holonomic motion or emit discrete actions unsuited to a differential-drive base. This paper presents TASC, a navigation system for a non-holonomic service robot that integrates an attention-based crowd encoder, an anticipatory collision feature, and a continuous-control policy. We adapt the dual-selection attention module, originally developed for discrete-action value learning, to proximal policy optimization for continuous velocity control, and add a closing-speed time-to-collision feature, a conservative estimate of the time to contact that serves as both an observation and a reward term. The policy is trained on a high-fidelity 3D robot model in NVIDIA Isaac Lab with 10,000 parallel environments, social-force-model pedestrians, and randomized crowd sizes. In 30,000 evaluation episodes, each run to its end, the policy timed out in fewer than 0.5% at every tested crowd density. This liveness comes at a cost: pedestrian collisions rise from 4.5% with five pedestrians to 17.4% with ten. In an ablation with four seeds per variant, policies retrained without the time-to-collision feature succeed 4 to 7 percentage points less often. The policy runs in Gazebo without retraining and on a commercial differential-drive service robot through a ROS 2 package with an inference latency below 10 ms, verified in a hardware-in-the-loop test with virtual pedestrians.",
@@ -36369,7 +36378,7 @@
    "date": "2026-11-24",
    "line": "让模型能在本地设备（车机、手机、机器人芯片）上直接运行；面向部署，适合做端侧 Demo 的起点。",
    "rank": 2,
-   "solve": "目标：让模型能在本地设备（车机、手机、机器人芯片）上直接运行；让机器人在意外情况下更安全。（原文要点：We propose MobileGrail, an on-device deployable model that addresses both.）",
+   "solve": "提出可端侧部署的 MobileGrail，为手机 GUI 智能体做运行时安全护栏：只保留后续安全决策所需的任务状态，并区分“违规动作”与可提前拦截的“阻断”。基于 Qwen3.5-2B 在 MobileVeto 上拦截 76.2% 的违规（原骨干为 64.5%），过早干预从 58.6% 降到 5.2%；4 bit 量化后在骁龙 8 Elite 上中位延迟 4.7 秒，与云端模型相当。",
    "use": "可作为在车机或机器人芯片上跑模型的端侧 Demo 起点；可参考其压缩/加速方法，评估模型在车载或机器人芯片上的可行性。",
    "why": "从设计上就面向实际部署；基于主流开源模型，便于复用。"
   },
@@ -36395,7 +36404,8 @@
   ],
   "updated": "2026-11-23T00:09:33Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出可端侧部署的 MobileGrail，为手机 GUI 智能体做运行时安全护栏：只保留后续安全决策所需的任务状态，并区分“违规动作”与可提前拦截的“阻断”。基于 Qwen3.5-2B 在 MobileVeto 上拦截 76.2% 的违规（原骨干为 64.5%），过早干预从 58.6% 降到 5.2%；4 bit 量化后在骁龙 8 Elite 上中位延迟 4.7 秒，与云端模型相当。"
  },
  "2611.29850": {
   "abstract": "Wrist cameras provide an action-centric view that is directly relevant to robot manipulation. However, collecting human wrist-camera videos at scale is challenging due to cumbersome setups that can interfere with natural hand movements. In contrast, head-mounted human egocentric videos are much easier to scale. We introduce Ego2Wrist, which synthesizes synchronized wrist-camera views from human egocentric videos and task descriptions. Trained on approximately 940 hours of paired head- and wrist-camera recordings, Ego2Wrist jointly generates three views. To evaluate generated wrist views without ground truth, we propose hand-centric cross-view consistency (HCC), which measures consistency between generated wrist views and corresponding hand regions in the input head view. HCC ranks model checkpoints comparably to ground-truth-based LPIPS, and human evaluators prefer HCC-selected generations in 77% of responses. Evaluated on four datasets, Ego2Wrist outperforms fine-tuned WorldWander, reducing LPIPS by 28% and receiving human preference in 76% of responses. More importantly, HCC facilitates recursive self-improvement on in-the-wild egocentric videos by selecting generated wrist views for further training. Generation quality progressively improves over three rounds. These results demonstrate a scalable approach to generating real-world wrist-view human manipulation videos for robot policy training.",
@@ -36785,7 +36795,7 @@
    "date": "2026-11-24",
    "line": "让机器人完成多步骤的长任务；已开源、有真实设备验证，可用来评估在车载/机器人芯片上的部署可行性。",
    "rank": 4,
-   "solve": "目标：让机器人完成多步骤的长任务；让腿足/人形机器人走得更稳。（原文要点：We present Motion Mamba 2.0, a Mamba-based root-body diffusion architecture that integrates local attention, resumable recurrent states, and persistent content memory (PCM) for long-horizon controllable motion generation.）",
+   "solve": "提出 Motion Mamba 2.0，结合局部注意力、可恢复循环状态和持久内容记忆（PCM）做人形长时程可控运动生成，并配合 CUDA Graph 等推理优化。在重定向 HiPHI 上可精确控制最长 39.52 秒的滚动；RTX 4090 上完整窗口中位延迟从 1685.35 ms 降到 276.14 ms（约 6.1 倍加速），并在 Unitree G1 真机上验证了文本引导动作组合与交互式行走。",
    "use": "可参考其压缩/加速方法，评估模型在车载或机器人芯片上的可行性；可作为人形/足式机器人运动控制方案的参考。",
    "why": "已公开代码或项目页，可以直接上手复现；在真实设备、机器人或车辆上做了实验（或有用户测试），不只停留在仿真；给出了可量化的效果数据（如 276.14 ms）。"
   },
@@ -36808,7 +36818,8 @@
   ],
   "updated": "2026-11-23T01:51:57Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 Motion Mamba 2.0，结合局部注意力、可恢复循环状态和持久内容记忆（PCM）做人形长时程可控运动生成，并配合 CUDA Graph 等推理优化。在重定向 HiPHI 上可精确控制最长 39.52 秒的滚动；RTX 4090 上完整窗口中位延迟从 1685.35 ms 降到 276.14 ms（约 6.1 倍加速），并在 Unitree G1 真机上验证了文本引导动作组合与交互式行走。"
  },
  "2611.29899": {
   "abstract": "Current AI may have a model of how we use human language, but this does not translate into a reliable representation of physical reality. World models promise to fill this gap by learning how an environment changes over time and predicting the consequences of an action, and they are already used to steer robots and generate explorable worlds. This article asks how AI regulation in three major legal contexts, the European Union, California, and China, copes with the distinctive challenges they raise. I propose a definition and a taxonomy of world models based on who or what acts on their predictions, and identify the risks of misplaced reliance on them. I argue that existing rules tend to cover world models but leave three questions open, i.e., action provenance, trajectory validity, and the weight of simulated evidence, and recommend ways to fill these gaps.",
@@ -37969,7 +37980,8 @@
   ],
   "updated": "2026-11-23T06:23:09Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 AxE Bench，沿智能体与环境的 8 个因素构造条件变化，并把生成视频转成时间对齐事件，用保真度与稳定性加权得到 AxE Score，系统评估视频世界模型的泛化。在 20 个模型中，事件时间匹配远好于内容匹配：保真度最高仅 13.01，稳定性最高 0.55，AxE Score 最高 7.10。"
  },
  "2611.30133": {
   "abstract": "Reinforcement Learning (RL) has progressed from simple control tasks to complex real-world challenges with large state spaces. While RL excels in these tasks, training time remains a limitation. Reward shaping is a popular solution, but existing methods often rely on value functions, which face scalability issues. This paper presents a novel safety-oriented reward-shaping framework inspired by barrier functions, offering simplicity and ease of implementation across various environments and tasks. To evaluate the effectiveness of the proposed reward formulations, we conduct simulation experiments on the Unitree Go1 quadruped robot in Isaacgym. The policy was better than the existing baselines and reduced safety violations from 27% to 0.1% without almost any compromise on the performance.",
@@ -38130,7 +38142,8 @@
   ],
   "updated": "2026-11-23T06:49:35Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出循环记忆推理 RMR，在 VLA 内部先从视觉证据推断事件，再更新任务状态并把子目标落到当前场景，从而在线索已消失时仍能依据记忆行动。相对无循环的相同模型，RoboMME 成功率约翻倍；RMR-VLA 在 RoboMME 上总体 66.46%（Reference 类别 79.83%），在 LIBERO-Mem 上 90.08%。"
  },
  "2611.30149": {
   "abstract": "Robot leading requires executing a route while continuously adapting to a designated follower. Existing robot-leading systems often mediate follower understanding and physical route execution through explicit states, planners, or modular interfaces; directly learning this coupling through end-to-end trajectory prediction can instead entangle route execution with follower response. We introduce LeadVLA, a structured multimodal policy that preserves the route as an explicit Path reference while learning a Pace for route progress and a Residual for local follower- and scene-conditioned adaptation. To make this problem trainable and measurable, we develop LeadInfra, a configurable Unreal Engine-based closed-loop data-generation infrastructure from which we instantiate an approximately 4M-sample training corpus, and LeadBench, a standardized benchmark with 108 fully held-out closed-loop episodes. LeadVLA achieves the highest task success (39.6%) among evaluated robot policies on LeadBench while maintaining strong route fidelity and follower responsiveness, and transfers to unseen real-world environments without real-world policy fine-tuning. Project Page: https://louiszengCN.github.io/LeadVLA_PAGE/",
@@ -38274,7 +38287,7 @@
    "date": "2026-11-24",
    "line": "把模型压缩得更小、更省算力；已开源、有实测数据，可用来评估在车载/机器人芯片上的部署可行性。",
    "rank": 5,
-   "solve": "目标：把模型压缩得更小、更省算力。（原文要点：We propose GUI-Q, a PTQ framework that targets response and relation preservation with 4-bit weights and 16-bit activations (W4A16).）",
+   "solve": "提出面向 GUI 智能体的训练后量化框架 GUI-Q（W4A16），用任务敏感的粒度分配和关系保持的对称性选择，减轻量化对点击定位和指令-视觉关系的破坏。在三款 GUI 模型上，目标命中率比最强 4 bit 方案提升 8.04–12.55 个百分点，峰值显存较 BF16 降低约 50%–56%，模型调用加速 1.7–2.8 倍。",
    "use": "可参考其压缩/加速方法，评估模型在车载或机器人芯片上的可行性；可作为智能体工具调用、任务规划类 Demo 的参考。",
    "why": "已公开代码或项目页，可以直接上手复现；给出了延迟、速度或显存等可量化的数据；从设计上就面向实际部署。"
   },
@@ -38296,7 +38309,8 @@
   ],
   "updated": "2026-11-23T07:15:53Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出面向 GUI 智能体的训练后量化框架 GUI-Q（W4A16），用任务敏感的粒度分配和关系保持的对称性选择，减轻量化对点击定位和指令-视觉关系的破坏。在三款 GUI 模型上，目标命中率比最强 4 bit 方案提升 8.04–12.55 个百分点，峰值显存较 BF16 降低约 50%–56%，模型调用加速 1.7–2.8 倍。"
  },
  "2611.30171": {
   "abstract": "We introduce Audio-Visual Rearrangement (AVR), a novel task in which an agent hears a spoken request, retrieves a suitable object, and delivers it to the requesting user or an instruction-specified destination. AVR requires the agent to understand the spoken request and acoustically localize the speaker for delivery. To support this task, we construct a dataset covering three query types: explicit target specification, speaker-relative spatial references, and implicit user intent, spanning eight subtypes with diverse object selection and delivery requirements. Moreover, we propose a framework that integrates a motion-aware spatial audio module into an audio-visual large language model to encode spatial cues from the spoken request and update them as the agent moves. We further incorporate auxiliary supervision for speech understanding, spatial audio perception, and visual grounding through multitask instruction tuning to improve action prediction. Experiments establish baseline performance in both seen and unseen environments, laying the groundwork for future research on embodied intelligence and human-robot interaction. The code will be publicly available soon.",
@@ -38537,7 +38551,7 @@
    "date": "2026-11-24",
    "line": "把模型压缩得更小、更省算力；已开源、有真实设备验证，适合做端侧 Demo 的起点。",
    "rank": 1,
-   "solve": "目标：把模型压缩得更小、更省算力；让机器人“看懂指令→动手执行”更可靠。（原文要点：We present LoopQ, an on-policy ultra-low-bit quantization framework.）",
+   "solve": "提出 LoopQ：用量化策略自身滚动产生的状态做在线校准，并只微调轻量查找表与缩放因子，使超低比特 VLA 接近全精度。线性层全部 2 bit 时，GR00T N1.7 在 LIBERO-Plus 成功率 60.4%（全精度 61.8%）；1 bit 的 π0.5 仍能完成 80.0% 的 LIBERO 任务，并在 Jetson AGX Thor 与真机 AgileX Piper 机械臂上验证，权重缩小 4.1 倍、显存减少 44%；代码已开源。",
    "use": "可作为在车机或机器人芯片上跑模型的端侧 Demo 起点；可参考其压缩/加速方法，评估模型在车载或机器人芯片上的可行性。",
    "why": "已公开代码或项目页，可以直接上手复现；在真实设备、机器人或车辆上做了实验（或有用户测试），不只停留在仿真；从设计上就面向实际部署。"
   },
@@ -38562,7 +38576,8 @@
   ],
   "updated": "2026-11-23T07:23:34Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 LoopQ：用量化策略自身滚动产生的状态做在线校准，并只微调轻量查找表与缩放因子，使超低比特 VLA 接近全精度。线性层全部 2 bit 时，GR00T N1.7 在 LIBERO-Plus 成功率 60.4%（全精度 61.8%）；1 bit 的 π0.5 仍能完成 80.0% 的 LIBERO 任务，并在 Jetson AGX Thor 与真机 AgileX Piper 机械臂上验证，权重缩小 4.1 倍、显存减少 44%；代码已开源。"
  },
  "2611.30188": {
   "abstract": "World action models (WAMs) deliver fast visuomotor control, yet degrade sharply in challenging scenes and act blindly when about to fail; conversely, foundation-model-based agents generalize and recover reliably, but incur prohibitive latency and cost when queried at every step. To achieve both WAM (System 1)-level speed and agent (System 2)-level reliability--- we propose \\textbf{\\oursfull (\\ours)}, a framework that calibrates WAMs' confidence--- adaptively triggering System~2 only when necessary, and distilling System~2's knowledge to form an evolving System~1. First, \\ours equips a frozen WAM with \\textbf{calibrated self-assessment}: a single lightweight judgment token reading internal video--action features is trained via our proposed \\textbf{cross-fitted temporal-difference (TD) learning} using only binary rollout success/failure signals. It can predict a \\textbf{calibrated success probability} at negligible overhead without affecting action predictions. Second, this calibrated success probability schedules control chunk by chunk---invoking System~2 to resolve bottlenecks when confidence drops, and handing control back to the WAM once confidence recovers, preserving WAM-like speed while approaching System~2 reliability. Third, as System~2 intervenes only when the WAM lacks confidence, its takeover trajectories directly capture the WAM's capability gaps. JiL distills these takeovers into the WAM to repair those gaps so System~1 can operate standalone without System~2 at test time, while our mastered-skill anchoring and dynamic confidence gating prevent degrading existing capabilities.",
@@ -38931,7 +38946,8 @@
   ],
   "updated": "2026-11-23T08:19:59Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出面向车载语音助手的 Voyag，一次前向同时预测 10 个受控车载意图槽，并对同时激活的意图对判断并行、顺序或互斥三种执行关系。在合成中文车生活基准上，槽位准确率 0.9893；端到端关系分类准确率 0.8530、宏平均 F1 为 0.8464。相对两阶段规则流程，总体提升有限，优势主要在规则难以覆盖的顺序/并行关系召回。"
  },
  "2611.30254": {
   "abstract": "The physical world is open-ended, dynamic, and partially observable. While foundation models have advanced embodied intelligence, standalone models struggle with long-horizon execution, and simply integrating models with agents may lead to inconsistencies between planning and physical control. To support reliable and adaptive behaviors in the physical world, we introduce Innata-0, a native embodied world system. Innata-0 jointly designs an embodied world-action model and an agent to combine their complementary strengths. The model, Innata-0-WAM, adopts a tri-tower Mixture-of-Transformers architecture that integrates understanding, prediction, and action generation. The agent, Innata-0-Agent, coordinates long-horizon execution through memory, verification, and recovery. A co-design protocol is further proposed to align model training with agent execution and leverage validated experiences to support subsequent adaptation and model improvement. Extensive evaluations demonstrate strong embodied capabilities across understanding, world prediction, and robotic manipulation. Innata-0 represents our first step toward physical intelligence, and we see it as the beginning of a much longer journey.",
@@ -39390,7 +39406,8 @@
   ],
   "updated": "2026-11-23T08:58:01Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 ConsisX，通过共享三维空间中的跨视角邻近约束、把各视角局部信息组织成一致的三维物体证据，并据此条件化动作预测，缓解多视角 VLA 中的错误关联与信息割裂。在 3 个真机操作任务和 4 个仿真基准上对该框架做了验证。"
  },
  "2611.30310": {
   "abstract": "Multi-robot embodied systems are typically designed to collaborate by coordinating actions, sharing trajectories, or learning joint policies. We ask a complementary question: can collaboration emerge before decision-making, by first building a shared understanding of the environment? We introduce Shared Environmental Understanding, a policy-agnostic representation that aggregates partial egocentric observations from multiple robots into a shared latent world model. This shifts collaboration from the policy space to the representation space, enabling decentralized decision-making with shared environmental context. To this end, we propose Shared Environment Encoding and Retrieval (SEER), a framework that organizes multi-robot observations into a shared memory, retrieves relevant context via spatio-temporal similarity, and encodes it using a predictive latent world model. The resulting representations are injected into downstream navigation agents as tokens. Experimental results demonstrate that SEER captures action-relevant environmental structure and consistently improves navigation performance across both specialized VLN agents and general vision-language model agents, while preserving single-agent capabilities.",
@@ -40090,7 +40107,8 @@
   ],
   "updated": "2026-11-23T11:12:30Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 EgoStudy，在固定机器人数据的前提下系统改变第一人称人类操作数据的规模、多样性和共训练设置，考察其对 VLA 与世界动作模型预训练的影响。发现数据多样性、轨迹对齐和细致语言标注是迁移关键；扩展第一人称数据对末端平移预测帮助更大、对精细手指运动帮助较小；数据少时 WAM 更占优，数据增多时 VLA 增益更大。"
  },
  "2611.30495": {
   "abstract": "Human demonstrations provide a rich source of bimanual dexterous skills, yet transferring them to robot hands remains challenging. Existing methods primarily optimize object trajectory tracking, often overlooking how human hands interact with the object. Even with accurate tracking, robots may contact incorrect object parts or slide their fingers, resulting in unstable manipulation. We present DexDuet, a framework that learns contact-preserving bimanual dexterity from a single human demonstration. DexDuet employs two interaction rewards to preserve human hand-object configurations and contacts. To enable coordinated manipulation, we factorize the bimanual policy into two weight-sharing per-hand policies that condition on each other's states. We further propose assisted reference-state initialization (A-RSI), an adaptive curriculum that adjusts object assistance and training starts across demonstration segments to overcome difficult manipulation phases. Across four benchmarks spanning three simulators and five robot embodiments, DexDuet improves object-tracking ADD-AUC by 11 to 41 points over the corresponding baselines while consistently achieving better contact preservation. Notably, among 122 paired runs with comparable object-tracking accuracy, DexDuet preserves the human's contacts better in 117 cases. Code and videos are available at https://rcl-robotics.github.io/Dexduet.io/",
@@ -41567,7 +41585,8 @@
   ],
   "updated": "2026-11-23T15:06:14Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 HIVE-Bench：用同一套流匹配策略，在 24 个第一人称双臂任务上比较 7 个家族共 20 个视觉编码器的 patch 表征。把每路视角平均成一个 token 会大幅降低成功率；适应训练对所有测试组合都有帮助；用逆动力学读出指令运动是训练策略前较强的预指标，而识别、深度和对应关系并不稳定可迁移。"
  },
  "2611.30836": {
   "abstract": "Embodied vision systems rely on complementary sensors to perceive and act as conditions change. Even models that accept arbitrary sensor subsets can exhibit negative fusion: adding a sensor increases prediction error. We propose MakeSense, a multimodal fusion framework that preserves sensor-specific evidence in private streams and combines information through shared bottleneck tokens. Training pairs full and subset views of the same degraded observations, penalizing higher error with more sensors. Where geometry permits, the distance readout uses range measurements alone, while the rest of the prediction draws on all available inputs. Paired tests across five datasets reveal helpful and harmful sensor additions. MakeSense reduces negative fusion on MM-Fi. With lightweight adapters and per-dataset training, the same design improves UAV localization on MMAUD, cooperative 3D detection on V2X-Real, few-shot pose transfer to RELI11D, and command prediction on Humanoid-Everyday, where a world model trained on the frozen core's outputs forecasts future fused states more accurately than a linear baseline at longer tested horizons. MakeSense supports embodied sensing across human activity, aerial systems, robotics, and autonomous driving.",
@@ -42478,7 +42497,8 @@
   ],
   "updated": "2026-11-23T16:53:57Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "发布 RoboUniverse-10K：由真实视频经 Real2Sim 自动构建的 10807 个可交互、可重置、可验证物理环境，并留出 500 个未见任务作为专家校验的零样本基准。前沿模型成功率 85.8%，开源基线仅 2.6%–10.0%；用约 1.7 万条多轮轨迹微调得到的 RoboUniverse-35B-A3B，把验证集成功率从 0.8% 提升到 21.2%，并开源环境与模型。"
  },
  "2611.31037": {
   "abstract": "We present SurgeCount, a system for auditable robotic surgical sponge counting that composes learned skills under a written procedural protocol. Retained sponges cause preventable harm, and surgical teams count every sponge before closure to reduce that risk. The robot repeatedly isolates one deformable sponge from a tangled pile and places it in the next numbered counting-tray slot, requiring handling of occluded grasp threads while preserving step order. We train one subtask-conditioned policy on eleven short skills and learn when each skill ends. At each learned boundary, a stateful vision-language model selects the next skill from an operator-authored specification of step order, visual verification, and recovery. This creates temporal commitment to each subtask and enables failures to be recovered by recomposing existing skills rather than using a dedicated recovery policy. We evaluate five methods across 100 real-robot trials using 20 matched layouts. SurgeCount fills 47 of 60 ordered slots and completes 12 of 20 procedures, compared with 27 of 60 and 3 of 20 for the strongest of four end-to-end policies trained on the same data. Replacing the detailed protocol prompt with a minimal prompt reduces performance to 29 of 60 slots and 5 of 20 completed procedures. These results show that long-horizon performance depends not only on visuomotor capacity, but also on how learned skills are committed, verified, and composed. This tabletop proof of concept motivates further evaluation of protocol-guided robotic sponge counting in clinically representative settings.",
@@ -42728,7 +42748,8 @@
   ],
   "updated": "2026-11-23T17:10:08Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 Boltz-Flow，在不改底层 VLA 的前提下，把流匹配的高斯噪声源替换为观测与指令条件的玻尔兹曼机，再用离线演示对齐其能量与积分后动作质量。该方法提升了 π0.5 在三个基准上的表现，在 LIBERO 和 RoboTwin 2.0 上优于对比的策略与噪声优化方法。"
  },
  "2611.31053": {
   "abstract": "Long-horizon embodied tasks involve physical dependencies that may only become clear through interaction. As task understanding deepens, past trials can reveal new information for adaptation and transfer. However, coarse progress feedback cannot identify which physical preconditions held, leaving search unguided, while task-specific optimization easily overfits to individual scenes, making cross-task transfer brittle. We introduce ReWeave, a framework that jointly optimizes an embodied agent harness and an emergent physical task topology from interaction without updating policy weights. Keeping execution policies and perception frozen, ReWeave co-optimizes coupled context, workflows, and control loops. As new evidence revises the topology, ReWeave reprojects past trials onto the updated task understanding, exposing retained progress, regressions, and bottlenecks that guide parent selection and search width. Across tasks, matching verified local mechanisms to unmet preconditions consolidates 72 specialist units into 44 reusable groups ($0.34\\times$ full concatenation) within a compact shared harness capable of continual learning. ReWeave improves held-out success from 89.00% to 98.75% on LIBERO-PRO and from 25.50% to 58.25% on RoboDojo, while uncovering retained progress in 89% of 159 failed RoboDojo development trials and translating stronger offline reasoning into higher online performance. On eight unseen LIBERO-PRO tasks, the shared harness reaches 51.3% success versus 41.3% for direct distillation, rising to 75.0% after continual learning.",
@@ -42841,7 +42862,8 @@
   ],
   "updated": "2026-11-23T17:16:04Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 ReWeave：不更新策略权重，只从交互中联合优化具身智能体的上下文、工作流、控制回路和涌现的物理任务拓扑，并把历史试验投影到更新后的任务理解上以指导搜索。它把 72 个专项单元合并为 44 个可复用组；LIBERO-PRO 留出成功率从 89.00% 升至 98.75%，RoboDojo 从 25.50% 升至 58.25%；8 个未见 LIBERO-PRO 任务上，共享框架成功率为 51.3%，持续学习后达 75.0%。"
  },
  "2611.31079": {
   "abstract": "A generalist manipulation policy should perform new tasks, operate in unfamiliar scenes, and transfer skills across robot embodiments. We present Wrist Video Policy (WVP), a closed-loop manipulation framework that learns how manipulation unfolds through video prediction and recovers executable motion through geometric estimation. Our key idea is to represent robot motion through wrist-camera trajectories, which determine the corresponding end-effector poses through a fixed hand-eye transformation. We pair a video generator that predicts future wrist views with a pose estimator adapted from a pretrained 3D model to recover the corresponding camera trajectories. Model stitching maps the generator's predicted latents directly into the estimator's intermediate feature space, bypassing RGB decoding. This decomposition allows task knowledge to expand through broad human and robot video data while reusing geometric motion estimation across tasks and embodiments. The resulting pose estimator transfers across Franka Panda, PiPER-X, and Galaxea R1 Pro without further fine-tuning. Across tabletop and laundry-room settings, WVP generalizes to tasks ranging from precise grasping and inserting to handling deformable objects, achieving a success rate of over 50% in zero-shot out-of-distribution evaluations. Our project page is at https://wrist-video-policy.github.io.",
@@ -43602,7 +43624,8 @@
   ],
   "updated": "2026-11-23T18:31:43Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 EmboEagle，把子任务条件的世界动作模型、潜空间自适应监督和记忆引导的几何恢复组成闭环智能体框架，并用轻量路由门决定何时调用视觉-语言模型做诊断与恢复。在 RMBench 和 LIBERO-Mem 上平均成功率分别为 91.3% 和 90.6%，比最强基线高 8.0 和 9.8 个百分点；自适应门控比逐块监视减少 74.2% 的 VLM 调用。"
  },
  "2611.31195": {
   "abstract": "World action model (WAM) is a promising paradigm for visuomotor control by jointly modeling world dynamics and actions. Notably, existing WAMs often rely on large generative models and iterative sampling which incur substantial latency for action generation, limiting real-time deployment. In particular, there are two root causes of inefficiency in conventional flow matching or diffusion based action models in WAMs: 1) transporting uninformative Gaussian noise into precise actions necessitating multiple ODE steps, and 2) repeatedly injecting task context through expensive cross-attention modules. Our key insight is that jointly learning and aligning the source and action manifolds streamlines the transport between them, substantially accelerating action generation. Building on this insight, we introduce VITA-WAM, a WAM architecture with manifold-aligned flow-matching (VITA flow matching) that directly transports latent observation representations containing visual, language, and proprioceptive information into latent actions. More specifically, a flow latent alignment (FLA) mechanism is employed to facilitate manifold alignment between latent observation and action representations, enabling accurate generation with few ODE steps. The resulting architecture also eliminates costly attention for observation conditioning during repeated denoising steps. Notably, with a single ODE step, VITA-WAM outperforms 10-step FastWAM by 21.47 pp on LIBERO-Plus and by 1.65 pp on LIBERO, achieving these gains through the FLA objective without distillation, while inferring at 55.67~ms latency, a $2.10\\times$ speedup compared to FastWAM.",
