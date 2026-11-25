@@ -111,3 +111,20 @@ git add -A && git commit -m "update pipeline" && git push
   - 修正误计数：`update public.global_clicks set count = greatest(count - <n>, 0) where arxiv_id = '<id>';`
 - 视觉（Aurora 浅色主题，2026-11-24 晚）：画布 #F7F6FC、卡片 #FFFFFF、墨色 #1E1B3A、次要文字 #5B5878/#8A87A3、细线 #E7E4F3/#D6D1EA；紫 #7C5CFC（文字用 #6D28D9）、粉 #EC4899（文字用 #DB2777）、蓝 #3B82F6（文字用 #2563EB）、靛 #6366F1；渐变 粉→紫（总数卡、重点推荐、已勾选）、紫→蓝（推荐度、已读、占比条）。弱投影、圆角卡片、胶囊按钮，顶部有 arXiv→三方向的流向图。样式在 `radar/assets/style.css`（构建时复制到 `site/`）；supabase-js 本地化为 `radar/assets/supabase-2.119.2.js`。
 - 自测：`/workspace/pwenv/bin/python tests/test_reading_list.py <url> <tag> [测试邮箱 测试密码]`。注意脚本的点击会真实计入全站次数，结束时打印 `GLOBAL_CLICK_DELTAS`，按上面的 SQL 扣回。
+
+## AI 论文助手（对话框，2026-11-25）
+- **入口**：右下角“✦ 问 AI”浮动按钮 → 右侧滑出面板（手机为全屏）；每张卡片也有“✦ 问 AI”按钮（直接让 AI 分析这一篇）。回答里的 arXiv 编号是可点的胶囊（打开 arXiv，计入打开次数），下方“引用的论文”列表的“定位”按钮会滚动并高亮页面上的卡片。对话记录只存在本浏览器（localStorage `paperRadar.chat.v1`，最近 20 条），“新对话”清空。
+- **只有登录用户能用**：未登录时面板显示“登录后即可使用”；服务端校验 Supabase 登录会话（JWT）+ 白名单（`private.is_allowed()`），匿名/publishable key/伪造 token 一律 401，非白名单 403。
+- **架构**：前端 `radar/assets/chat.js`（构建时复制到 `site/`）→ Supabase Edge Function **`paper-chat`**（源码 `supabase/functions/paper-chat/index.ts`，`verify_jwt=false`，鉴权在代码里做，以便处理 CORS 预检）→ DeepSeek `deepseek-chat`（流式）。**LLM 密钥只在服务端**，网页里没有。
+  - 检索：函数从 GitHub Pages 读取 `data/manifest.json` 和各月份 JSON（缓存 10 分钟，所以每日更新后自动可检索），对标题×3、中文摘要×2、标签×2、英文摘要、作者做 BM25（中文按双字切分 + 常用中→英同义词扩展），再按方向、清北航、重点推荐、推荐度、“最近”类问题的时间加权，取前 12 篇（连同卡片上点的那篇、上一轮回答里引用的论文）作为上下文。
+  - 回答规则（system prompt）：用提问的语言回答；只依据摘要，不编造；每个结论标 arXiv 编号；库里没有相关论文就直说。多轮：带最近 6 条消息。
+  - 返回 NDJSON 流：`refs`（检索到的论文 + 当日额度）→ `delta`（逐段文字）→ `done`；出错为 `error`。
+- **额度**：每个账号每天（北京时间）最多 60 次（`public.chat_take_quota(p_limit)`，硬上限 200），用量和 token 数记在 `public.chat_usage(user_id, day, n, tokens)`。调额度：改 `index.ts` 里的 `p_limit` 后重新部署。查用量：`select * from public.chat_usage order by day desc;`
+- **密钥（DeepSeek API key）设置 / 轮换** —— 永远不要写进代码、提交或打印：
+  1. Supabase 控制台 → 项目 `paper-radar` → Edge Functions → **Secrets**（或 Project Settings → Edge Functions）→ Add new secret：Name `DEEPSEEK_API_KEY`，Value 粘贴 key → Save。立即生效，无需重新部署。
+  2. 轮换：在 DeepSeek 控制台（platform.deepseek.com → API keys）新建 key → 在上面同一处把 `DEEPSEEK_API_KEY` 的值改成新 key → 在面板问一句确认正常 → 回 DeepSeek 删除旧 key。
+  3. 备选：函数在没有环境变量时会读 Supabase Vault 中名为 `deepseek_api_key` 的密钥（`public.chat_llm_key()`，仅 service_role 可调用）。
+  - 未配置密钥时，面板仍会显示检索到的论文，并提示“AI 服务尚未配置密钥”。
+- **费用**：DeepSeek 按 token 计费，一次问答约 5–6k token（≈ ¥0.02）。余额不足时会返回错误提示；在 DeepSeek 控制台充值即可。
+- **重新部署函数**：用 Supabase MCP `deploy_edge_function`（name `paper-chat`，`verify_jwt: false`，文件 `index.ts`），或 CLI `supabase functions deploy paper-chat --no-verify-jwt --project-ref gabsjglbryeftyolopev`。
+- **本地调试**：`cd supabase/functions/paper-chat && SUPABASE_URL=https://gabsjglbryeftyolopev.supabase.co SUPABASE_ANON_KEY=<anon key> SUPABASE_SERVICE_ROLE_KEY=unused deno run --allow-net --allow-env index.ts`（`DEEPSEEK_API_KEY` 从环境继承，监听 :8000）。

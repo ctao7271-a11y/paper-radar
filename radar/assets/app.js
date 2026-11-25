@@ -111,6 +111,7 @@
     b.title = user ? "已登录：" + (user.email || "") + "（点击管理）" : "登录后阅读清单可在多台设备间同步";
     $("#auth-out").hidden = !!user; $("#auth-in").hidden = !user;
     if (user) $("#auth-who").textContent = user.email || user.id;
+    document.dispatchEvent(new CustomEvent("pr-auth", { detail: { in: !!user } }));
   }
   async function finishLogin(raw) {
     const s = raw.trim(), msg = $("#auth-msg");
@@ -274,7 +275,7 @@
     return `<div class="cardhead"><label class="pick-box" title="加入/移出我的阅读清单"><input type="checkbox" data-save="${esc(id)}"${saved ? " checked" : ""}><span>阅读清单</span></label>${extra || ""}<span class="grow"></span>${opensHTML(id)}<span class="idc">${esc(id)}</span></div>`;
   }
   function links(id, right) {
-    return `<div class="links"><a href="https://arxiv.org/abs/${esc(id)}" target="_blank" rel="noopener" data-open="${esc(id)}">arXiv</a><a href="https://arxiv.org/pdf/${esc(id)}" target="_blank" rel="noopener" data-open="${esc(id)}">PDF</a>${right}</div>`;
+    return `<div class="links"><a href="https://arxiv.org/abs/${esc(id)}" target="_blank" rel="noopener" data-open="${esc(id)}">arXiv</a><a href="https://arxiv.org/pdf/${esc(id)}" target="_blank" rel="noopener" data-open="${esc(id)}">PDF</a><button class="ask" type="button" data-ask="${esc(id)}" title="让 AI 助手分析这篇论文">✦ 问 AI</button>${right}</div>`;
   }
   function card(p, showWhy) {
     const flag = Object.keys(p.fl).length > 0;
@@ -441,6 +442,15 @@
   }
   function update() { syncControls(); writeHash(); render(); }
 
+  // small bridge for chat.js (AI assistant panel)
+  window.PR = {
+    sbUrl: SB_URL, sbKey: SB_KEY,
+    loggedIn: () => !!user,
+    token: async () => (sb ? ((await sb.auth.getSession()).data.session || {}).access_token || "" : ""),
+    openLogin: () => { $("#auth").hidden = false; paintAuth(); (user ? $("#auth-resync") : $("#auth-email")).focus(); },
+    paper: (id) => byId(id),
+    count: (id) => countClick(id),
+  };
   async function init() {
     readHash(); bind(); syncControls(); badge(); paintAuth();
     if (sb) {

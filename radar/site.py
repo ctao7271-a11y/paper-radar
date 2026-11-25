@@ -33,14 +33,14 @@ def slim(p):
 def build(store, state, out):
     os.makedirs(os.path.join(out, "data"), exist_ok=True)
     import hashlib
-    for f in ("app.js", "style.css", "favicon.svg", "supabase-2.119.2.js"):
+    for f in ("app.js", "chat.js", "style.css", "favicon.svg", "supabase-2.119.2.js"):
         shutil.copy(os.path.join(ASSETS, f), os.path.join(out, f))
     for f in os.listdir(out):   # stale vendored library versions
         if f.startswith("supabase-") and f.endswith(".js") and not os.path.exists(os.path.join(ASSETS, f)):
             os.remove(os.path.join(out, f))
-    ver = hashlib.md5((open(os.path.join(ASSETS, "app.js"), "rb").read() + open(os.path.join(ASSETS, "style.css"), "rb").read())).hexdigest()[:8]
+    ver = hashlib.md5(b"".join(open(os.path.join(ASSETS, f), "rb").read() for f in ("app.js", "chat.js", "style.css"))).hexdigest()[:8]
     html = open(os.path.join(ASSETS, "index.html"), encoding="utf-8").read()
-    html = html.replace('href="style.css"', f'href="style.css?v={ver}"').replace('src="app.js"', f'src="app.js?v={ver}"')
+    html = html.replace('href="style.css"', f'href="style.css?v={ver}"').replace('src="app.js"', f'src="app.js?v={ver}"').replace('src="chat.js"', f'src="chat.js?v={ver}"')
     open(os.path.join(out, "index.html"), "w", encoding="utf-8").write(html)
     open(os.path.join(out, ".nojekyll"), "w").close()
     months = {}
