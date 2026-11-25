@@ -168,7 +168,13 @@ Deno.serve(async (req) => {
   if (qe) return json(req, 403, { error: "not allowed" });
   if (quota === -1) return json(req, 429, { error: `今天的提问次数已用完（每天 ${DAILY_LIMIT} 次）` });
 
-  let key = Deno.env.get("DEEPSEEK_API_KEY") || "";
+  let key = (Deno.env.get("DEEPSEEK_API_KEY") || "").trim();
+  let envNames: string[] = [];
+  try { envNames = Object.keys(Deno.env.toObject()); } catch (_) { /* ignore */ }
+  if (!key) {   // tolerate a secret name with stray spaces / lower case
+    const alt = envNames.find((n) => n.trim().toUpperCase() === "DEEPSEEK_API_KEY") || envNames.find((n) => /DEEPSEEK/i.test(n));
+    if (alt) key = (Deno.env.get(alt) || "").trim();
+  }
   if (!key) { const { data } = await svc.rpc("chat_llm_key"); key = (data as string) || ""; }
 
   const c = await load();
@@ -182,7 +188,7 @@ Deno.serve(async (req) => {
     async start(ctrl) {
       const send = (o: unknown) => ctrl.enqueue(enc.encode(JSON.stringify(o) + "\n"));
       send({ type: "refs", papers: refs, n: c.docs.length, weak: best < 2 && !focus.length && !carried.length, quota_used: quota, quota_limit: DAILY_LIMIT });
-      if (!key) { send({ type: "error", msg: "AI 服务尚未配置密钥（DEEPSEEK_API_KEY）。检索结果见下方。" }); ctrl.close(); return; }
+      if (!key) { send({ type: "error", msg: "AI 服务尚未配置密钥（DEEPSEEK_API_KEY）。检索结果见下方。", custom_secret_names: envNames.filter((n) => !/^(SUPABASE_|DENO_|SB_)/.test(n) && !["PATH","HOME","HOSTNAME","PWD","LANG","TZ","NODE_ENV"].includes(n)) }); ctrl.close(); return; }
       const context = docs.length ? docs.map(ctx).join("\n\n") : "（没有检索到相关论文）";
       const messages = [{ role: "system", content: SYSTEM }, ...hist,
         { role: "user", content: `检索到的论文（共 ${docs.length} 篇，论文库共 ${c.docs.length} 篇）：\n\n${context}\n\n---\n我的问题：${q}` }];
