@@ -44840,7 +44840,8 @@
   ],
   "updated": "2026-11-23T23:50:53Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 FoveaWAM：按角色分配预测精度——目标用毫米级 SE(3) 轨迹、周围用稀疏 3D 流、静止部分直接用当前帧；在一块 RTX 5090 上推理约 15.1 ms（约为视频世界-动作基线的 1/10），在自提出的动态操作基准 OnTimeBench 上成功率 82.1%，比最强基线高 20.8 个百分点，并在 DOMINO 和真机任务上领先。"
  },
  "2611.31715": {
   "abstract": "This paper demonstrates an approach for correcting failures of robot foundation models (RFMs) without additional data collection, demonstrations, or training. We apply weight-space programming (WSP), in which a language-model agent directly reads and writes a neural network's parameters, to a large, pre-trained vision-language-action policy. The idea is simple: many policy failures are not random but repeatedly land in the same recognizable stuck state, so if that state is visible in the model's internal activations, a small edit could trigger a corrective movement while leaving the rest of the model's parameters unchanged. A core design choice is where to write the edit: repurposing a few near-silent neurons in the action expert lets the edit switch on in situations associated with the failure and produce a corrective movement, such as lowering the gripper toward the target, that is specified directly rather than learned through training. Empirically, when applied to the pi0.5 policy in simulation, we find that edits to roughly 0.0002% of the parameters can improve success on recurring failures, including for a policy that was already fine-tuned on its task. Reversed and random edits indicate that the gains come from the intended behavior, and the approach works best when the failure situation is recognizable and a simple correction can address it.",
@@ -45483,7 +45484,8 @@
   ],
   "updated": "2026-11-24T02:49:16Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "针对流匹配具身基础模型提出两阶段后训练：先用多教师在策略轨迹上蒸馏巩固专家能力，再把强化学习与仅作用于失败轨迹的教师蒸馏结合，用稠密速度误差补足稀疏奖励；在多个模型和基准上超过联合 SFT，并高于教师的合计成功率，且比直接强化学习更省交互次数。"
  },
  "2611.31863": {
   "abstract": "Behavior Foundation Models (BFMs) have emerged as a promising paradigm for general-purpose humanoid control through pretraining on large-scale behavioral data. However, their proficiency in whole-body coordination does not readily extend to scene interaction, which requires adapting motion to scene-dependent geometric constraints and contact dynamics. To bridge this gap, we introduce Ada-BFM, a post-training framework that adapts pretrained BFMs for humanoid scene interaction. Ada-BFM augments the original architecture with a lightweight adapter, enabling interaction-specific adjustments while leveraging pretrained control capabilities. Rather than producing a separate controller for each task, the framework yields a shared model for each interaction domain, supporting diverse tasks involving terrain or object interaction. Extensive experiments in simulation and the real world demonstrate that Ada-BFM enables diverse scene interaction behaviors, accelerates learning compared with training from scratch, and largely preserves pretrained behavioral competence. These findings establish Ada-BFM as an effective and efficient approach to extending the capabilities of BFMs beyond their pretraining settings while retaining their strengths in general whole-body control.",
@@ -45819,7 +45821,8 @@
   ],
   "updated": "2026-11-24T03:59:44Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出世界-动作模型 PreWAM：在预训练 DINO 特征空间中用残差世界预测与按时间尺度条件的预测，突出状态变化并同时捕捉短时运动与较长程演化；在 LIBERO、SimplerEnv、RoboTwin 2.0 及真机操作上表现较强，并在多种分布偏移下提升泛化与鲁棒性。"
  },
  "2611.31903": {
   "abstract": "Vision-language-action (VLA) models need to continually acquire new manipulation skills while retaining the ability to follow previously learned instructions. Experience replay (ER) can mitigate catastrophic forgetting, but retaining only a small number of historical expert frames per task leaves many old-instruction responses without direct supervision. Under limited replay, we observe a structured failure mode in which an earlier instruction can trigger a subsequently learned, competing goal. To address this gap, we propose Cross-Instruction Anchoring (XIA), which supplements expert replay with instruction-conditioned response preservation. At each task boundary, XIA freezes the previous policy as a teacher and matches its responses to old instructions paired with current observations. This extends supervision beyond stored historical examples without requiring additional expert replay data. Experiments across multiple VLA architectures and three LIBERO suites demonstrate improved success rates and reduced forgetting compared with ER under identical historical expert-data budgets. Additional RoboCasa and real-world experiments further support the effectiveness of XIA.",
@@ -46203,7 +46206,7 @@
    "date": "2026-11-25",
    "line": "把模型压缩得更小、更省算力；已开源、有真实设备验证，可用来评估在车载/机器人芯片上的部署可行性。",
    "rank": 1,
-   "solve": "目标：把模型压缩得更小、更省算力；让机器人“看懂指令→动手执行”更可靠。（原文要点：We show that perceptual semantics can guide effective token selection without relying on internal attention when the selection scale adapts to the scene's evolving semantic structure.）",
+   "solve": "提出免训练的 TauPrune-VLA：用感知温度 τ 按场景语义结构在线调整视觉 token 的保留尺度，并可与推理异步执行；在多种 VLA 和仿真基准上最高加速约 1.86 倍且任务成功率接近原模型，并在两个真实机器人平台上验证。",
    "use": "可参考其压缩/加速方法，评估模型在车载或机器人芯片上的可行性；可作为“看懂指令→动手执行”的具身 PoC 基线。",
    "why": "已公开代码或项目页，可以直接上手复现；在真实设备、机器人或车辆上做了实验（或有用户测试），不只停留在仿真；免训练或即插即用，接入成本低。"
   },
@@ -46226,7 +46229,8 @@
   ],
   "updated": "2026-11-24T04:58:24Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出免训练的 TauPrune-VLA：用感知温度 τ 按场景语义结构在线调整视觉 token 的保留尺度，并可与推理异步执行；在多种 VLA 和仿真基准上最高加速约 1.86 倍且任务成功率接近原模型，并在两个真实机器人平台上验证。"
  },
  "2611.32016": {
   "abstract": "Agentic harnesses enable frontier vision-language models (VLMs) to manipulate robots through perception, planning, and control tools, yet achieving comparable performance with compact open-weight VLMs remains challenging. We present RoboHarness-RL, an agentic reinforcement learning framework for improving VLM-based robot manipulation through tool calls. Starting from supervised fine-tuning on successful teacher demonstrations, the VLM further improves through multi-turn reinforcement learning with task-outcome rewards, without relying on vision-language-action models or world action models. To support efficient multi-turn training, we develop LiteHarness, which uses hierarchical memory to keep interaction contexts compact while preserving task performance. With Qwen3.5-9B, RL raises success from 31.2% to 44.0% on RoboTwin 2.0 and from 57.8% to 73.3% on LIBERO-Pro; these gains extend to randomized RoboTwin scenes unseen during training (26.4% to 38.0%). Behavioral analysis further shows that RL reduces repetitive-call rates by up to $4\\times$, shortens successful executions, and improves recovery from negative feedback. Project page: https://aim-uofa.github.io/RoboHarness-RL/",
@@ -46668,7 +46672,8 @@
   ],
   "updated": "2026-11-24T07:03:55Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 KeyMemVLA：按子任务进度与决策证据，在有限预算下把关键帧写入稀疏记忆，推理时先预测当前子任务再预测动作与下次写入位置；在 RMBench-M(n)、RoboTwin-MeM、自建 KMBench 及真机操作上平均成功率高于对比基线。"
  },
  "2611.32098": {
   "abstract": "Robotics foundation models are now widely used for manipulation, and egocentric videos offer rich data for scaling. However, existing methods overlook the human active priors captured in egocentric videos, which limits performance in unstructured scenes. They act on given observations instead of actively seeking information as humans do. We propose ActiveBridge, a training framework that learns these human active priors and transfers them to robots through world-action modeling. We design a robot that actively controls its viewpoint through head actions to acquire the visual information needed for manipulation using a single head camera, without wrist cameras. During human training, an instruction-conditioned model jointly predicts future egocentric videos and synchronized head-wrist action trajectories, with head actions providing explicit supervision for active perception. Experiments show that ActiveBridge outperforms baselines on active manipulation tasks, while ablations demonstrate the benefit of joint head-wrist action supervision.",
@@ -46946,7 +46951,8 @@
   ],
   "updated": "2026-11-24T07:25:53Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 Duo：在共享动作头里把双臂拆成每个时间步两个动作 token，用跨臂注意力做时空协调；在 RoboTwin 2.0 上四种基座策略均有提升，FLOWER（0.89B）和 π0.5（3.62B）分别提高 12.55 和 9.02 个百分点，FLOWER-Duo 在 RoboDojo 上随机泛化、精度和记忆指标最好，真机成功率与执行速度也优于 π0.5。"
  },
  "2611.32119": {
   "abstract": "Episodic-memory embodied question answering enables agents to answer questions based on previously recorded visual observations of the surrounding scenes. However, growing observation histories, varying observation quality across viewpoints, and limited computational resources make it challenging to construct and maintain compact visual memories while retrieving sufficient evidence for question answering. To address these challenges, we introduce CoverMem, which incorporates three key components: (1) a coverage-constrained memory construction method that selects a compact set of informative full frames satisfying object-quality and representative-scene coverage requirements; (2) a coverage-preserving incremental maintenance strategy that locally reselects only the affected frames to satisfy updated coverage requirements as observations arrive; and (3) a budgeted complementary frame selection method that balances question relevance, additional support for question requirements, and redundancy with selected frames within a fixed budget. Experimental results on three benchmarks covering diverse environments and question types demonstrate that CoverMem improves question-answering performance under limited visual budgets.",
@@ -47022,7 +47028,8 @@
   ],
   "updated": "2026-11-24T07:36:40Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 CoverMem：在有限视觉预算下，按物体质量与场景覆盖构造紧凑记忆，增量维护时只重选受影响帧，并按问题相关性做定额补帧；在三个覆盖不同环境与问题类型的基准上提升了具身问答表现。"
  },
  "2611.32152": {
   "abstract": "Evaluating the physical plausibility of generated videos is critical for reliable robotic planning with world models. These videos inform action proposal and assessment before real-world execution, so undetected physical violations can lead to erroneous assessments of action feasibility and safety. Yet current video generators often produce physically implausible interactions. Detecting such violations directly with vision-language models (VLMs) remains challenging as physical verification requires evidence-grounded spatiotemporal reasoning beyond high-level semantic understanding. We develop five law-specific metrics for evaluating physical plausibility by combining spatiotemporal evidence from segmentation, tracking, 3D geometry, or appearance comparisons with targeted VLM reasoning: Contact fidelity, Object persistence, Solidity, Robot deformation, and Object deformation. Building on this metric suite, we introduce RoboProbe, an agentic evaluation framework that coordinates metric execution and selectively refines evaluations through constrained actions. To evaluate the physical plausibility of robot world models, we further introduce RP-Bench, with 761 human-labeled generated videos and 130 real demonstrations of 239 manipulation tasks from 12 robot datasets. On RP-Bench, all five metrics achieve AUROCs above 0.85 and outperform the evaluated learned judges, prior evaluators, and a frames-only Gemini baseline. Applying these metrics to five video generators reveals distinct patterns of physical violations across models, in both violation types and frequencies.",
@@ -47426,7 +47433,8 @@
   ],
   "updated": "2026-11-24T08:59:01Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 NativeDrive：用原生多模态骨干同时做离散/连续驾驶策略，并在训练时以驾驶语义编辑作为稠密场景结构监督、推理只跑选定规划策略；在 NAVSIM v1/v2 上于统一理解-生成模型中达到有竞争力的规划表现，代码将开源。"
  },
  "2611.32218": {
   "abstract": "Vision-Language Navigation (VLN) requires an embodied agent to relate past experience, current spatial state, and future motion while following natural-language instructions. Recent approaches improve these capabilities through long-horizon memory, state-aware reasoning, and future prediction, yet these components are often modeled separately, leaving navigation state evolution insufficiently connected across time. We argue that camera pose provides a natural geometric representation for bridging past, present, and future states. Based on this insight, we propose PoseVLN, a pose-aware VLN framework that jointly learns navigation decisions and geometric state evolution. PoseVLN organizes visual memory and the current observation in an episode-relative coordinate frame, and jointly predicts the next K navigation actions together with a local $Δ$Pose over the same horizon. The predicted $Δ$Pose is composed with the current trajectory-level pose to obtain the future pose state, which is recursively propagated throughout navigation, forming a continuous geometric state evolution from past memory to future motion. Experiments on the R2R-CE and RxR-CE Val-Unseen splits demonstrate the effectiveness of explicitly modeling geometric state evolution, with PoseVLN outperforming the strongest compared baselines by 2.6 and 2.9 percentage points in success rate, respectively, using only single RGB observations.",
@@ -47904,7 +47912,8 @@
   ],
   "updated": "2026-11-24T09:19:03Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 PILOT：在世界-动作模型的动作分支中显式建模状态转移 token，作为运动思维链引导细粒度轨迹，从而把高层运动语义与底层轨迹解耦；提升复杂操作的成功率与泛化，并因更稠密的状态转移监督而可用更少示范做真机适配。"
  },
  "2611.32245": {
   "abstract": "Composing frozen Vision-Language-Action (VLA) skills under an agentic planner promises scalable long-horizon manipulation without long-horizon demonstrations, yet strong atomic skills routinely fail at seams even under a correct plan. Standard remedies reset the robot's pose or draft entry conditions in language, missing the physical cause we uncover via causal interventions: even after re-homing, a frozen VLA rigidly retraces its habitual trajectory and collides with displaced scene residue, whether or not it can see it. We propose the Skill Envelope, a policy-measured 3D geometric precondition capturing the volume a frozen skill sweeps during successful executions. Exploiting the insight that the rigidity making a frozen skill fragile at seams also makes its trajectory predictable in advance, we expose each envelope as two classical 3D tools (CHECK to detect blocking residue and FREE to locate safe placement regions), establishing a division of labor where VLAs execute in-distribution manipulation and code repairs out-of-distribution states. On LIBERO-Goal with frozen $π_{0.5}$, our zero-failure envelope predicts collisions at 0.946 AUROC (0.944 from one RGB-D view) and beats frontier VLMs on seam readiness (0.902 vs. 0.793); using it for skill ordering and code repair lifts success from 82.8% to 92.3% on two-step seams and from 29.7% to 93.8% on drawer-bearing 3-4 step chains, matching privileged world reset. Together, these results show that reliable VLA composition hinges on measuring a policy's physical workspace rather than guessing preconditions in language. Ongoing work closes the loop with autonomous LLM orchestration, synthesized free-object recovery, and cross-policy evaluation on cluttered benchmarks and real hardware.",
@@ -48174,7 +48183,7 @@
    "date": "2026-11-25",
    "line": "用人类视频降低机器人数据采集成本；已开源、有真实设备验证，适合做端侧 Demo 的起点。",
    "rank": 2,
-   "solve": "目标：用人类视频降低机器人数据采集成本；让机器人完成多步骤的长任务。（原文要点：To overcome these limitations, we propose EgoLoAF, the first paradigm to derive all training data for humanoid loco-manipulation directly from egocentric demonstrations without wearable motion trackers.）",
+   "solve": "提出 EgoLoAF：无需穿戴动作捕捉，仅从第一人称人类演示重建躯干与双手轨迹，并用手-物体相对位姿作为 affordance 注入动作专家；发布 12.84 万条、共 1000 小时、1284 项任务的数据，四项真机任务进度分 73.1（遥操作 74.4），数据采集效率约提升 4.03 倍。",
    "use": "可作为在车机或机器人芯片上跑模型的端侧 Demo 起点；可作为“看懂指令→动手执行”的具身 PoC 基线。",
    "why": "已公开代码或项目页，可以直接上手复现；在真实设备、机器人或车辆上做了实验（或有用户测试），不只停留在仿真。"
   },
@@ -48200,7 +48209,8 @@
   ],
   "updated": "2026-11-24T09:31:55Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 EgoLoAF：无需穿戴动作捕捉，仅从第一人称人类演示重建躯干与双手轨迹，并用手-物体相对位姿作为 affordance 注入动作专家；发布 12.84 万条、共 1000 小时、1284 项任务的数据，四项真机任务进度分 73.1（遥操作 74.4），数据采集效率约提升 4.03 倍。"
  },
  "2611.32269": {
   "abstract": "Autoregressive (AR) decoding emits one token per forward pass, reloading the full model each time, so LLM inference on edge devices is memory-bound while the compute units sit idle. Speculative decoding puts that idle compute to work by verifying several drafted tokens in a single pass. State-of-the-art parallel drafters such as DFlash and DSpark propose an entire block of draft tokens in one forward pass, which makes drafting compute-efficient. However, they are deployed with draft chains whose length is capped by the block size they are trained for, leaving most of the computational budget for verification unused. To tackle this problem, we propose Pando, which builds dynamic draft trees on top of a parallel drafter and thereby removes this cap. Pando employs noise-coupled pruning, which draws the target model's sampling noise before drafting and ranks candidate branches under that noise, so the tree retains the branches the target will actually sample. Noise coupling is lossless and requires no retraining or additional model pass, yet increases acceptance length by up to $8.4\\%$ on Qwen3-8B. To optimize and evaluate Pando configurations across hardware, we normalize an operator-level roofline to AR decoding, reducing every platform to its ridge point. On a representative edge device, a 16-node Pando tree attains $5.3\\times$ speedup and $4.2\\times$ energy reduction over AR decoding: $25\\%$ faster than DSpark's released chain, and $27\\%$ faster and $72\\%$ more energy-efficient than an EAGLE-3 tree. The best configurations remain memory-bound on every edge device we model, so added compute capacity does not reduce their latency.",
@@ -48264,7 +48274,7 @@
    "date": "2026-11-25",
    "line": "让模型反应更快、动作更流畅；面向部署，适合做端侧 Demo 的起点。",
    "rank": 4,
-   "solve": "目标：让模型反应更快、动作更流畅。（原文要点：To tackle this problem, we propose Pando, which builds dynamic draft trees on top of a parallel drafter and thereby removes this cap.）",
+   "solve": "提出面向端侧的投机解码方法 Pando：在并行草稿器上构建动态草稿树，并用目标模型的采样噪声做无损剪枝、无需再训练；在代表端侧设备上 16 节点树相对自回归解码加速 5.3 倍、能耗降至约 1/4.2，比 DSpark 链快 25%，比 EAGLE-3 树快 27% 且节能 72%。",
    "use": "可作为在车机或机器人芯片上跑模型的端侧 Demo 起点；可参考其压缩/加速方法，评估模型在车载或机器人芯片上的可行性。",
    "why": "从设计上就面向实际部署；基于主流开源模型，便于复用。"
   },
@@ -48288,7 +48298,8 @@
   ],
   "updated": "2026-11-24T09:39:12Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出面向端侧的投机解码方法 Pando：在并行草稿器上构建动态草稿树，并用目标模型的采样噪声做无损剪枝、无需再训练；在代表端侧设备上 16 节点树相对自回归解码加速 5.3 倍、能耗降至约 1/4.2，比 DSpark 链快 25%，比 EAGLE-3 树快 27% 且节能 72%。"
  },
  "2611.32304": {
   "abstract": "Vision-Language-Action (VLA) models advance robotic manipulation, but their reliance on demonstrations exposes them to backdoor threats. Among these threats, trajectory-level targeted backdoors are particularly challenging and may pose greater safety risks than behavior-disrupting attacks: rather than merely causing task failures or local action deviations, they must sustain closed-loop redirection to complete an attacker-specified multi-step task. To reliably induce such behaviors, existing methods typically rely on high poisoning rates to obtain sufficient target-trajectory supervision. However, high poisoning rates may compromise clean-task performance, whereas low rates leave target-trajectory supervision scarce and backdoor learning vulnerable to interference from dominant clean-task updates. To resolve this trade-off at low poisoning rates, we propose a two-stage co-optimization framework guided by vision, language, and action. Stage I freezes the policy and uses differentiable rendering and multimodal supervision to optimize a 3D trigger's texture, translation, and scale, strengthening trigger-target associations from limited poisoned demonstrations. Building on the optimized trigger, Stage II applies source-selective dual-LoRA adaptation to decouple clean and backdoor updates and mitigate their interference, followed by learned column-wise calibration and analytic fusion into a unified policy. Experiments on OpenVLA, OpenVLA-OFT, $π_0$, and $π_{0.5}$ across four LIBERO suites show consistent gains over all evaluated attack baselines. With only 1% poisoned data, our method achieves 86.4% target success and 95.2% clean-task success on OpenVLA-OFT in LIBERO-Spatial. Real-robot trials also demonstrate trajectory-level hijacking.",
@@ -48371,7 +48382,8 @@
   ],
   "updated": "2026-11-24T10:00:45Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出针对 VLA 的轨迹级后门攻击方法：先优化三维触发器，再用源选择性双 LoRA 把干净任务与后门更新分开，仅用 1% 投毒数据即可劫持闭环多步轨迹；在 OpenVLA-OFT 的 LIBERO-Spatial 上目标成功率 86.4%、干净任务 95.2%，并在真机上演示轨迹劫持。"
  },
  "2611.32353": {
   "abstract": "Robot in-context learning (ICL) enables a policy to perform unseen tasks by following contextual demonstrations, without task-specific fine-tuning. This is increasingly valuable as large language models reasoning at low frequency can specify tasks through demonstrations and delegate high-frequency execution to such a policy. However, methods conditioned on human videos are bounded by scarce human-robot pairs, while those conditioned on robot demonstrations accept only one or two source types at limited scale. We present Any2Act, a foundation model for robot ICL. Our key insight is that a demonstration should be expressed in the camera layout and action space of the robot that performs it (the executor), not of whoever provided it (the demonstrator). This unified embodiment-grounded representation decouples learning to follow from admitting a new source. Any2Act learns to follow once, from robot-to-robot pairs that already take this form in 1.2M real trajectories spanning 10K tasks. Human videos, simulation, UMI, and other robots are then translated into this representation, and source-routed adapters trained on only a few hundred pairs each absorb the residual gap while the pretrained model stays frozen. For long horizons, a training-free tracker feeds only the demonstration window around the executor's progress, bounding the context and rolling back to redo failed steps. From a single demonstration, Any2Act achieves 57.5% success on unseen tasks without fine-tuning, exceeding VLAs fine-tuned on 50 demonstrations per task; other demonstrators retain 74-91% of the success achieved with the executor's own demonstrations.",
@@ -48483,7 +48495,8 @@
   ],
   "updated": "2026-11-24T10:28:46Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出机器人上下文学习基础模型 Any2Act：把各类示范统一转换到执行机器人的相机布局与动作空间，在 120 万条真实轨迹、1 万项任务上学习“如何跟随”，再用少量配对吸收新来源差异；单条示范、无需微调即可在未见任务上达到 57.5% 成功率，超过每任务用 50 条示范微调的 VLA，其他来源示范可保留执行者自身示范成功率的 74%–91%。"
  },
  "2611.32357": {
   "abstract": "Visual world models enable goal-directed planning by predicting action outcomes. Gradient-based planners optimize actions to lower predicted goal cost, but continued optimization can exploit prediction errors after execution stops improving. Comparing plans requires informative relative scores; improving them also requires reliable update directions. Exact-state execution reveals that a frozen hierarchical world model ranks goal-conditioned proposals even when its rankings among outputs of prolonged gradient search are uninformative. Effective planning pairs goal-directed candidates with predictions that distinguish their outcomes. We introduce CriticJEPA, which learns goal-conditioned flow proposals from reward-free trajectories and uses frozen rollouts to select among them at every hierarchy level. Forward selection forms a complete planner; short anchored updates refine candidates before selection. Across visual navigation and manipulation, CriticJEPA increases success at a fraction of the planning compute, transferring shared settings across independently trained models, hierarchy depths, and unseen tasks while keeping every world-model weight fixed.",
@@ -48583,7 +48596,8 @@
   ],
   "updated": "2026-11-24T10:30:16Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 CriticJEPA：用无奖励轨迹学习目标条件流提案，并在冻结的分层世界模型上用短时锚定更新后做前向选择，把世界模型主要当评判者而非优化器；在视觉导航与操作中以更少规划算力提高成功率，且可在保持世界模型权重不变的情况下迁移到不同模型、层次深度和未见任务。"
  },
  "2611.32381": {
   "abstract": "Large language models can write competent robot navigation code, but not only does the research on the topic advance, a model may also, due to the volume of findings, fail to recall relevant findings and apply them to the task at hand. In this work, we test whether providing particular research papers as context improves the LLM-written navigation code for the Go2 quadruped, with the LLM (Claude Opus 5) and locomotion policy frozen. Specifically, we compare the navigation controllers the LLM writes when provided with and without particular papers across three settings: behavior trees, navigators edited from a shared base, and controllers written from scratch. When a maze's shortest route is blocked mid-episode, 2 of 8 controllers written with the context of an incremental-replanning paper complete all four trips under Isaac Sim physics, against 7 of 8 without it (two-sided Fisher's exact test, p = 0.041). This difference appears only under physics: in an idealized kinematic simulator, the controllers written with and without the paper are indistinguishable. We hypothesize that an LLM provided research papers as context tends to overweight both their content and their goals -- in this case, the efficiency of incremental replanning -- negatively affecting the fulfillment of the main task and leading to less robust code.",
@@ -48799,7 +48813,7 @@
    "date": "2026-11-25",
    "line": "让智能体记住过去的经验并持续改进；已开源、即插即用，可做带记忆助手的原型参考。",
    "rank": 3,
-   "solve": "目标：让智能体记住过去的经验并持续改进。（原文要点：We propose M2R (Mesh to Remember), a few-step causal video renderer that stores its own features on the surfaces they depict, in each object's frame, and retrieves them by rasterizing the mesh whenever those surfaces come back into view.）",
+   "solve": "提出 M2R（Mesh to Remember）：把视频渲染特征存在物体网格表面上，再现时按网格取回，使外观随物体移动并在再次进入视野时保持一致；仅用合成数据训练即可零样本迁移到真实室内扫描和编程智能体生成的世界，物体持久性提升一倍以上、跨智能体一致性接近翻倍，可实时渲染 720p（40 FPS）。",
    "use": "可作为“带记忆的智能体”原型参考，例如让助手跨会话记住用户偏好；可作为智能体工具调用、任务规划类 Demo 的参考。",
    "why": "已公开代码或项目页，可以直接上手复现；给出了可量化的效果数据（如 40 FPS）；免训练或即插即用，接入成本低。"
   },
@@ -48822,7 +48836,8 @@
   ],
   "updated": "2026-11-24T11:42:48Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 M2R（Mesh to Remember）：把视频渲染特征存在物体网格表面上，再现时按网格取回，使外观随物体移动并在再次进入视野时保持一致；仅用合成数据训练即可零样本迁移到真实室内扫描和编程智能体生成的世界，物体持久性提升一倍以上、跨智能体一致性接近翻倍，可实时渲染 720p（40 FPS）。"
  },
  "2611.32473": {
   "abstract": "Action-conditioned world models play a vital role in robotics and autonomous driving, yet existing video diffusion models struggle to maintain dynamic object persistence. When the camera turns away and returns, out-of-view moving entities fail to evolve plausibly in latent space, often mutating or vanishing entirely due to bounded perspective views. To resolve this issue, we propose OmniPersist, a unified framework that couples perspective video generation with panoramic evolution within a single-stage diffusion model, without relying on auxiliary models or initial panoramic inputs. To maintain efficiency, we model the panoramic stream at a lower frame rate, bridging both views across space and time via Geometric Anchoring (GeoAnch) for spatial correspondence and Temporal Compensation (TemComp) for temporal aggregation. OmniPersist is agnostic to camera-control architectures, supporting both latent-level and attention-level conditioning. Extensive experiments on a newly constructed dynamic benchmark across image-to-video and video continuation tasks demonstrate consistent gains in visual quality, camera controllability, revisit consistency, and dynamic persistence.",
@@ -49027,7 +49042,8 @@
   ],
   "updated": "2026-11-24T12:06:34Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "发布 ViTacLab（含仿真器 ViTacSim、基准 ViTacBench 与策略 ViTacPolicy）：用与 PhysX 接触求解一致的三模态触觉表示（稀疏接触力、局部密力阵、触觉图像）覆盖平行夹爪、灵巧手和双臂，并在接触丰富任务的真机上有提升；触觉主导任务的绝对成功率仍偏低。"
  },
  "2611.32483": {
   "abstract": "Driving world models anticipate action consequences through representations of how the world evolves. For autonomous driving, these representations must capture both the surrounding scene and the ego vehicle's motion under a candidate plan. We propose CodeWAM, a driving world model that incorporates executable code as part of its world representation. Code represents ego dynamics by expressing how the vehicle state evolves under plan execution, while a learned visual model captures scene-dependent consequences. Executing the code produces a candidate-conditioned motion sequence, which is evaluated relative to the prior plan and recorded motion history. The resulting execution consequences and learned scene outcomes jointly represent the candidate's future, enabling the planner to assess both what a plan may lead to and how the vehicle transitions into that future. The selected plan becomes part of the next decision's execution context, linking successive choices within the model. CodeWAM achieves 93.6 PDMS on NAVSIM v1 navtest, 92.1 EPDMS on v2 navtest, and 50.6 EPDMS on NAVHARD. Further experiments demonstrate improved pairwise execution consistency and gains on Hydra-MDP and DrivoR without additional training, supporting executable code as a complementary representation for driving world models.",
@@ -49119,7 +49135,8 @@
   ],
   "updated": "2026-11-24T12:11:29Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出驾驶世界-动作模型 CodeWAM：用可执行代码表示自车在候选规划下的运动演化，再与学习到的场景后果一起评估规划；在 NAVSIM v1 navtest 上 PDMS 93.6、v2 上 EPDMS 92.1、NAVHARD 上 EPDMS 50.6，并能在不额外训练的情况下提升 Hydra-MDP 与 DrivoR 的成对执行一致性。"
  },
  "2611.32510": {
   "abstract": "Vision-language-action (VLA) planners inherit semantic knowledge from pretrained vision-language models, but their reasoning is rarely grounded in 3D scene structure and its evolution over time. We introduce GeoVLDrive, a geometry-grounded VLA framework for 3D spatiotemporal reasoning and planning. Multi-layer features from a 3D foundation model augment the vision-language backbone through gated cross-attention. A structured latent chain of thought (CoT) organizes future scene geometry, key-agent motion, and meta-actions into ordered, separately supervised latent states. An action expert generates trajectory proposals from these states and multi-layer scene features, and ranks them using scene-grounded, interacting score tokens. We also introduce NAVSIM 3DQA to train and evaluate metric 3D spatial and motion understanding. GeoVLDrive achieves 91.8 PDMS on NAVSIM v1 and 90.9 EPDMS on NAVSIM v2. On NAVSIM 3DQA, the geometry-grounded backbone scores 89.2% overall, 4.6 percentage points above the fine-tuned Qwen3-VL-2B baseline. On LingoQA, the backbone achieves 68.6% Lingo-Judge accuracy.",
@@ -50127,7 +50144,8 @@
   ],
   "updated": "2026-11-24T14:07:17Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "发布在线基准 ICLWorld（含 30 个环境、630 段示范视频、160 项需从上下文学习非常规规则的任务），评测智能体从电脑使用到机器人使用的上下文学习；最强模型在电脑使用上成功率 82%/76%，在机器人使用上仅 27%/26%，无规则对照最高仅 8%，显示数字世界与物理世界、识别规则与按规则行动之间仍有明显差距。"
  },
  "2611.32654": {
   "abstract": "Robot demonstrations provide more than actions to imitate: they reveal how actions change the world and how those changes contribute to task success. Recent world-action models (WAMs) extend vision-language-action (VLA) models with the first signal by jointly predicting actions and future observations, yet this predictive ability serves only as an auxiliary loss for policy learning. Meanwhile, most policy improvement methods learn dynamics and values in separate models, increasing training overhead and limiting representation sharing between these complementary objectives. We introduce DexWAC, a unified world-actor-critic model that jointly learns an actor, an action-conditioned world model, and a bootstrapped critic in a single robot pretraining stage. Our key insight is that visual prediction encourages control-relevant features, while value supervision promotes task-relevant representations; together, they shape a representation suited to policy learning. Built on an image-editing backbone, DexWAC predicts, for each action chunk, the visual latent and proprioception at its endpoint together with its reward and continuation, so the world model alone efficiently yields complete imagined transitions without generating intermediate video frames. After adapting the world model and critic on real rollouts, we improve the pretrained actor through either PPO on imagined rollouts or critic-guided best-of-$N$ selection. DexWAC surpasses the large-scale pretrained VLA and WAM baselines in simulation and achieves 75% average success on two real-world tasks, compared with 45% for $π_{0.5}$. Its world model is more accurate and faster than video-based baselines, and ablations confirm that learning dynamics and value together improves the policy.",
@@ -50231,7 +50249,8 @@
   ],
   "updated": "2026-11-24T14:09:49Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出统一的世界-行动者-评判者模型 DexWAC：在同一预训练阶段联合学习策略、动作条件世界模型与自举评判者，再用世界模型和评判者做 PPO 或 best-of-N 改进；仿真中超过大规模预训练 VLA/WAM 基线，两项真机任务平均成功率 75%（π0.5 为 45%），世界模型比基于视频的基线更准也更快。"
  },
  "2611.32665": {
   "abstract": "Vision-language-action (VLA) models have achieved strong results in arm-centric manipulation, yet humanoid whole-body control (WBC) requires dynamic balance and tightly coupled full-body coordination. Existing hierarchical humanoid VLAs typically decouple motion generation from physical execution, leaving tracking and balance errors unable to directly optimize the VLA generator. We propose DiffGR00T, an end-to-end differentiable training framework that couples GR00T N1.7 with SONIC, a pretrained whole-body behavior foundation model. To enable execution-aware differentiable training, we replace the non-differentiable simulator with a learned, action-conditioned world model, allowing multi-step body-execution losses to backpropagate through the frozen whole-body controller and the flow-matching sampler directly into the VLA action head. On four HumanoidArena simulation tasks, DiffGR00T improves average task success by 12.5 percentage points over the supervised base VLA (59.2% to 71.7%), demonstrating that execution-aware gradients effectively align high-level motion generation with closed-loop whole-body dynamics.",
@@ -50792,7 +50811,8 @@
   ],
   "updated": "2026-11-24T15:15:00Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "对照比较操作模仿中的“稠密动作”与“关键姿态（keypose）”表示：示范被减速、停顿或改道时，稠密策略成功率明显下降而 keypose 更稳；干净且充足的示范下 keypose 往往接近或不如稠密，真机开抽屉任务也显示 keypose 对执行器速度设置更敏感。"
  },
  "2611.32797": {
   "abstract": "We present the Screw Attention Policy, a geometry-centric manipulation framework that supplies task geometry explicitly and learns only execution. The policy operates on object poses, relative SE(3) transforms, and joint screw axes provided by perception and robot models. The policy requires only 30K learned parameters. Trained entirely in simulation on a single robot arm, the policy generalises to new scene layouts, transfers zero-shot across robot embodiments, and deploys directly on a real robot, without adaptation or fine-tuning. It achieves 96% success on LIBERO, 85.8% under layout changes, 80.2% across five unseen robot arms, and 21 of 24 trials on a real robot. These results suggest that much of what manipulation policies learn at scale is geometric structure that can instead be supplied.",
@@ -51631,7 +51651,8 @@
   ],
   "updated": "2026-11-24T17:32:00Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出镜像评测基准 RoboDojo-Mirror：在五种 VLA/世界-动作/智能体策略上，单镜、双镜和镜面台面都会降低成功率（三种条件平均下降 10.8–56.7 个百分点，镜面台面最高降 62.5 点）；50%–88% 的镜像特有失败并未碰到挡板，更常见的是把镜像当成目标或对真实物体定位错误，π0.5 与 FastWAM 的真机实验也出现同样下降。"
  },
  "2611.33013": {
   "abstract": "Scaling embodied simulation requires diverse objects with executable physical representations. We present RFW-W, a physical asset universe connecting rigid, articulated, and deformable asset sources to task-conditioned scene composition. Its reported inventories comprise 1,010,386 asset records: 524,611 rigid assets in 1,212 categories (RFW-R), 402,410 articulated assets in 531 categories (RFW-A), and 83,365 jointly verified deformables in 485 categories (RFW-S). These taxonomies contribute 2,228 dataset--category entries. RFW-R couples category-guided generation with collision geometry, composed physical properties, and interaction annotations; RFW-A uses reusable agent-authored procedural generators with explicit part and joint structure; RFW-S uses structure-aware simulation representations, calibration, and independent testing. A common interface preserves physical requirements specific to each asset type for retrieval and scene assembly. Quantitative evaluations demonstrate that RFW-R provides broader asset coverage and stronger scene-fulfillment capabilities than existing datasets. Across five RoboTwin tasks, using 100 demonstrations per task for each asset source, policies trained on RFW-R achieve macro success rates of 71.2% in clean settings and 41.8% under randomization, exceeding the strongest baseline by 15.8 and 10.6 percentage points, respectively. RFW-W provides a scalable and unified asset foundation for generating physically grounded, task-conditioned embodied worlds.",
@@ -51808,7 +51829,8 @@
   ],
   "updated": "2026-11-24T17:32:51Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "发布物理资产库 RFW-W，汇总约 101 万条刚体、关节和可变形资产并支持按任务组装场景；在五项 RoboTwin 任务、每任务 100 条示范下，用 RFW-R 训练的策略干净设置成功率 71.2%、随机化下 41.8%，分别比最强基线高 15.8 和 10.6 个百分点。"
  },
  "2611.33054": {
   "abstract": "Progress in embodied foundation models is largely measured by task success, while the physical safety of their decisions remains underexamined. Safety evaluations centered on rule following and binary judgments do not adequately assess whether embodied models understand environmental hazards and make safe decisions. We introduce EmbodiSafety, comprising 1,092 snapshot tasks and 540 trajectory tasks across 844 visual scenarios to assess safety over short and long horizons. Six response modes cover direct execution, refusal, clarification, constrained execution, autonomous recovery, and human escalation. Distinguishing recovery from human intervention makes the boundary of safe autonomy an explicit evaluation target. Our protocol assesses mode correctness, risk identification, and actionable handling, with complete decision accuracy requiring all applicable checks to pass. Claude-Opus-5.5 achieves the highest complete decision accuracy among reference models, reaching 56.1% on snapshots and 61.5% on trajectories. We further develop a data construction pipeline and curate 40k examples for safety alignment. Supervised training on this corpus raises the complete decision accuracy of Qwen3.5-2B and Qwen3.5-4B.",
@@ -52376,7 +52398,7 @@
    "date": "2026-11-25",
    "line": "让多指灵巧手学会复杂操作；已开源、有真实设备验证，可做抓取/操作 PoC 的起点。",
    "rank": 5,
-   "solve": "目标：让多指灵巧手学会复杂操作；让机器人“看懂指令→动手执行”更可靠。（原文要点：We present PyRUA-Dex, a framework that enables coding agents to develop dexterous manipulation through programmatic policy, without the need of demonstrations.）",
+   "solve": "提出 PyRUA-Dex：让编程智能体在无需示范的情况下，通过探索与蒸馏写出程序化策略，再在随机布局中 refinement；仿真中 Bench2Dex 得分 72.9、DexJoCo 全随机成功率 81.0%，双臂 22 自由度灵巧手上可弹琴、写书法，新曲从乐谱学习最快约 30 分钟。",
    "use": "可作为机器人抓取/操作类 PoC 的起点；可作为智能体工具调用、任务规划类 Demo 的参考。",
    "why": "已公开代码或项目页，可以直接上手复现；在真实设备、机器人或车辆上做了实验（或有用户测试），不只停留在仿真。"
   },
@@ -52402,7 +52424,8 @@
   ],
   "updated": "2026-11-24T18:56:44Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 PyRUA-Dex：让编程智能体在无需示范的情况下，通过探索与蒸馏写出程序化策略，再在随机布局中 refinement；仿真中 Bench2Dex 得分 72.9、DexJoCo 全随机成功率 81.0%，双臂 22 自由度灵巧手上可弹琴、写书法，新曲从乐谱学习最快约 30 分钟。"
  },
  "2611.33145": {
   "abstract": "Embodied Spatial Reasoning (ESR) is central to deploying Vision-Language Models (VLMs) in real-world embodied tasks, yet remains inadequately evaluated. Existing benchmarks primarily assess spatial reasoning in static images or synthetic indoor environments, where semantic shortcuts often suffice, making it difficult to faithfully evaluate spatial reasoning capabilities in the wild. In light of this, we present Lost on Campus, a benchmark for evaluating ESR in large-scale real-world outdoor 3D environments reconstructed by 3D Gaussian Splatting. Our benchmark introduces a unified reasoning-action evaluation framework that seamlessly integrates diagnostic QA for isolated reasoning with closed-loop interactive navigation for active reasoning under multimodal instructions. To enable fine-grained diagnosis, we evaluate six capability aspects of ESR: action grounding, spatial foresight, metric awareness, goal-directed planning, ego-allocentric localization, and spatio-temporal consistency. Extensive experiments reveal that: (i) Compared to indoor settings, real-world outdoor environments impose substantially higher demands on spatial reasoning, where existing models exhibit poor performance; (ii) VLMs still struggle with fine-grained visual alignment, with failures in spatial foresight and ego-allocentric localization emerging as primary bottlenecks; (iii) Improving multimodal interaction capabilities and long-term spatial reasoning is crucial for advancing embodied intelligence. These findings highlight that faithful evaluation of ESR demands benchmarks tightly coupling perception, reasoning and action within realistic and continuous environments.",
