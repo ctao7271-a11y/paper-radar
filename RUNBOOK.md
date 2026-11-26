@@ -10,9 +10,9 @@
 | 部分 | 在哪里跑 | 时间（北京时间） | 做什么 |
 |---|---|---|---|
 | 网站更新 | GitHub Actions `daily-update`（`.github/workflows/daily.yml`） | 每天 09:10（cron `10 1 * * *` UTC，GitHub 可能延迟 5–30 分钟） | 抓取 → 解析机构 → 提交 `data/` `site/` → 发布 Pages。无需 box 参与。 |
-| 邮件摘要 | box 定时 routine | 每天 09:30 | 同步网站数据 + 自行抓取补漏 → 生成邮件 → 发送 → 标记已发送 |
+| 邮件摘要 | box 定时 routine（工作日 ~09:13）+ 她 Gmail 里的 Apps Script | 09:13 发布；09:30–13:00 发送 | box：同步 + 补抓 → 生成摘要 → `--publish-digest` 发布到网站 `digest/latest.json` 并标记已发送；Apps Script 每小时检查一次，用她自己的 Gmail 发出 |
 
-## 每日 routine 步骤（box，09:30）
+## 每日 routine 步骤（box，工作日 ~09:13）
 
 ```bash
 cd /workspace/paper-radar
@@ -35,14 +35,16 @@ python3 run.py --sync https://raw.githubusercontent.com/ctao7271-a11y/paper-rada
    python3 run.py --rebuild
    ```
    （不写也可：邮件和网站显示“[中文关键词标签] + 摘要原文关键句”。）
-4. **发邮件**：收件人按 routine 配置；主题 = `latest.json` 的 `subject`；HTML 正文 = `out-digest/latest.html` 的全文；纯文本备选 = `out-digest/latest.txt`。
+4. **发布摘要**（不再由 box 直接发邮件，见下方“邮件发送：Google Apps Script”）：
+   ```bash
+   python3 run.py --publish-digest
+   ```
+   把今天的摘要写到 `repo-bundle/site/digest/latest.json`（+ `YYYY-MM-DD.json`、`index.json`）→ commit `digest YYYY-MM-DD` → push（触发 Pages 重新部署，1–2 分钟后可访问）→ **推送成功后自动标记已发送**（等同 `--mark-sent`）。
+   `ids` 为空或摘要不是今天生成的：什么都不写、不标记，日志写 “Digest not published”，退出码 0。退出码非 0 = 推送失败（未标记，下次会连同新论文一起发布）。
+   摘要内容（邮件结构不变）：
    邮件结构：数量统计 + 网站链接 → **★ 重点推荐（3–5 篇，附通俗推荐理由）** → 其余清华/北大/北航论文（学校与作者高亮）
    → 座舱（最多 8 篇）→ 端侧部署与智能体（最多 8 篇）→ 具身（最多 10 篇），均按推荐度排序，其余注明“见网站”。
-5. **发送成功后**：
-   ```bash
-   python3 run.py --mark-sent
-   ```
-   （只在确认发送成功后运行；未发送就不要运行，第二天会连同新论文一起再发。邮件只包含 4 天内首次收录且未发送过的论文。）
+5. **不要**再运行 `--mark-sent`（`--publish-digest` 已标记）。`--mark-sent` 仅在手动用其他方式发出邮件后使用。邮件只包含 4 天内首次收录且未发送过的论文。
 6. **（可选）把中文简介同步到网站**（只有第 3 步写了简介才需要）：
    ```bash
    cd /workspace/paper-radar/repo-bundle && git pull -q --rebase origin main \
@@ -79,7 +81,9 @@ git add -A && git commit -m "update pipeline" && git push
 | `python3 run.py --sync <raw url>` | 每日运行（见上） |
 | `python3 run.py` | 不同步，只本地抓取 + 生成 |
 | `python3 run.py --rebuild` | 只重建网站与邮件（改了简介/剔除名单/规则后） |
-| `python3 run.py --mark-sent` | 记录当前邮件已发送 |
+| `python3 run.py --publish-digest` | 发布今天的摘要到网站 `digest/latest.json`，推送成功后标记已发送 |
+| `python3 run.py --publish-digest --no-push` | 只写文件（本地检查用，不推送、不标记） |
+| `python3 run.py --mark-sent` | 记录当前邮件已发送（仅手动另行发出时用） |
 | `python3 run.py --rebuild --reseed-picks` | 按当前规则重新挑选全部往期重点推荐（慎用） |
 | `gh workflow run daily-update -R ctao7271-a11y/paper-radar` | 手动触发网站更新 |
 | `gh run list -R ctao7271-a11y/paper-radar` | 查看网站更新运行记录 |
@@ -128,3 +132,13 @@ git add -A && git commit -m "update pipeline" && git push
 - **费用**：DeepSeek 按 token 计费，一次问答约 5–6k token（≈ ¥0.02）。余额不足时会返回错误提示；在 DeepSeek 控制台充值即可。
 - **重新部署函数**：用 Supabase MCP `deploy_edge_function`（name `paper-chat`，`verify_jwt: false`，文件 `index.ts`），或 CLI `supabase functions deploy paper-chat --no-verify-jwt --project-ref gabsjglbryeftyolopev`。
 - **本地调试**：`cd supabase/functions/paper-chat && SUPABASE_URL=https://gabsjglbryeftyolopev.supabase.co SUPABASE_ANON_KEY=<anon key> SUPABASE_SERVICE_ROLE_KEY=unused deno run --allow-net --allow-env index.ts`（`DEEPSEEK_API_KEY` 从环境继承，监听 :8000）。
+
+## 邮件发送：Google Apps Script（2026-11-26 起）
+- **流程**：box routine `python3 run.py --publish-digest` → 网站静态文件 `https://ctao7271-a11y.github.io/paper-radar/digest/latest.json`
+  （字段 `date`（北京时间 YYYY-MM-DD）、`id`（= date，唯一）、`subject`、`html`、`text`、`count`、`counts`、`flagged`、`picks`、`site`、`generated`）
+  → 她 Gmail 账号下的 Apps Script 项目“论文雷达邮件”每小时运行 `sendDigest()`：仅工作日 09:30–13:00（北京时间）、`date` 是今天、`count>0`、`id` ≠ 上次已发 id 时才发送（MailApp，发件人显示“论文雷达”），发完把 id 记在 Script Properties `lastSentId`。所以同一天最多一封；周末/无新论文时文件不更新，脚本不发。
+- **代码**：`apps-script/Code.gs` + `apps-script/appsscript.json`（时区 Asia/Shanghai；权限只有 `script.external_request`、`script.send_mail`、`script.scriptapp`）。仓库里的 `Code.gs` 收件人留空（公开仓库），填好地址的版本在 box `/workspace/paper-radar/apps-script/Code.gs`。函数：`setup()`（运行一次：重建每小时触发器，并把网站上当前这份摘要视为已发送，防止安装当天重复）、`sendDigest()`（定时）、`testSend()`（把当前摘要以“[测试]”主题只发给自己，不影响记录）。
+- **为什么用 MailApp 而不是 GmailApp**：`GmailApp.sendEmail` 需要完整 Gmail 权限 `https://mail.google.com/`；`MailApp.sendEmail` 只需“代你发送邮件”（`script.send_mail`），同样从她的 Gmail 发出、出现在“已发送”里。
+- **取舍**：发布时就标记已发送。若某天脚本没发出（授权过期、配额、Google 故障），那批论文不会在第二天的邮件里重复出现；但网站保留最近 7 天的摘要：`digest/index.json` 列表、`digest/YYYY-MM-DD.json` 全文，直接在浏览器打开那天的 JSON 查看（手动补发时可把 `html` 内容转发）。
+- **排查**：Apps Script 左侧“执行”看每次运行日志（“已发送 …”/“读取失败 HTTP …”）；“触发器”里应只有一个 `sendDigest`·每小时。重装：再运行一次 `setup()`。改收件人：改 `Code.gs` 顶部 `TO` 后保存。暂停：在“触发器”里删除它。
+- **测试**：`python3 tests/test_publish.py`（发布逻辑）、`node tests/test_apps_script.js`（脚本逻辑，模拟 Apps Script 服务）。

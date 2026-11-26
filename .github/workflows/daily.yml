@@ -6,7 +6,7 @@ on:
   workflow_dispatch: {}
   push:
     branches: [main]
-    paths: ["radar/**", "run.py", "data/zh_summaries.json", "data/rejected_ids.json"]
+    paths: ["radar/**", "run.py", "data/zh_summaries.json", "data/rejected_ids.json", "site/digest/**"]
 
 permissions:
   contents: write

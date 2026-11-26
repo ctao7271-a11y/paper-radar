@@ -10,7 +10,7 @@
 import os, sys, json, argparse, datetime as dt, time, traceback
 ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
-from radar import config as C, arxiv, affil, summarize, site, digest, interest
+from radar import config as C, arxiv, affil, summarize, site, digest, interest, publish
 
 DATA = os.path.join(ROOT, "data")
 STORE = os.path.join(DATA, "papers.json")
@@ -188,12 +188,57 @@ def sync(store, url):
             p["pick"] = rp
     log(f"Synced {added} papers from {url}")
 
+def mark_sent():
+    cur = load(os.path.join(ROOT, "out-digest", "latest.json"), {})
+    done = set(load(DIGESTED, []))
+    done |= set(cur.get("ids", []))
+    save(DIGESTED, sorted(done))
+    log(f"Marked {len(cur.get('ids', []))} papers as sent")
+
+def publish_digest(push=True):
+    """Write today's digest to <repo>/site/digest/, commit + push (GitHub Pages redeploys), then mark sent.
+    Marking happens at publish time: if the mail script fails that day the papers are not mailed again,
+    but the last 7 days stay readable at <site>/digest/YYYY-MM-DD.json."""
+    import subprocess
+    today = now_utc().astimezone(CN).date().isoformat()
+    repo = os.environ.get("PAPER_RADAR_REPO", os.path.join(ROOT, "repo-bundle"))
+    git = lambda *args: subprocess.run(["git", "-C", repo, *args], capture_output=True, text=True)
+    if push:
+        git("pull", "-q", "--rebase", "origin", "main")
+    r = publish.write(os.path.join(ROOT, "out-digest"), os.path.join(repo, "site"), today)
+    if not r["published"]:
+        log(f"Digest not published: {r['reason']}")
+        return 0
+    publish.write(os.path.join(ROOT, "out-digest"), os.path.join(ROOT, "site"), today)   # keep the local copy in step
+    log(f"Digest {r['id']} written: {r['count']} papers · {r['subject']}")
+    if not push:
+        return 0
+    git("add", "site/digest")
+    if git("diff", "--cached", "--quiet").returncode != 0:
+        c = git("-c", "user.name=paper-radar", "-c", "user.email=paper-radar@users.noreply.github.com",
+                "commit", "-qm", f"digest {today}")
+        if c.returncode != 0:
+            log("commit failed: " + c.stderr[-500:]); return 1
+    for i in range(3):
+        p = git("push", "-q", "origin", "HEAD:main")
+        if p.returncode == 0:
+            break
+        log(f"push failed (try {i + 1}): {p.stderr[-300:]}")
+        git("pull", "-q", "--rebase", "origin", "main"); time.sleep(5)
+    else:
+        log("Digest NOT pushed; not marking sent"); return 1
+    log(f"Digest pushed ({git('rev-parse', '--short', 'HEAD').stdout.strip()}); the site redeploys in ~1-2 min")
+    mark_sent()
+    return 0
+
 def main():
     global _logf
     ap = argparse.ArgumentParser()
     ap.add_argument("--rebuild", action="store_true")
     ap.add_argument("--sync", default="")
     ap.add_argument("--mark-sent", action="store_true")
+    ap.add_argument("--publish-digest", action="store_true", help="put today's digest on the site (digest/latest.json), push, then mark sent")
+    ap.add_argument("--no-push", action="store_true", help="with --publish-digest: write files only (no git, no mark-sent)")
     ap.add_argument("--no-pdf", action="store_true")
     ap.add_argument("--no-digest", action="store_true")
     ap.add_argument("--reseed-picks", action="store_true", help="recompute the whole picks archive (per submission day)")
@@ -208,12 +253,10 @@ def main():
     reject = set(load(REJECT, []))
 
     if a.mark_sent:
-        cur = load(os.path.join(ROOT, "out-digest", "latest.json"), {})
-        done = set(load(DIGESTED, []))
-        done |= set(cur.get("ids", []))
-        save(DIGESTED, sorted(done))
-        log(f"Marked {len(cur.get('ids', []))} papers as sent")
+        mark_sent()
         return
+    if a.publish_digest:
+        sys.exit(publish_digest(push=not a.no_push))
 
     if a.sync:
         sync(store, a.sync)
