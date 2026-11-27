@@ -53340,7 +53340,8 @@
   ],
   "updated": "2026-11-24T21:36:26Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "把 SuperMimic 的可微世界模型追踪方法扩展到 700 肌的 MS-Human-700 与 354 肌的 MyoFullBody，并针对肌肉调整观测、边采集边更新、Beta 探索噪声与 50 Hz 控制。单张 RTX 5090 上，MS-Human-700 用 6.3 分钟达到原超参 3.9 小时的保持集回报（快约 37 倍），20 分钟的追踪误差优于原方法训练 10 小时；测试时经世界模型 refinement 动作还可使位置误差再降 26%。"
  },
  "2611.33467": {
   "abstract": "World models typically predict future observations in pixel or latent space, limiting their ability to directly represent true 3D scene evolution. We present SplatWAM (Splatting World Action Model), a generative world model that learns action-conditioned dynamics directly over compact 3D Gaussian primitives. A tokenizer SplatWAM-T first encodes a variable number of unposed views into a fixed budget of Gaussian tokens. A dynamics model SplatWAM-D then predicts future Gaussian states in a single forward pass per action, using log-Euclidean covariance coordinates and differentiable rendering supervision to facilitate learning in an explicit 3D space. Each predicted state can be rasterized from arbitrary viewpoints, enforcing a shared 3D representation across views by construction. On OGBench Scene, SplatWAM renders novel views 12x faster than video world models (~80 FPS on an RTX 5090) with up to 2.0 dB higher PSNR. We further introduce SplatWAM-P, a lightweight flow-matching policy head jointly trained with the dynamics model. Across 8 task suites, model-free Gaussian-token policies outperform pixel-based counterparts by up to 24.8 percentage points. SplatWAM-P improves over Latent Particle World Model (LPWM) by 12 percentage points and matches HIQL without a learned value function. On LIBERO, our ~1B model outperforms WorldVLA (~7B) and the robot-pretrained OpenVLA (~7B), while matching OpenVLA-OFT when both are trained without large-scale robot pretraining. Code and checkpoints will be released.",
@@ -54275,7 +54276,8 @@
   ],
   "updated": "2026-11-25T04:06:11Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出反事实世界模型 WhatIf：在共享的潜在物理与由事实历史推断的转移噪声下，为候选动作建立稀疏物体因果图并 rollout，从而在同一物理情境中比较个体效应；在此基础上用反事实优势规划（CAP）在共享情境中对方案排序并约束伤害概率。用成对模拟干预评估了反事实准确性、因果图恢复、组合泛化与决策质量。"
  },
  "2611.33764": {
   "abstract": "Optimizing indoor climate systems plays a critical role in achieving the United Nations' Sustainable Development Goals 11 and 13. However, indoor delayed thermodynamic responses and partial observability severely hinder existing reinforcement learning (RL) methods, which are primarily limited by implicit thermal inertia, occupancy dynamic prediction, and cumulative prediction errors during long-horizon rollouts. Thus, we propose a novel occupant-centric indoor climate control framework. It develops indoor environmental world models to predict future physical thermal baselines and dynamic occupancy, explicitly capturing latent thermal inertia. By formulating adaptive regulation as counterfactual advantage learning against future environments via a Branching Dueling Q-Network, and integrating a Held-Action TD-λ target, it effectively mitigates delayed credit assignment. Additionally, a proposed physics-aligned smoothness regularization suppresses high-frequency actuator fluctuations, potentially extending equipment service life. Experiments on SemiBuildingSim and Sinergym demonstrate that our method achieves a superior multi-objective trade-off. Compared to the best-performing methods, it further reduces energy consumption by 11.2%, occupant discomfort by 44.2%, and action fluctuation by 47.3%, achieving better sample efficiency and cross-region effectiveness. This interdisciplinary study offers an energy-efficient, occupant-centric AI solution for control science, building science, and energy sustainability.",
@@ -54364,7 +54366,8 @@
   ],
   "updated": "2026-11-25T04:25:59Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出以室内环境世界模型预测热力基线与动态占用、再用 Branching Dueling Q-Network 做反事实优势学习的建筑室内气候控制方法，并用物理对齐的平滑正则抑制执行器高频波动。在 SemiBuildingSim 与 Sinergym 上，相对最强方法再降能耗 11.2%、不适感 44.2%、动作波动 47.3%。"
  },
  "2611.33769": {
   "abstract": "Human takeovers offer corrective supervision for vision-language-action (VLA) policies, but their contribution to offline post-training must be separated from that of continued optimization. We introduce FailPoint-X, a benchmark for offline VLA post-training with human takeovers. To represent uncertainty in failure onset, an annotator marks an interval for each failure, and training takeovers start at seeded frames sampled within it. From one fixed $π_{0.5}$ checkpoint, which also initializes post-training, we assemble 629 natural failures across 10 LIBERO-X task families at up to five difficulty levels. All 2,823 takeover attempts are logged; 2,400 are accepted recoveries, of which 2,320 are used for post-training. Evaluation restarts every method from the fixed midpoints of 384 held-out failure intervals. Under matched actor-update counts, we compare behavior cloning of recoveries, value-based offline learning on recoveries and failed rollouts, and continued training on existing demonstrations. Within 1,200 steps on the 240 L1-L3 held-out failures, cloning improves recovery by 29.4 percentage points (pp) over the demonstration-only control; the value-based learner does not establish a further gain (1.5 pp). In exploratory evaluation from L1-L5 nominal starts at the same horizon, cloning loses 30.0 pp of success relative to the base policy; mixing in demonstrations reduces the loss to 16.5 pp, a reduction that shrinks under a stricter, pre-specified horizon. Restorable failure states and a shared evaluator let all methods be compared from identical starts.",
@@ -54640,7 +54643,8 @@
   ],
   "updated": "2026-11-25T05:04:06Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出无人机第一人称视频世界模型 DuoWM：用动作流把未来相机位姿投影到目标帧，用物体流把初始观测前向扭曲并叠加局部 6 自由度变换，再辅以变换感知预训练。在 Sekai-drone 上视频质量、三维一致性与轨迹跟随均为最佳；相对 Captain Safari，真实域 FVD/LPIPS 分别下降 17.2%/21.6%，游戏域 AUC@30 从 0.5003 升至 0.5719。"
  },
  "2611.33794": {
   "abstract": "Self-improvement is now a practical recipe for embodied policies: a policy collects experience, is retrained, and is kept when a judge rates it higher. However, the judge is usually trained or chosen inside the same loop, so its evidence is not independent of the policy. We introduce SealedLoop, an evaluation framework that adds a sealed judge: an evaluator outside the loop that the improver cannot see or optimize against. A new policy is kept only when a sequential test on the sealed judge confirms the gain, with a bounded probability of keeping a worse one. Running the same loop under each judge, we separate two sources of a false gain, which we call judge error (the loop's judge is wrong on its own data) and transfer gap (a real gain there does not carry over to unseen conditions). We evaluate on LIBERO manipulation, NAVSIM driving, and a full-scale real vehicle. In manipulation, a success classifier accepted 65 of 196 failures in one generation. In driving, policies that gain on the loop's own frames lose in an unseen city, so even an exact in-loop judge would keep 8/15 of them. When the sealed test decides, a driving loop built to improve ends with a better policy than under its own critic (0.674 against 0.649 PDMS, from 0.638), and on driving pairs with known sealed gain the test accepted 11 of 12 real gains and none of 59 losses. In a real-world field experiment on a published improvement step, the reinforced version drove further into a curve than the version it started from in all 6 blind pairs, though neither completed it. These results show that evidence from inside the loop, however accurate, is not enough to decide whether a policy has improved. SealedLoop offers a foundation for trustworthy self-improvement of embodied policies, in which progress is judged by evidence the improving system cannot influence.",
@@ -55167,7 +55171,8 @@
   ],
   "updated": "2026-11-25T06:43:54Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "在视觉-语言导航的机器人交接中，系统比较交接时应传什么信息：在 106 个环境、3920 次自主出发中，把领航机器人最后一组动作之前的那一帧连同已执行动作传给接管方，RxR / SAGE 每次交接成功率分别提高 7.51 / 8.54 个百分点。领航方中位已积累 41 帧，仅传约 7 kB 的一帧即可分别收回相对完整历史 30%（RxR）和 24%（SAGE）的优势。"
  },
  "2611.33872": {
   "abstract": "A world model lets an agent anticipate the consequences of its actions and use imagined futures to make decisions. We introduce Normalizing-Flow World Model (NFWM), which pairs an invertible observation encoder with an action-conditioned probabilistic predictor. Because the encoder is invertible, the predicted distribution over latent states defines a distribution over future observations. Maximizing the exact conditional likelihood of those observations therefore trains the representation and dynamics jointly. An agent can plan directly in the learned latent space and decode sampled trajectories to inspect possible futures. On Teleport, these samples capture the two possible outcomes of the same action. In Flappy Bird, a world model trained by likelihood alone supports reward-based planning that reaches 100 pipes in all ten evaluated games. For goal-conditioned control, an auxiliary inverse-dynamics objective shapes the coordinates used to compare predicted states with a goal. On LIBERO, NFWM uses this distance to select successful action sequences more often than LeWM and SMWM. In Atari Boxing, training on imagined trajectories improves a policy beyond its behavior-cloned initialization. Together, these results establish normalizing flows as capable world models.",
@@ -55777,7 +55782,8 @@
   ],
   "updated": "2026-11-25T07:43:15Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出一步生成式策略优化框架 iMFPO：把瞬时速度学习与区间平均动作生成解耦，并用漂移感知的速度对齐及 JVP 修正的速度回归，与奖励驱动目标联合训练，推理时直接用区间平均速度一步出动作。在 Go2、G1、H1、Spot 上零隐变量评估平均回报分别为 35.69、34.44、416.23、29.86；Go2 上动作生成时延由 15.57 ms（64 步 RFPO）降至 0.41 ms。"
  },
  "2611.33925": {
   "abstract": "Robot world models are increasingly used to evaluate and plan policies, yet robot training data are dominated by successful demonstrations. Off the happy path, when a grasp is misaligned or mistimed and the object is pushed, tilted, or slips, their predictions break down. Across five pretrained action-conditioned models, object-motion error is at most 10.4% lower than that of a static baseline that copies the first frame, and two models are worse than this baseline. We present WorldReforge, which teaches world models what happens when manipulation goes wrong. We construct the Reforge dataset of 62k simulated trajectories by perturbing reference grasps in position, orientation, and closure timing, recording each resulting push, slip, or failed pickup with ground-truth object pose, contact, and surface points. WorldReforge turns this ground truth into two training signals without additional inference cost. Interaction Alignment focuses reconstruction on the small object and contact regions that a global loss underweights, and Surface Correspondence trains backbone features to follow the same physical surface points across frames. On Cosmos3 Nano, WorldReforge reduces object trajectory error by 28.2% overall and by 35.0% on unseen objects, and it lowers the error in predicting how two actions' outcomes diverge by 43.3%. Although trained only in simulation, it also improves reconstruction on DROID and on real failure videos. Controlled data studies show that failed contact and successful holding teach complementary physics: failed contact teaches how objects respond, and holding teaches how a grasped state persists. Our code, data, and models are available at aim-uofa.github.io/WorldReforge/.",
@@ -56111,7 +56117,7 @@
    "date": "2026-11-26",
    "line": "让模型能在本地设备（车机、手机、机器人芯片）上直接运行；有真实设备验证、面向部署，适合做端侧 Demo 的起点。",
    "rank": 1,
-   "solve": "目标：让模型能在本地设备（车机、手机、机器人芯片）上直接运行；让模型反应更快、动作更流畅。（原文要点：We present MixMoMo, an efficient mixed-precision inference runtime for extra-large MoE models on heterogeneous mobile SoCs.）",
+   "solve": "提出 MixMoMo：面向手机等异构 SoC 上超大 MoE 模型的混合精度推理运行时，结合离线量化影响画像与运行时激活风险来分配专家位宽，并在 GPU–NPU 间做精度结构化分配与 HVX 并行反量化。在两款移动平台、三种 MoE 模型上，解码平均比均匀 Q4_0 快 3.72 倍，比最强混合精度 MoE 基线快 1.53 倍。",
    "use": "可作为在车机或机器人芯片上跑模型的端侧 Demo 起点；可参考其压缩/加速方法，评估模型在车载或机器人芯片上的可行性。",
    "why": "在真实设备、机器人或车辆上做了实验（或有用户测试），不只停留在仿真；从设计上就面向实际部署。"
   },
@@ -56135,7 +56141,8 @@
   ],
   "updated": "2026-11-25T08:41:02Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 MixMoMo：面向手机等异构 SoC 上超大 MoE 模型的混合精度推理运行时，结合离线量化影响画像与运行时激活风险来分配专家位宽，并在 GPU–NPU 间做精度结构化分配与 HVX 并行反量化。在两款移动平台、三种 MoE 模型上，解码平均比均匀 Q4_0 快 3.72 倍，比最强混合精度 MoE 基线快 1.53 倍。"
  },
  "2611.33991": {
   "abstract": "Spatial intelligence concerns both scene structure and its temporal evolution. Yet a semantically correct description can conceal a quantitative error: recognizing that objects are approaching does not determine their closing speed or whether they will meet. Such errors are critical in collision avoidance, trajectory tracking, and reactive grasping, where actions depend on motion magnitude, timing, and relative geometry. We study quantitative kinematic understanding in multimodal large language models (MLLMs): resolving motion magnitude, rate, reference-frame dependence, and future spatial evolution from visual evidence. We introduce the Quantitative Kinematics Benchmark (QK-Bench), comprising 2,341 multiple-choice QA pairs from 379 videos and 17 tasks spanning Object-Centric Kinematics, Camera Ego-Motion Kinematics, and Multi-Object Kinematic Relations. Hidden geometric and temporal signals support trajectory construction and filtering, while fixed kinematic rules map physical quantities to verifiable answers, including categorical labels. Trajectory and question validation ensure target reliability and sufficient visual support in the sampled frames. All models receive a unified monocular RGB input. Evaluations of proprietary, open-source, and spatial MLLMs reveal substantial limitations: the strongest model achieves only 41.2\\% overall accuracy, and spatial MLLMs show no consistent advantage. These findings indicate that current advances in spatial intelligence do not reliably transfer to quantitative kinematic understanding.",
@@ -56715,7 +56722,8 @@
   ],
   "updated": "2026-11-25T10:18:08Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出世界-动作模型 CoTacWAM：联合建模腕部视觉与触觉的共享接触语义，同时保留各模态独有证据，并在独立检测器确认失败后据此修正。四项真机操作任务上优于所评基线，对缺失局部观测更稳健，自主重试还能进一步提升成功率。"
  },
  "2611.34124": {
   "abstract": "World-action models (WAMs) couple future imagination with action generation, but they execute every action chunk while ignoring the potential risk. To fill this gap, we present WAtcher, a safety-aware world-action framework in which the policy imagines the outcome of the candidate chunk before execution. For fast future preview, WAtcher builds on a compact WAM whose video expert imagines the visual outcome in only two denoising steps. In addition, we propose Safe-Guard, a lightweight module kept outside the WAM that scores each candidate chunk from its imagined outcome and triggers a bounded retreat when the risk is high. Safe-Guard is detachable and can be applied to other WAMs. To train Safe-Guard, we build an autonomous pipeline to collect hazard data from RoboTwin, LIBERO, and a real robot. Specifically, the pipeline perturbs expert demonstrations and labels each candidate chunk from the physical events recorded when it is executed, such as contacts and losses of support. Using the ~25,000 labeled windows from this pipeline, Safe-Guard reaches 92.1% balanced accuracy on a blind set, and cuts hazardous closed-loop trials on training tasks from 27.0% to 10.8% without lowering task success. On a held-out 300-question benchmark, it scores 94.2%, against 72.5% and 63.3% for zero-shot GPT-6-Astra and Claude Opus 5.5. WAtcher also reaches 90.4% and 82.4% average success on RoboTwin 2.0 and ManiSkill3, on par with or above leading WAMs, and 74.0% on five real-world tasks with Safe-Guard on, against 59.5% for $π_{0.5}$. Project page: https://zyshan0929.github.io/WAtcher",
@@ -57053,7 +57061,8 @@
   ],
   "updated": "2026-11-25T11:27:05Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 Loop4D：用保运动的 4D VAE 将 RGB 与点图序列编码为时空潜变量，再以双流循环扩散 Transformer（外观与几何分流、权重共享并跨模态连接）做联合生成，通过循环复用加深有效深度而不复制骨干参数。实验显示可生成高质量 4D 结果，并在仿真机器人操作任务中得到验证。"
  },
  "2611.34249": {
   "abstract": "Vision-and-Language Navigation (VLN) with general-purpose multimodal large language models (MLLMs) offers a flexible alternative to task-specific navigation policies, while reliable long-horizon execution remains challenging. Agents must track navigation progress, detect discrepancies between commanded and actual motion, and recognize when movement has passed relevant landmarks or entrances. We present Navigent, an agentic VLN framework built around a frozen MLLM and a Geometry-Grounded Execution Critic (GEC). GEC performs two complementary checks: action-to-motion consistency, which evaluates measured displacement against commanded movement, and motion-to-landmark consistency, which tracks agent-selected visual anchors and entrance candidates in world coordinates. Detected discrepancies interrupt the remaining action sequence and trigger reobservation, local adjustment, or node-based recovery. Historical visual memory supports progress tracking across extended routes. An offline self-improvement procedure further analyzes successful and failed training trajectories to refine navigation prompts and GEC logic while keeping model weights fixed. On the R2R-CE validation-unseen split (1,839 episodes) and RxR-CE validation-unseen split(3,669 episodes), Navigent achieves 84.0%/86.0% SR and 72.9%/69.1% SPL, respectively, demonstrating the value of geometry-grounded execution verification for reliable agentic navigation. Project Page: https://marslab-navigent.github.io/navigent.github.io/ Code: https://github.com/MarsLab-Navigent/Navigent",
@@ -58952,7 +58961,8 @@
   ],
   "updated": "2026-11-25T15:36:13Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出仿真到真机框架 RIPPLE：用预张力质量-弹簧网格 ElasticMembrane 建模大变形弹性地面的空间耦合形变与回弹，分阶段把刚性地面技能迁移到仅靠本体感觉的平衡与跳跃。零样本部署到 MagicBot Z1 上可平衡、连续起跳并从刚性平台进入蹦床；仿真中在 0.3 m/s 扰动下站立成功率不低于 98.7%，固定策略可容忍刚度为训练值的 0.35–2.8 倍。"
  },
  "2611.34597": {
   "abstract": "We present $μ$MPC, a fast model predictive control (MPC) framework that reduces online computation using learned Koopman-linearized dynamics. By precomputing finite-horizon control-to-output maps, $μ$MPC eliminates lifted-state trajectories, yielding an action-only Koopman-Compiled QP (KC-QP) with $Hn_u$ decision variables, independent of lifted dimension. A fixed, precomputed primal operator enables efficient primal-dual iterations using only matrix-vector products and projections, accommodating changing goals and constraints without refactorization. This efficiency also enables control-aware dynamics learning through differentiable KC-QPs in the training loop and batched DAgger-style data aggregation. $μ$MPC achieves solve times as low as $23μ$s on a desktop CPU and 24 ms onboard a 168 MHz Crazyflie microcontroller. It scales to 4096D quadruped control in under 5 ms, visual planning with 2048D world models in 0.4 ms, and collision-aware planning for 200 quadrotors at over 30 Hz on the GPU. Across these benchmarks, $μ$MPC achieves up to $108\\times$ faster constrained MPC and $1907\\times$ faster visuomotor planning than competing methods.",
@@ -59168,7 +59178,7 @@
    "date": "2026-11-26",
    "line": "让智能体记住过去的经验并持续改进；已开源，可做带记忆助手的原型参考。",
    "rank": 5,
-   "solve": "目标：让智能体记住过去的经验并持续改进；让智能体自己总结经验、学会使用工具。（原文要点：In this paper, we introduce HoMe, an evaluation-driven framework that iteratively evaluates candidate harnesses and derives each new candidate from any previously evaluated harness by editing any part of it.）",
+   "solve": "提出评测驱动框架 HoMe：对长时助手记忆系统的 harness（记忆构建、维护、检索与回答的代码、提示和配置）做迭代修改与评估，用会话级记忆版本与执行轨迹定位共性失败，并以候选门控、冒烟测试和自适应采样降低评估成本。在开源记忆系统 ReMe 的 LongMemEval-S 与 BEAM 上，每基准仅 6 次正式评估即可找到优于原强 harness、且查询时 token 更少的配置。",
    "use": "可作为“带记忆的智能体”原型参考，例如让助手跨会话记住用户偏好。",
    "why": "已公开代码或项目页，可以直接上手复现。"
   },
@@ -59190,7 +59200,8 @@
   ],
   "updated": "2026-11-25T16:11:53Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出评测驱动框架 HoMe：对长时助手记忆系统的 harness（记忆构建、维护、检索与回答的代码、提示和配置）做迭代修改与评估，用会话级记忆版本与执行轨迹定位共性失败，并以候选门控、冒烟测试和自适应采样降低评估成本。在开源记忆系统 ReMe 的 LongMemEval-S 与 BEAM 上，每基准仅 6 次正式评估即可找到优于原强 harness、且查询时 token 更少的配置。"
  },
  "2611.34644": {
   "abstract": "Many embodied world models predict future states in latent spaces optimized for RGB reconstruction, which do not explicitly prioritize object-level semantics and geometry relevant to motion generation. We present MotionRep, a visual representation world model that jointly generates future DINO representations and 3D object flow, coupling semantic and geometric information with object-centric dynamics. To make high-dimensional DINO features amenable to generative modeling, we introduce DINO-VAE, which combines temporal and channel compression with latent regularization to produce compact latents while preserving semantic and geometric information. Conditioned on an initial observation, object query points, and a language instruction, a unified diffusion transformer predicts future visual representations and 3D object flow through joint attention. MotionRep employs asymmetric modality-specific noise schedules to keep the visual stream ahead of 3D object flow during joint denoising, allowing progressively refined future visual representations to guide flow generation. Experiments on simulated and real-world manipulation benchmarks demonstrate that MotionRep outperforms pixel-based baselines in 3D object flow accuracy and generalization to unseen scenes, while requiring only three denoising steps for inference. These results support predictive visual representations as an effective future-state space for object-centric dynamics modeling.",
@@ -59381,7 +59392,7 @@
    "date": "2026-11-26",
    "line": "让多指灵巧手学会复杂操作；已开源、有真实设备验证，可做抓取/操作 PoC 的起点。",
    "rank": 4,
-   "solve": "目标：让多指灵巧手学会复杂操作；让机器人/无人机听懂指令并找到路。（原文要点：To address them, we introduce Nav4Manip, a bidirectionally coupled co-evolution system for long-horizon dexterous mobile manipulation.）",
+   "solve": "提出 Nav4Manip：把导航与灵巧操作双向耦合共同进化，Nav4Manip-N 用操作反馈 refinement 长程导航（含操作感知 affordance、拒绝采样微调与 RLAIF），Nav4Manip-M 训练世界-动作模型做下游灵巧操作。在公开 VLN 与自建 Nav-N-Manip 基准上达到领先水平，并在真机上完成多样化的长程灵巧移动操作。",
    "use": "可作为机器人抓取/操作类 PoC 的起点；可用于在仿真中先预演、再让机器人执行的方案验证。",
    "why": "已公开代码或项目页，可以直接上手复现；在真实设备、机器人或车辆上做了实验（或有用户测试），不只停留在仿真。"
   },
@@ -59407,7 +59418,8 @@
   ],
   "updated": "2026-11-25T16:29:17Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 Nav4Manip：把导航与灵巧操作双向耦合共同进化，Nav4Manip-N 用操作反馈 refinement 长程导航（含操作感知 affordance、拒绝采样微调与 RLAIF），Nav4Manip-M 训练世界-动作模型做下游灵巧操作。在公开 VLN 与自建 Nav-N-Manip 基准上达到领先水平，并在真机上完成多样化的长程灵巧移动操作。"
  },
  "2611.34656": {
   "abstract": "Reinforcement learning has achieved remarkable success in sequential decision-making, but learning effective policies often requires substantial interaction experience. Model-based reinforcement learning alleviates this dependence by leveraging world models, which are typically used to support planning or policy optimization. In this paper, we investigate an alternative paradigm in which autonomous LLM-based coding agents directly synthesize control policies by reasoning over readable world models. By examining environment source code, these agents translate environmental knowledge into executable decision rules and iteratively refine their policies using online feedback or offline data, without task-specific RL training. Experiments across diverse decision-making benchmarks show that synthesized policies match or outperform conventional RL methods while requiring substantially less experience. Further analyses reveal interpretable decision rules and how they evolve through feedback-driven refinement. Comparisons with policies generated without source code access and experiments under challenging conditions further demonstrate the benefits of readable world models. These findings suggest that direct policy synthesis can reduce reliance on trial and error, challenging the necessity of task-specific RL training.",
@@ -59522,7 +59534,8 @@
   ],
   "updated": "2026-11-25T16:29:37Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "研究由基于 LLM 的编程智能体直接阅读可解释世界模型（环境源代码）来合成控制策略，并用在线反馈或离线数据迭代 refinement，无需任务特定的强化学习训练。在多种决策基准上，合成策略达到或超过常规 RL，且所需交互经验显著更少。"
  },
  "2611.34669": {
   "abstract": "During independent home study sessions, students frequently sustain improper sitting postures, accumulate excessive sedentary hours, and experience productivity loss from off-task digital distractions. Furthermore, learners often lack real-time pedagogical scaffolding for demanding self-study curricula. To mitigate these ergonomic and instructional challenges, this paper presents an affordable, privacy-preserving cyber-physical embedded system for domestic study spaces. Engineered on a Raspberry Pi 3 Model B (1 GB RAM) paired with a UVC optical camera and a USB condenser microphone, the system executes on-device computer vision utilizing MediaPipe Pose and OpenCV to monitor upper-body alignment, sagittal head inclination, and coronal shoulder asymmetry in real time without persisting raw video streams. A deterministic finite state machine (FSM) quantifies active study durations, enforces health-compliant rest periods, and detects illicit smartphone usage. Simultaneously, an integrated multimodal AI tutoring agent parses voice and text queries via an encrypted API gateway, synthesizing Socratic conceptual hints rather than direct solutions. A lightweight parental web dashboard delivers encrypted session analytics and scheduling configurations. Empirical benchmarks on the physical prototype confirm an end-to-end inference latency of 244-250 ms at a 352x288 resolution (4.0-4.1 FPS), a trunk-angle estimation error of 4.39 degrees MAE over 5,760 synthetic ground-truth poses, a resident set size of 320 MB, a peak SoC temperature of 58.0 degrees Celsius under sustained load, and a 1.58 s total latency for the offline TTS feedback path, proving high practicality for resource-constrained edge deployment.",
@@ -59574,7 +59587,7 @@
    "date": "2026-11-26",
    "line": "让模型能在本地设备（车机、手机、机器人芯片）上直接运行；有实测数据、面向部署，适合做端侧 Demo 的起点。",
    "rank": 2,
-   "solve": "目标：让模型能在本地设备（车机、手机、机器人芯片）上直接运行。（原文要点：To mitigate these ergonomic and instructional challenges, this paper presents an affordable, privacy-preserving cyber-physical embedded system for domestic study spaces.）",
+   "solve": "提出一套跑在树莓派 3B（1 GB 内存）上的家用学习边缘系统：用板载视觉实时监测坐姿与肩部不对称且不保存原始视频，用状态机统计学习时长、强制休息并检测手机使用，同时接入多模态辅导智能体与家长看板。实物测试端到端推理时延 244–250 ms（352×288，约 4 FPS），躯干角度误差 4.39° MAE，常驻内存 320 MB。",
    "use": "可作为在车机或机器人芯片上跑模型的端侧 Demo 起点；可参考其压缩/加速方法，评估模型在车载或机器人芯片上的可行性。",
    "why": "给出了可量化的效果数据（如 1 GB、250 ms）；从设计上就面向实际部署。"
   },
@@ -59598,7 +59611,8 @@
   ],
   "updated": "2026-11-25T16:36:19Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出一套跑在树莓派 3B（1 GB 内存）上的家用学习边缘系统：用板载视觉实时监测坐姿与肩部不对称且不保存原始视频，用状态机统计学习时长、强制休息并检测手机使用，同时接入多模态辅导智能体与家长看板。实物测试端到端推理时延 244–250 ms（352×288，约 4 FPS），躯干角度误差 4.39° MAE，常驻内存 320 MB。"
  },
  "2611.34671": {
   "abstract": "Scaling robot learning requires demonstrations that combine realistic visual observations with reliable action supervision. Simulation-based synthesis faces a substantial visual gap relative to real environments, while video-only generation struggles to maintain physically consistent interactions and provide aligned action labels. We present DemoFoundry, an automated framework that couples coding agents with generative rendering to synthesize photorealistic and physically grounded robot demonstrations. Coding agents both construct aligned real--proxy video pairs from existing robot episodes to train a video renderer and write executable interaction programs to generate new demonstrations. Given a scene reference and task instruction, an agent reconstructs task-relevant geometry and writes a control program without requiring target-task human demonstrations. Program execution in a physics simulator produces proxy videos with aligned robot states and actions. The video renderer translates these proxy videos into scene-consistent, photorealistic observations, reducing the need for detailed appearance modeling in each scene. Automated task-execution checks select successful trajectories for rendering and policy learning. Experiments show improved visual quality and action--video consistency. Policies trained on the generated demonstrations outperform raw-simulation training and approach the performance of training on an equal number of real demonstrations.",
@@ -60217,7 +60231,7 @@
    "date": "2026-11-26",
    "line": "让模型反应更快、动作更流畅；已开源、有真实设备验证，可做抓取/操作 PoC 的起点。",
    "rank": 3,
-   "solve": "目标：让模型反应更快、动作更流畅；让机器人“看懂指令→动手执行”更可靠。（原文要点：We introduce SOLVE, a training-free, versatile and efficient agent policy: a multimodal LLM agent writes a sparse, ordered sequence of 6-DoF end-effector keyposes per call, observes the result, and writes the next, while a motion planner interpolates between them.）",
+   "solve": "提出免训练的智能体策略 SOLVE：多模态 LLM 每次只写出稀疏有序的 6 自由度末端关键姿态，由运动规划器插值执行，再根据结果写下一组，并能用稀疏深度查询落地、从执行反馈中提炼任务规则。在 RoboDojo / RoboLab 上分别达到 74.5% / 84.5%，每轮平均花费约 1.7 美元（比稠密控制智能体低约 12 倍）；真机 16 项零样本任务成功率 88%（75/85）。",
    "use": "可作为机器人抓取/操作类 PoC 的起点；可作为智能体工具调用、任务规划类 Demo 的参考。",
    "why": "已公开代码或项目页，可以直接上手复现；在真实设备、机器人或车辆上做了实验（或有用户测试），不只停留在仿真；给出了可量化的效果数据（如 成功率 88%）。"
   },
@@ -60241,7 +60255,8 @@
   ],
   "updated": "2026-11-25T17:25:17Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出免训练的智能体策略 SOLVE：多模态 LLM 每次只写出稀疏有序的 6 自由度末端关键姿态，由运动规划器插值执行，再根据结果写下一组，并能用稀疏深度查询落地、从执行反馈中提炼任务规则。在 RoboDojo / RoboLab 上分别达到 74.5% / 84.5%，每轮平均花费约 1.7 美元（比稠密控制智能体低约 12 倍）；真机 16 项零样本任务成功率 88%（75/85）。"
  },
  "2611.34778": {
   "abstract": "Recent vision-language models (VLMs) can act as robot-use agents that understand diverse scenes and control robots through policy code and tools. However, they predict 3D gripper poses poorly even with extended reasoning, struggling with precise manipulation. Vision-language-action (VLA) and world-action (WAM) models are the opposite: they execute fast, smooth control on trained tasks, yet fail under domain shifts or when tasks require long-horizon memory and reasoning. Agentic robots therefore combine VLM reasoning and perception with precise VLA/WAM control through a policy harness. Yet harness design spans thousands of configurations, shifting success by tens of points with the same models. Moreover, testing even one design takes thousands of rollouts at high API and GPU cost, so prior works often commit to a single design chosen from few alternatives. To guide harness design, we evaluate over 470,000 rollouts across eight simulation benchmarks, six VLMs, and 15 VLA/WAM checkpoints. Seven controlled studies show effective harnesses must adapt to both VLM and VLA/WAM capabilities. Our findings specify what structure the VLM's policy code needs, where VLA manipulation needs help from tools and policy code, and when to involve the VLM at test time. The reference recipe X-Harness shows that these findings compose without weight updates, lifting base policies up to $+42.8$ points across memory, reasoning, and domain shifts.",
@@ -60443,7 +60458,8 @@
   ],
   "updated": "2026-11-25T17:59:24Z",
   "venue": "",
-  "version": "v1"
+  "version": "v1",
+  "zh_summary": "提出 HOG-WAM：在世界-动作模型训练中增加未来方向梯度直方图（HOG）作为结构监督，用辅助 HOG 扩散模块塑造视觉表征，推理时去掉该模块、保持原 RGB 到动作结构。在 RoboTwin-Plus 的四种观测损坏下均为最高成功率（混合噪声下相对 FastWAM 从 78.86% 升至 82.86%）；Franka 四项任务干净/含噪平均成功率分别从 40%/17% 升至 59%/24%。"
  },
  "2611.34830": {
   "abstract": "World models predict how an environment responds to actions, so that candidate actions can be evaluated before execution. Executed actions, or decisions, taken in this manner are only as reliable as the model's predictive capabilities, and predictions in turn are only reliable within the model's experience. Epistemic uncertainty (EU) is the signal that marks where that experience ends. In this work we offer an extensive empirical study on how training objectives and architectures shape epistemic uncertainty of world models. More precisely, we present a controlled comparison of post-hoc EU (last-layer Laplace and ensembles) between two dominant models of different paradigms: 1) LeWorldModel (LeWM): A joint-embedding predictive architecture (JEPA), which predicts the next embedding without a decoder, and 2) DreamerV3: A recurrent state-space model (RSSM), which reconstructs the observation from a recurrent latent state. In ten simulated visual-control environments, we follow a controlled state perturbation of the environment state through every stage of the models up to the final EU estimate. We find that the RSSM attenuates the state perturbation through two mechanisms before it reaches an estimator on the predictor feature. Its recurrent update averages over context, so a change in a single frame reaches the state at a fraction of its size and recovers only as the change persists. Its reconstruction objective weights an entity by the pixels it covers, so a small object can be lost due to the training objective. The JEPA has neither mechanism and passes the change through all stages to the uncertainty. We further show that this translates to gaps in five uncertainty related downstream tasks, from unfamiliar-state detection to uncertainty-penalised planning: the RSSM uncertainty misses deviations that its own posterior registers, whereas the JEPA uncertainty reports what its model sees.",
